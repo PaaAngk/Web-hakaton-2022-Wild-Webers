@@ -25,12 +25,12 @@ export class TimeTableComponent implements OnInit {
 
   clickButton(){
 
-    this.schedulesService.get().subscribe(data=>( console.log(data)))
-
-    //this.schedulesService.getGroup("Снорки").subscribe(data=>( console.log(data.id)))
-    //this.schedulesService.getTeachers("Морра").subscribe(data=>( console.log(data.id)))
-    this.schedulesService.getTeachers("Морра").subscribe(data=>( console.log(data.id)))
-    //this.activitiesService.getGroup("Снорки").subscribe(data=>( console.log(data.id)))
+    //this.schedulesService.get().subscribe(data=>( console.log(data)))
+    const d: Date = new Date();
+    this.schedulesService.getGroup("Снорки",d.toString()).subscribe(data=>( console.log(data)))
+    //this.schedulesService.getTeachers("Морра","2022-04-11").subscribe(data=>( console.log(data)))
+    //this.schedulesService.getAuditories("Танцплощадка","2022-04-11").subscribe(data=>( console.log(data)))
+    
 
   }
 }
