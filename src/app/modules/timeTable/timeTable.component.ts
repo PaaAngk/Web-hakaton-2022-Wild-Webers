@@ -19,7 +19,7 @@ export class TimeTableComponent implements OnInit {
   }
 
   clickButton(){
-    
+    this.schedulesService.get().subscribe(data=>( console.log(data)))
   }
 
 }

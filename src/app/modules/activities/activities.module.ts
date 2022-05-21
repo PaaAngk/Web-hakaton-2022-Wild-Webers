@@ -1,7 +1,7 @@
-import { ActivitiesRoutingModule } from './activities-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivitiesComponent } from './activities.component';
+import { ActivitiesRoutingModule } from './activities-routing.module';
 
 @NgModule({
   imports: [
