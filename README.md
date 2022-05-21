@@ -5,6 +5,8 @@ npm install
 
 npm install -g json-server
 
+npm i @taiga-ui/{cdk,core,kit,icons}
+
 npm start 
 
 json-server --watch db.json
