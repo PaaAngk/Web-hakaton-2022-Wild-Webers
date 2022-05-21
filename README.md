@@ -1,7 +1,10 @@
 ## Run project
 npm install
+
 npm install -g json-server
+
 npm start 
+
 json-server --watch db.json
 
 # TimeTable
