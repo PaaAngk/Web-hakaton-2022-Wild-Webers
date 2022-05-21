@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SchedulesService } from 'src/app/core/services';
 import {ActivitiesService} from 'src/app/core/services/activities.service';
 
+
 @Component({
   selector: 'app-timeTable',
   templateUrl: './timeTable.component.html',
@@ -14,15 +15,21 @@ export class TimeTableComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private schedulesService: SchedulesService
+
     //private activitiesService: ActivitiesService
+
   ) { }
 
   ngOnInit() {
   }
 
   clickButton(){
+
+    this.schedulesService.get().subscribe(data=>( console.log(data)))
+
     this.schedulesService.getGroup("Снорки").subscribe(data=>( console.log(data.id)))
     //this.activitiesService.getGroup("Снорки").subscribe(data=>( console.log(data.id)))
+
   }
 
 }
