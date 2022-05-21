@@ -20,4 +20,8 @@ export class SchedulesService {
     return this.apiService.get('/schedules?groups='+ group)
       .pipe(map((data: {schedules: Schedules}) => data.schedules));
   }
+  getTeachers(teachers: string): Observable<Schedules> {
+    return this.apiService.get('/schedules?teachers='+ teachers)
+      .pipe(map((data: {schedules: Schedules}) => data.schedules));
+  }
 }
