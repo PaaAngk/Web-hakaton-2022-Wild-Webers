@@ -1,9 +1,14 @@
 # UPD 2.0 Проект самой прикольной команды :)
 
-## Run project
+## Run project 
+test comment
+# Проект самой прикольной команды :)
+
 npm install
 
 npm install -g json-server
+
+npm i @taiga-ui/{cdk,core,kit,icons}
 
 npm start 
 
