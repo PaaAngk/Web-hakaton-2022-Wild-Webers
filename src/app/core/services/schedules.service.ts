@@ -16,6 +16,7 @@ export class SchedulesService {
     return this.apiService.get('/schedules')
       .pipe(map((data: {schedules: Schedules}) => data.schedules));
   }
+  
   getGroup(group: string): Observable<Schedules> {
     return this.apiService.get('/schedules?groups='+ group)
       .pipe(map((data: {schedules: Schedules}) => data.schedules));
