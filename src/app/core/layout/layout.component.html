@@ -1,4 +1,12 @@
-<p>
-  layout works!
-</p>
-<router-outlet *ngIf="true"></router-outlet>
+<div class="layout">
+  <ul class="nav justify-content-center">
+    <li class="nav-item">
+      <a class="nav-link active" href="schedule">Schedule</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="activitie">Activitie</a>
+    </li>
+  </ul>
+  
+  <router-outlet *ngIf="true"></router-outlet>
+</div>
