@@ -27,9 +27,10 @@ export class TimeTableComponent implements OnInit {
 
     this.schedulesService.get().subscribe(data=>( console.log(data)))
 
-    this.schedulesService.getGroup("Снорки").subscribe(data=>( console.log(data.id)))
+    //this.schedulesService.getGroup("Снорки").subscribe(data=>( console.log(data.id)))
+    //this.schedulesService.getTeachers("Морра").subscribe(data=>( console.log(data.id)))
+    this.schedulesService.getTeachers("Морра").subscribe(data=>( console.log(data.id)))
     //this.activitiesService.getGroup("Снорки").subscribe(data=>( console.log(data.id)))
 
   }
-
 }
