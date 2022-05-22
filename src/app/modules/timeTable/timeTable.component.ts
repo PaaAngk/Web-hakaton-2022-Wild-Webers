@@ -110,6 +110,7 @@ export class TimeTableComponent implements OnInit {
       case 6:
         weekStartDate = new TuiDay(day.year, day.month, day.day - 6);
         break;
+      default: weekStartDate = day
     }
 
     // Найти расписание группы

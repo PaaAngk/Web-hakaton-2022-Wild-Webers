@@ -1,49 +1,38 @@
 <div class="container">
-  <button style="height: 100px; width: 100px; background-color: red; " type="button"
-    (click)='clickButton()'>AAAAAAAAA</button>
-
-  <div class="container">
+  
     <div class="row">
-      <table>
-        <tr>
-          <th style="width: 20%;">
-            <div class="col-3;" style=" background-color: rgb(216, 216, 216); width: 100%;">
-              <div class="row" style=" padding-left: 10px;">
-                <tui-select class="control" [identityMatcher]="identityMatcher" 
-                  [(ngModel)]="valueGroups">
-                  Группы
-                  <custom-list *tuiDataList [items]="itemsGroups"></custom-list>
-                </tui-select>
-              </div>
-              <div class="row" style=" padding-left: 10px;">
-                <tui-select class="control" [identityMatcher]="identityMatcher" 
-                  [(ngModel)]="valueTeachers">
-                  Преподы
-                  <custom-list *tuiDataList [items]="itemsTeachers"></custom-list>
-                </tui-select>
-              </div>
-              <div class="row" style=" padding-left: 10px;">
-                <tui-select class="control" [identityMatcher]="identityMatcher"
-                  [(ngModel)]="valueAuditories">
-                  Аудитории
-                  <custom-list *tuiDataList [items]="itemsAuditories"></custom-list>
-                </tui-select>
+      <div class="col-auto p-2 card">
 
-              </div>
-            </div>
-          </th>
-          <th>      
-          </th>
-          <td>
-          </td>
-        </tr>
-      </table>
+          <div class="row mb-2" style=" padding-left: 10px;">
+            <tui-select class="control" [identityMatcher]="identityMatcher" 
+              [(ngModel)]="valueGroups">
+              Группы
+              <custom-list *tuiDataList [items]="itemsGroups"></custom-list>
+            </tui-select>
+          </div>
+          <div class="row mb-2" style=" padding-left: 10px;">
+            <tui-select class="control" [identityMatcher]="identityMatcher" 
+              [(ngModel)]="valueTeachers">
+              Преподы
+              <custom-list *tuiDataList [items]="itemsTeachers"></custom-list>
+            </tui-select>
+          </div>
+          <div class="row mb-2" style=" padding-left: 10px;">
+            <tui-select class="control" [identityMatcher]="identityMatcher"
+              [(ngModel)]="valueAuditories">
+              Аудитории
+              <custom-list *tuiDataList [items]="itemsAuditories"></custom-list>
+            </tui-select>
+
+          </div>
+          <div class="card shadow-lg">
+            <tui-calendar [value]="date"(dayClick)="onDayClick($event)"></tui-calendar>
+          </div>
+      </div>
 
 
-
-      <div class="col-9">
-
-        <div class="calendar">
+      <div class="col-9 ">
+        <div class="calendar card p-2 shadow-lg">
           <div class="row justify-content-center">
             <div class="my-2 me-2 my-lg-0 justify-content-center">
               <button data-mdb-ripple-color="dark" class="btn btn-link text-dark">
@@ -128,7 +117,7 @@
         22/05/2022</small></p>'>
                         JS Conference
                       </div>
-
+                    </div>
                     </td>
                     <td data-date-time="23/05/2022 01:00"></td>
                     <td data-date-time="24/05/2022 01:00"></td>
@@ -169,7 +158,7 @@
       23/05/2022 <small class="fw-light">08:00 - 12:00</small></small></p>'>
                         <i class="fas fa-circle pe-1 event-circle" style="color: rgb(207, 224, 252)"></i>Meeting
                       </div>
-
+                    </div>
                     </td>
                     <td data-date-time="26/05/2022 02:00"></td>
                     <td data-date-time="27/05/2022 02:00"></td>
@@ -208,6 +197,7 @@
         30/05/2022</small></p>'>
                         React Meetup
                       </div>
+                    </div>
                     </td>
                     <td data-date-time="23/05/2022 04:00"></td>
                     <td data-date-time="24/05/2022 04:00"></td>
@@ -318,5 +308,4 @@
         </div>
       </div>
     </div>
-  </div>
 </div>
