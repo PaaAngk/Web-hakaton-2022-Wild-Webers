@@ -16,10 +16,12 @@ export class SchedulesService {
     return this.apiService.get('/schedules')
       .pipe(map(data => data));
   }
+
   getGroup(group: string,week_begining:string): Observable<Schedules[]> {
     return this.apiService.get('/schedules?groups='+ group+"&week_begining="+week_begining+'&_sort=day,pair&_order=asc')
       .pipe(map((data: {schedules: Array<Schedules>}) => (data as any) as Array<Schedules>));
       
+
   }
   getTeachers(teachers: string,week_begining:string): Observable<Schedules[]> {
     return this.apiService.get('/schedules?teachers='+ teachers+"&week_begining="+week_begining+'&_sort=day,pair&_order=asc')
