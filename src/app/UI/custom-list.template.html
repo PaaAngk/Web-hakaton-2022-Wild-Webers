@@ -1,0 +1,56 @@
+<tui-primitive-textfield
+    #input
+    iconContent="tuiIconSearchLarge"
+    iconAlign="left"
+    class="tui-space_all-2"
+    [tuiTextfieldLabelOutside]="true"
+    
+    [(value)]="valueEmpity"
+
+
+    (keydown.arrowDown.prevent)="onArrowDown(list, $event)"
+>
+    Search categories
+</tui-primitive-textfield>
+
+
+<hr />
+<tui-data-list
+    #list
+    emptyContent="No results found"
+    (keydown)="onKeyDown($event.key, input.nativeFocusableElement)"
+>   
+    <tui-opt-group *ngIf="valueGroups, valueTeachers">
+        
+        <button
+            *ngFor="let item of items"
+            tuiOption
+            [value]="item"
+        >
+            {{ item }} 
+        </button> 
+    </tui-opt-group>
+    
+    
+    
+    
+    <ng-container *ngFor="let item of items">
+        <tui-opt-group
+            *tuiLet="item | tuiFilter: filter:value as filtered"
+            
+        >
+            <tui-opt-group
+                *ngIf="filtered.length"
+                tuiMultiSelectGroup
+            >
+                <button
+                    *ngFor="let item of filtered"
+                    tuiOption
+                    [value]="item"
+                >
+                    {{ item }}
+                </button>
+            </tui-opt-group>
+        </tui-opt-group>
+    </ng-container> 
+</tui-data-list>
