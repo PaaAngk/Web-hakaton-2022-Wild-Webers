@@ -1,476 +1,340 @@
 <div class="container">
   <button style="height: 100px; width: 100px; background-color: red; " type="button"
     (click)='clickButton()'>AAAAAAAAA</button>
+  
+    <div class="container">
+      <div class="row">
+        <div class="col-3" style=" background-color: rgb(216, 216, 216)">
+          <div class="row">фильтры</div>
+          <div class="row">фильтры</div>
+          <div class="row">календарик</div>
+        </div>
 
-  <div class="card-body">
-    <div id="calendar1" class="calendar-s fc fc-ltr fc-unthemed" style="">
-      <div class="fc-toolbar fc-header-toolbar">
-        <div class="fc-left">
-          <div class="fc-button-group"><button type="button" class="fc-prev-button fc-button fc-button-primary"
-              aria-label="prev"><span class="fc-icon fc-icon-chevron-left"></span></button><button type="button"
-              class="fc-next-button fc-button fc-button-primary" aria-label="next"><span
-                class="fc-icon fc-icon-chevron-right"></span></button></div><button type="button"
-            class="fc-today-button fc-button fc-button-primary" disabled="">today</button>
-        </div>
-        <div class="fc-center">
-          <h2>May 15 – 21, 2022</h2>
-        </div>
-        <div class="fc-right">
-          <div class="fc-button-group"><button type="button"
-              class="fc-dayGridMonth-button fc-button fc-button-primary">month</button><button type="button"
-              class="fc-timeGridWeek-button fc-button fc-button-primary fc-button-active">week</button><button
-              type="button" class="fc-timeGridDay-button fc-button fc-button-primary">day</button><button type="button"
-              class="fc-listWeek-button fc-button fc-button-primary">list</button></div>
-        </div>
-      </div>
-      <div class="fc-view-container">
-        <div class="fc-view fc-timeGridWeek-view fc-timeGrid-view">
-          <table class="">
-            <thead class="fc-head">
-              <tr>
-                <td class="fc-head-container fc-widget-header">
-                  <div class="fc-row fc-widget-header">
-                    <table class="">
-                      <thead>
-                        <tr>
-                          <th class="fc-axis fc-widget-header" style="width: 54.2244px;"></th>
-                          <th class="fc-day-header fc-widget-header fc-sun fc-past" data-date="2022-05-15"><span>Sun
-                              5/15</span></th>
-                          <th class="fc-day-header fc-widget-header fc-mon fc-past" data-date="2022-05-16"><span>Mon
-                              5/16</span></th>
-                          <th class="fc-day-header fc-widget-header fc-tue fc-past" data-date="2022-05-17"><span>Tue
-                              5/17</span></th>
-                          <th class="fc-day-header fc-widget-header fc-wed fc-past" data-date="2022-05-18"><span>Wed
-                              5/18</span></th>
-                          <th class="fc-day-header fc-widget-header fc-thu fc-past" data-date="2022-05-19"><span>Thu
-                              5/19</span></th>
-                          <th class="fc-day-header fc-widget-header fc-fri fc-past" data-date="2022-05-20"><span>Fri
-                              5/20</span></th>
-                          <th class="fc-day-header fc-widget-header fc-sat fc-today" data-date="2022-05-21"><span>Sat
-                              5/21</span></th>
-                        </tr>
-                      </thead>
-                    </table>
-                  </div>
-                </td>
-              </tr>
-            </thead>
-            <tbody class="fc-body">
-              <tr>
-                <td class="fc-widget-content">
-                  <div class="fc-day-grid">
-                    <div class="fc-row fc-week fc-widget-content">
-                      <div class="fc-bg">
-                        <table class="">
-                          <tbody>
-                            <tr>
-                              <td class="fc-axis fc-widget-content" style="width: 54.2244px;"><span>all-day</span></td>
-                              <td class="fc-day fc-widget-content fc-sun fc-past" data-date="2022-05-15"></td>
-                              <td class="fc-day fc-widget-content fc-mon fc-past" data-date="2022-05-16"></td>
-                              <td class="fc-day fc-widget-content fc-tue fc-past" data-date="2022-05-17"></td>
-                              <td class="fc-day fc-widget-content fc-wed fc-past" data-date="2022-05-18"></td>
-                              <td class="fc-day fc-widget-content fc-thu fc-past" data-date="2022-05-19"></td>
-                              <td class="fc-day fc-widget-content fc-fri fc-past" data-date="2022-05-20"></td>
-                              <td class="fc-day fc-widget-content fc-sat fc-today " data-date="2022-05-21"></td>
-                            </tr>
-                          </tbody>
-                        </table>
+        <div class="col-9">
+          <div class="calendar">
+            <div class="row justify-content-center">
+              <div class="my-2 me-2 my-lg-0 justify-content-center">
+                <button data-mdb-ripple-color="dark" class="btn btn-link text-dark">
+                  Today</button
+                ><button
+                  data-mdb-ripple-color="dark"
+                  class="btn btn-link text-dark"
+                >
+                  <i class="fas fa-chevron-left"></i></button
+                ><button
+                  data-mdb-ripple-color="dark"
+                  class="btn btn-link text-dark"
+                >
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+    
+                <span class="calendar-heading">May 2022</span>
+              </div>
+            </div>
+            <div class="row-auto">
+              <table class="week">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>
+                      <div class="weekday-field">Mon</div>
+                      <div class="day-field">23</div>
+                    </th>
+                    <th>
+                      <div class="weekday-field">Tue</div>
+                      <div class="day-field">24</div>
+                    </th>
+                    <th>
+                      <div class="weekday-field">Wed</div>
+                      <div class="day-field">25</div>
+                    </th>
+                    <th>
+                      <div class="weekday-field">Thu</div>
+                      <div class="day-field">26</div>
+                    </th>
+                    <th>
+                      <div class="weekday-field">Fri</div>
+                      <div class="day-field">27</div>
+                    </th>
+                    <th>
+                      <div class="weekday-field">Sat</div>
+                      <div class="day-field">28</div>
+                    </th>
+                    <th>
+                      <div class="weekday-field">Sun</div>
+                      <div class="day-field">29</div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th class="hour-field">1</th>
+                    <td data-date-time="22/05/2022 01:00">
+                      <div class="events-wrapper">
+                        <div
+                          class="event event-2 event-end"
+                          data-mdb-event-key="1"
+                          data-mdb-event-order="0"
+                          draggable="true"
+                          data-mdb-toggle="tooltip"
+                          data-mdb-offset="0,10"
+                          data-mdb-html="true"
+                          title=""
+                          style="
+                            order: 2;
+                            background: rgb(199, 245, 217);
+                            color: rgb(11, 65, 33);
+                            padding-left: 7px;
+                          "
+                          data-mdb-original-title='<h6><strong>JS Conference</strong></h6><p class="mb-0"><small>
+        <i class="fas fa-calendar-alt pr-1"></i>
+        22/05/2022</small></p>'
+                        >
+                          Angular Meetup
+                        </div>
+                        <div
+                          class="event event-2 event-end"
+                          data-mdb-event-key="2"
+                          data-mdb-event-order="1"
+                          draggable="true"
+                          data-mdb-toggle="tooltip"
+                          data-mdb-offset="0,10"
+                          data-mdb-html="true"
+                          title=""
+                          style="
+                            order: 2;
+                            background: rgb(207, 224, 252);
+                            color: rgb(10, 71, 169);
+                          "
+                          data-mdb-original-title='<h6><strong>JS Conference</strong></h6><p class="mb-0"><small>
+        <i class="fas fa-calendar-alt pr-1"></i>
+        22/05/2022</small></p>'
+                        >
+                          JS Conference
+                        </div>
                       </div>
-                      <div class="fc-content-skeleton">
-                        <table>
-                          <tbody>
-                            <tr>
-                              <td class="fc-axis" style="width: 54.2244px;"></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                          </tbody>
-                        </table>
+                    </td>
+                    <td data-date-time="23/05/2022 01:00"></td>
+                    <td data-date-time="24/05/2022 01:00"></td>
+                    <td data-date-time="25/05/2022 01:00"></td>
+                    <td data-date-time="26/05/2022 01:00"></td>
+                    <td data-date-time="27/05/2022 01:00"></td>
+                    <td data-date-time="28/05/2022 01:00"></td>
+                  </tr>
+                  <tr>
+                    <th class="hour-field">2</th>
+                    <td data-date-time="22/05/2022 02:00"></td>
+                    <td data-date-time="23/05/2022 02:00"></td>
+                    <td data-date-time="24/05/2022 02:00"></td>
+                    <td data-date-time="25/05/2022 02:00">
+                      <div class="events-wrapper">
+                        <div
+                          class="event event-2 event-end"
+                          data-mdb-event-key="2"
+                          data-mdb-event-order="1"
+                          draggable="true"
+                          data-mdb-toggle="tooltip"
+                          data-mdb-offset="0,10"
+                          data-mdb-html="true"
+                          title=""
+                          style="
+                            order: 2;
+                            background: rgb(235, 205, 254);
+                            color: rgb(110, 2, 177);
+                          "
+                          data-mdb-original-title='<h6><strong>JS Conference</strong></h6><p class="mb-0"><small>
+    <i class="fas fa-calendar-alt pr-1"></i>
+    22/05/2022</small></p>'
+                        >
+                          Vue Meetup
+                        </div>
+                        <div
+                          class="event event-4 event-short event-end"
+                          data-mdb-event-key="4"
+                          data-mdb-event-order="2"
+                          draggable="true"
+                          data-mdb-toggle="tooltip"
+                          data-mdb-offset="0,10"
+                          data-mdb-html="true"
+                          title=""
+                          style="order: 4"
+                          data-mdb-original-title='<h6><strong>Meeting</strong></h6><p class="mb-0"><small>
+      <i class="fas fa-calendar-alt pr-1"></i>
+      23/05/2022 <small class="fw-light">08:00 - 12:00</small></small></p>'
+                        >
+                          <i
+                            class="fas fa-circle pe-1 event-circle"
+                            style="color: rgb(207, 224, 252)"
+                          ></i
+                          >Meeting
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <hr class="fc-divider fc-widget-header">
-                  <div class="fc-scroller fc-time-grid-container" style="overflow: hidden auto; height: auto;">
-                    <div class="fc-time-grid">
-                      <div class="fc-bg">
-                        <table class="">
-                          <tbody>
-                            <tr>
-                              <td class="fc-axis fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-day fc-widget-content fc-sun fc-past" data-date="2022-05-15"></td>
-                              <td class="fc-day fc-widget-content fc-mon fc-past" data-date="2022-05-16"></td>
-                              <td class="fc-day fc-widget-content fc-tue fc-past" data-date="2022-05-17"></td>
-                              <td class="fc-day fc-widget-content fc-wed fc-past" data-date="2022-05-18"></td>
-                              <td class="fc-day fc-widget-content fc-thu fc-past" data-date="2022-05-19"></td>
-                              <td class="fc-day fc-widget-content fc-fri fc-past" data-date="2022-05-20"></td>
-                              <td class="fc-day fc-widget-content fc-sat fc-today " data-date="2022-05-21"></td>
-                            </tr>
-                          </tbody>
-                        </table>
+                    </td>
+                    <td data-date-time="26/05/2022 02:00"></td>
+                    <td data-date-time="27/05/2022 02:00"></td>
+                    <td data-date-time="28/05/2022 02:00"></td>
+                  </tr>
+                  <tr>
+                    <th class="hour-field">3</th>
+                    <td data-date-time="22/05/2022 03:00"></td>
+                    <td data-date-time="23/05/2022 03:00"></td>
+                    <td data-date-time="24/05/2022 03:00"></td>
+                    <td data-date-time="25/05/2022 03:00"></td>
+                    <td data-date-time="26/05/2022 03:00"></td>
+                    <td data-date-time="27/05/2022 03:00"></td>
+                    <td data-date-time="28/05/2022 03:00"></td>
+                  </tr>
+                  <tr>
+                    <th class="hour-field">4</th>
+                    <td data-date-time="22/05/2022 04:00">
+                      <div class="events-wrapper">
+                        <div
+                          class="event event-6 event-end"
+                          data-mdb-event-key="6"
+                          data-mdb-event-order="2"
+                          draggable="true"
+                          data-mdb-toggle="tooltip"
+                          data-mdb-offset="0,10"
+                          data-mdb-html="true"
+                          title=""
+                          style="
+                            order: 6;
+                            background: rgb(253, 216, 222);
+                            color: rgb(121, 6, 25);
+                          "
+                          data-mdb-original-title='<h6><strong>React Meetup</strong></h6><p class="mb-0"><small>
+        <i class="fas fa-calendar-alt pr-1"></i>
+        27/05/2022 -
+        30/05/2022</small></p>'
+                        >
+                          React Meetup
+                        </div>
                       </div>
-                      <div class="fc-slats">
-                        <table class="">
-                          <tbody>
-                            <tr data-time="00:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>12am</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="00:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="01:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>1am</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="01:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="02:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>2am</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="02:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="03:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>3am</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="03:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="04:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>4am</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="04:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="05:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>5am</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="05:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="06:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>6am</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="06:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="07:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>7am</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="07:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="08:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>8am</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="08:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="09:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>9am</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="09:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="10:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>10am</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="10:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="11:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>11am</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="11:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="12:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>12pm</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="12:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="13:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>1pm</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="13:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="14:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>2pm</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="14:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="15:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>3pm</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="15:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="16:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>4pm</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="16:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="17:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>5pm</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="17:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="18:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>6pm</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="18:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="19:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>7pm</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="19:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="20:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>8pm</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="20:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="21:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>9pm</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="21:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="22:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>10pm</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="22:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="23:00:00">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"><span>11pm</span>
-                              </td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                            <tr data-time="23:30:00" class="fc-minor">
-                              <td class="fc-axis fc-time fc-widget-content" style="width: 54.2244px;"></td>
-                              <td class="fc-widget-content"></td>
-                            </tr>
-                          </tbody>
-                        </table>
+                    </td>
+                    <td data-date-time="23/05/2022 04:00"></td>
+                    <td data-date-time="24/05/2022 04:00"></td>
+                    <td data-date-time="25/05/2022 04:00"></td>
+                    <td data-date-time="26/05/2022 04:00"></td>
+                    <td data-date-time="27/05/2022 04:00"></td>
+                    <td data-date-time="28/05/2022 04:00"></td>
+                  </tr>
+                  <tr>
+                    <th class="hour-field">5</th>
+                    <td data-date-time="22/05/2022 05:00"></td>
+                    <td data-date-time="23/05/2022 05:00"></td>
+                    <td data-date-time="24/05/2022 05:00"></td>
+                    <td data-date-time="25/05/2022 05:00"></td>
+                    <td data-date-time="26/05/2022 05:00"></td>
+                    <td data-date-time="27/05/2022 05:00"></td>
+                    <td data-date-time="28/05/2022 05:00"></td>
+                  </tr>
+                  <tr>
+                    <th class="hour-field">6</th>
+                    <td data-date-time="22/05/2022 06:00">
+                      <div
+                        class="event event-short event-4"
+                        draggable="true"
+                        data-mdb-toggle="tooltip"
+                        data-mdb-offset="0,10"
+                        data-mdb-html="true"
+                        title=""
+                        data-mdb-original-title='<h6><strong>Meeting</strong></h6><p class="mb-0"><small>
+        <i class="fas fa-calendar-alt pr-1"></i>
+        23/05/2022 <small class="fw-light">08:00 - 12:00</small></small></p>'
+                      >
+                        <i
+                          class="fas fa-circle event-circle pe-1"
+                          style="color: #cfe0fc"
+                        ></i
+                        >Meeting
                       </div>
-                      <hr class="fc-divider fc-widget-header" style="display:none">
-                      <div class="fc-content-skeleton">
-                        <table>
-                          <tbody>
-                            <tr>
-                              <td class="fc-axis" style="width: 54.2244px;"></td>
-                              <td>
-                                <div class="fc-content-col">
-                                  <div class="fc-event-container fc-mirror-container"></div>
-                                  <div class="fc-event-container"><a class="fc-time-grid-event fc-event fc-start fc-end"
-                                      style="background-color: rgb(21, 202, 146); border-color: rgb(21, 202, 146); inset: 274.347px 0% -324.318px; z-index: 1;">
-                                      <div class="fc-content">
-                                        <div class="fc-time" data-start="5:30" data-full="5:30 AM"><span>5:30</span>
-                                        </div>
-                                        <div class="fc-title">Meeting</div>
-                                      </div>
-                                    </a></div>
-                                  <div class="fc-highlight-container"></div>
-                                  <div class="fc-bgevent-container"></div>
-                                  <div class="fc-business-container"></div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="fc-content-col">
-                                  <div class="fc-event-container fc-mirror-container"></div>
-                                  <div class="fc-event-container"><a class="fc-time-grid-event fc-event fc-start fc-end"
-                                      style="background-color: rgb(244, 169, 101); border-color: rgb(244, 169, 101); inset: 274.347px 0% -324.318px; z-index: 1;">
-                                      <div class="fc-content">
-                                        <div class="fc-time" data-start="5:30" data-full="5:30 AM"><span>5:30</span>
-                                        </div>
-                                        <div class="fc-title">Birthday Party</div>
-                                      </div>
-                                    </a></div>
-                                  <div class="fc-highlight-container"></div>
-                                  <div class="fc-bgevent-container"></div>
-                                  <div class="fc-business-container"></div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="fc-content-col">
-                                  <div class="fc-event-container fc-mirror-container"></div>
-                                  <div class="fc-event-container"></div>
-                                  <div class="fc-highlight-container"></div>
-                                  <div class="fc-bgevent-container"></div>
-                                  <div class="fc-business-container"></div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="fc-content-col">
-                                  <div class="fc-event-container fc-mirror-container"></div>
-                                  <div class="fc-event-container"></div>
-                                  <div class="fc-highlight-container"></div>
-                                  <div class="fc-bgevent-container"></div>
-                                  <div class="fc-business-container"></div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="fc-content-col">
-                                  <div class="fc-event-container fc-mirror-container"></div>
-                                  <div class="fc-event-container"><a class="fc-time-grid-event fc-event fc-start fc-end"
-                                      style="background-color: rgb(234, 100, 63); border-color: rgb(234, 100, 63); inset: 274.347px 0% -324.318px; z-index: 1;">
-                                      <div class="fc-content">
-                                        <div class="fc-time" data-start="5:30" data-full="5:30 AM"><span>5:30</span>
-                                        </div>
-                                        <div class="fc-title">Birthday Party</div>
-                                      </div>
-                                    </a></div>
-                                  <div class="fc-highlight-container"></div>
-                                  <div class="fc-bgevent-container"></div>
-                                  <div class="fc-business-container"></div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="fc-content-col">
-                                  <div class="fc-event-container fc-mirror-container"></div>
-                                  <div class="fc-event-container"></div>
-                                  <div class="fc-highlight-container"></div>
-                                  <div class="fc-bgevent-container"></div>
-                                  <div class="fc-business-container"></div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="fc-content-col">
-                                  <div class="fc-event-container fc-mirror-container"></div>
-                                  <div class="fc-event-container"><a class="fc-time-grid-event fc-event fc-start fc-end"
-                                      style="background-color: rgb(244, 169, 101); border-color: rgb(244, 169, 101); inset: 274.347px 0% -324.318px; z-index: 1; margin-right: 20px;">
-                                      <div class="fc-content">
-                                        <div class="fc-time" data-start="5:30" data-full="5:30 AM"><span>5:30</span>
-                                        </div>
-                                        <div class="fc-title">Doctor Meeting</div>
-                                      </div>
-                                    </a><a class="fc-time-grid-event fc-event fc-start fc-end fc-time-grid-event-inset"
-                                      style="background-color: rgb(21, 202, 146); border-color: rgb(21, 202, 146); inset: 274.347px 0% -324.318px 50%; z-index: 2;">
-                                      <div class="fc-content">
-                                        <div class="fc-time" data-start="5:30" data-full="5:30 AM"><span>5:30</span>
-                                        </div>
-                                        <div class="fc-title">Meeting</div>
-                                      </div>
-                                    </a><a class="fc-time-grid-event fc-event fc-start fc-end" href="http://google.com/"
-                                      style="background-color: rgb(71, 49, 182); border-color: rgb(71, 49, 182); inset: 324.318px 0% -374.29px; z-index: 1;">
-                                      <div class="fc-content">
-                                        <div class="fc-time" data-start="6:30" data-full="6:30 AM"><span>6:30</span>
-                                        </div>
-                                        <div class="fc-title">Click for Google</div>
-                                      </div>
-                                    </a><a class="fc-time-grid-event fc-event fc-start fc-end"
-                                      style="background-color: rgb(91, 170, 115); border-color: rgb(91, 170, 115); inset: 374.29px 0% -424.261px; z-index: 1;">
-                                      <div class="fc-content">
-                                        <div class="fc-time" data-start="7:30" data-full="7:30 AM"><span>7:30</span>
-                                        </div>
-                                        <div class="fc-title">Repeating Event</div>
-                                      </div>
-                                    </a><a class="fc-time-grid-event fc-event fc-start fc-end"
-                                      style="background-color: rgb(244, 169, 101); border-color: rgb(244, 169, 101); inset: 424.261px 0% -474.233px; z-index: 1;">
-                                      <div class="fc-content">
-                                        <div class="fc-time" data-start="8:30" data-full="8:30 AM"><span>8:30</span>
-                                        </div>
-                                        <div class="fc-title">Birthday Party</div>
-                                      </div>
-                                    </a></div>
-                                  <div class="fc-highlight-container"></div>
-                                  <div class="fc-bgevent-container"></div>
-                                  <div class="fc-business-container"></div>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                    </td>
+                    <td data-date-time="23/05/2022 06:00"></td>
+                    <td data-date-time="24/05/2022 06:00"></td>
+                    <td data-date-time="25/05/2022 06:00"></td>
+                    <td data-date-time="26/05/2022 06:00"></td>
+                    <td data-date-time="27/05/2022 06:00"></td>
+                    <td data-date-time="28/05/2022 06:00"></td>
+                  </tr>
+                  <tr>
+                    <th class="hour-field">7</th>
+                    <td data-date-time="22/05/2022 07:00"></td>
+                    <td data-date-time="23/05/2022 07:00"></td>
+                    <td data-date-time="24/05/2022 07:00"></td>
+                    <td data-date-time="25/05/2022 07:00"></td>
+                    <td data-date-time="26/05/2022 07:00"></td>
+                    <td data-date-time="27/05/2022 07:00">
+                      <div
+                        class="event event-short event-4"
+                        draggable="true"
+                        data-mdb-toggle="tooltip"
+                        data-mdb-offset="0,10"
+                        data-mdb-html="true"
+                        title=""
+                        data-mdb-original-title='<h6><strong>Meeting</strong></h6><p class="mb-0"><small>
+        <i class="fas fa-calendar-alt pr-1"></i>
+        23/05/2022 <small class="fw-light">08:00 - 12:00</small></small></p>'
+                      >
+                        <i
+                          class="fas fa-circle event-circle pe-1"
+                          style="color: #cfe0fc"
+                        ></i
+                        >Meeting
                       </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                    </td>
+                    <td data-date-time="28/05/2022 07:00"></td>
+                  </tr>
+                  <tr>
+                    <th class="hour-field">8</th>
+                    <td data-date-time="22/05/2022 08:00"></td>
+                    <td data-date-time="23/05/2022 08:00">
+                      <div
+                        class="event event-short event-4"
+                        draggable="true"
+                        data-mdb-toggle="tooltip"
+                        data-mdb-offset="0,10"
+                        data-mdb-html="true"
+                        title=""
+                        data-mdb-original-title='<h6><strong>Meeting</strong></h6><p class="mb-0"><small>
+        <i class="fas fa-calendar-alt pr-1"></i>
+        23/05/2022 <small class="fw-light">08:00 - 12:00</small></small></p>'
+                      >
+                        <i
+                          class="fas fa-circle event-circle pe-1"
+                          style="color: #cfe0fc"
+                        ></i
+                        >Meeting
+                      </div>
+                    </td>
+                    <td data-date-time="24/05/2022 08:00"></td>
+                    <td data-date-time="25/05/2022 08:00"></td>
+                    <td data-date-time="26/05/2022 08:00">
+                      <div
+                        class="event event-short event-5"
+                        draggable="true"
+                        data-mdb-toggle="tooltip"
+                        data-mdb-offset="0,10"
+                        data-mdb-html="true"
+                        title=""
+                        data-mdb-original-title='<h6><strong>Call</strong></h6><p class="mb-0"><small>
+        <i class="fas fa-calendar-alt pr-1"></i>
+        24/05/2022 <small class="fw-light">11:00 - 14:00</small></small></p>'
+                      >
+                        <i
+                          class="fas fa-circle event-circle pe-1"
+                          style="color: #292929"
+                        ></i
+                        >Call
+                      </div>
+                    </td>
+                    <td data-date-time="27/05/2022 08:00"></td>
+                    <td data-date-time="28/05/2022 08:00"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+</div>
