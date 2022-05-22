@@ -4,19 +4,23 @@
     iconAlign="left"
     class="tui-space_all-2"
     [tuiTextfieldLabelOutside]="true"
-    [(value)]="valueGroups"
+    
+    [(value)]="valueEmpity"
+
 
     (keydown.arrowDown.prevent)="onArrowDown(list, $event)"
 >
     Search categories
 </tui-primitive-textfield>
+
+
 <hr />
 <tui-data-list
     #list
     emptyContent="No results found"
     (keydown)="onKeyDown($event.key, input.nativeFocusableElement)"
->
-    <tui-opt-group *ngIf="!valueGroups">
+>   
+    <tui-opt-group *ngIf="valueGroups, valueTeachers">
         
         <button
             *ngFor="let item of items"
@@ -28,9 +32,11 @@
     </tui-opt-group>
     
     
-    <!-- <ng-container *ngFor="let item of items">
+    
+    
+    <ng-container *ngFor="let item of items">
         <tui-opt-group
-            *tuiLet="item.items | tuiFilter: filter:value as filtered"
+            *tuiLet="item | tuiFilter: filter:value as filtered"
             
         >
             <tui-opt-group
@@ -46,5 +52,5 @@
                 </button>
             </tui-opt-group>
         </tui-opt-group>
-    </ng-container> -->
+    </ng-container> 
 </tui-data-list>

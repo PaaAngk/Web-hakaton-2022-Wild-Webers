@@ -8,8 +8,6 @@ interface Items<T> {
 }
 
 
-
-
 @Component({
     selector: 'custom-list',
     templateUrl: './custom-list.template.html',
@@ -22,6 +20,7 @@ export class CustomListComponent<T> {
     valueGroups= 'gggg';
     valueTeachers= 'tttt';
     valueAuditories= 'aaaa';
+    valueEmpity=' '
 
     readonly all = EMPTY_ARRAY;
 
