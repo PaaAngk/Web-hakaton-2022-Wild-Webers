@@ -7,9 +7,9 @@
         <div class="col-3" style=" background-color: rgb(216, 216, 216)">
           <div class="row">фильтры</div>
           <div class="row">фильтры</div>
-          <tui-calendar [value]="date"(dayClick)="onDayClick($event)"></tui-calendar>
+          <tui-calendar [value]="date" (dayClick)="onDayClick($event)"></tui-calendar>
         </div>
-        
+ 
         <div class="col-9">
           <div class="calendar">
             <div class="row justify-content-center">
@@ -37,37 +37,34 @@
                   <tr>
 
                     <th></th>
-                    <th *ngFor="let hero of tableGroupData">
-
-                    </th>
                     <th>
-                      <div class="weekday-field">Mon</div>
-                      <div class="day-field">23</div>
+                      <div class="weekday-field">П</div>
+                      <div class="day-field">{{currentDay}}</div>
 
                     </th>
                     <th>
                       <div class="weekday-field">Tue</div>
-                      <div class="day-field">24</div>
+                      <div class="day-field">{{currentDay+1}}</div>
                     </th>
                     <th>
                       <div class="weekday-field">Wed</div>
-                      <div class="day-field">25</div>
+                      <div class="day-field">{{currentDay+2}}</div>
                     </th>
                     <th>
                       <div class="weekday-field">Thu</div>
-                      <div class="day-field">26</div>
+                      <div class="day-field">{{currentDay+3}}</div>
                     </th>
                     <th>
                       <div class="weekday-field">Fri</div>
-                      <div class="day-field">27</div>
+                      <div class="day-field">{{currentDay+4}}</div>
                     </th>
                     <th>
                       <div class="weekday-field">Sat</div>
-                      <div class="day-field">28</div>
+                      <div class="day-field">{{currentDay+5}}</div>
                     </th>
                     <th>
                       <div class="weekday-field">Sun</div>
-                      <div class="day-field">29</div>
+                      <div class="day-field">{{currentDay+6}}</div>
                     </th>
                   </tr>
                 </thead>
