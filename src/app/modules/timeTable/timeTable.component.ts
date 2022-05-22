@@ -4,9 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SchedulesService } from 'src/app/core/services';
 import {ActivitiesService} from 'src/app/core/services/activities.service';
 import {TuiDay,TuiDayOfWeek} from '@taiga-ui/cdk';
-import { TUI_FIRST_DAY_OF_WEEK } from '@taiga-ui/core';
-
-
 
 @Component({
   selector: 'app-timeTable',
@@ -15,6 +12,8 @@ import { TUI_FIRST_DAY_OF_WEEK } from '@taiga-ui/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimeTableComponent implements OnInit {
+  schedules: Schedules[]=[];
+
   tableGroupData?: Array<Schedules>
 
   constructor(
@@ -51,6 +50,10 @@ export class TimeTableComponent implements OnInit {
 
   clickButton(){
     const d: Date = new Date();
-    this.schedulesService.getGroup("Муми-тролли","2022-05-23").subscribe(data=>( console.log(data), this.tableGroupData = data))
+    this.schedulesService.getGroup("Муми-тролли","2022-05-23").subscribe(data => this.schedules=data);
+    //this.schedulesService.getTeachers("Морра","2022-04-11").subscribe(data=>( console.log(data)))
+    //this.schedulesService.getAuditories("Танцплощадка","2022-04-11").subscribe(data=>( console.log(data)))
+    console.log(this.schedules)
+
   }
 }
