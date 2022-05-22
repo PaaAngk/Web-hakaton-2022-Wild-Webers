@@ -28,20 +28,15 @@
                   Аудитории
                   <custom-list *tuiDataList [items]="itemsAuditories"></custom-list>
                 </tui-select>
+
               </div>
             </div>
           </th>
-          <th>
-            
+          <th>      
           </th>
           <td>
-
           </td>
-
         </tr>
-
-
-
       </table>
 
 
@@ -65,45 +60,54 @@
             <table class="week">
               <thead>
                 <tr>
-                  <th></th>
-                  <th>
-                    <div class="weekday-field">Mon</div>
-                    <div class="day-field">23</div>
-                  </th>
-                  <th>
-                    <div class="weekday-field">Tue</div>
-                    <div class="day-field">24</div>
-                  </th>
-                  <th>
-                    <div class="weekday-field">Wed</div>
-                    <div class="day-field">25</div>
-                  </th>
-                  <th>
-                    <div class="weekday-field">Thu</div>
-                    <div class="day-field">26</div>
-                  </th>
-                  <th>
-                    <div class="weekday-field">Fri</div>
-                    <div class="day-field">27</div>
-                  </th>
-                  <th>
-                    <div class="weekday-field">Sat</div>
-                    <div class="day-field">28</div>
-                  </th>
-                  <th>
-                    <div class="weekday-field">Sun</div>
-                    <div class="day-field">29</div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th class="hour-field">1</th>
-                  <td data-date-time="22/05/2022 01:00">
-                    <div class="events-wrapper">
-                      <div class="event event-2 event-end" data-mdb-event-key="1" data-mdb-event-order="0"
-                        draggable="true" data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true" title=""
-                        style="
+                    <th></th>
+                    <th>
+                      <div class="weekday-field">Понедельник</div>
+                      <div class="day-field">{{currentDay}}</div>
+
+                    </th>
+                    <th>
+                      <div class="weekday-field">Вторник</div>
+                      <div class="day-field">{{currentDay+1}}</div>
+                    </th>
+                    <th>
+                      <div class="weekday-field">Среда</div>
+                      <div class="day-field">{{currentDay+2}}</div>
+                    </th>
+                    <th>
+                      <div class="weekday-field">Четверг</div>
+                      <div class="day-field">{{currentDay+3}}</div>
+                    </th>
+                    <th>
+                      <div class="weekday-field">Пятница</div>
+                      <div class="day-field">{{currentDay+4}}</div>
+                    </th>
+                    <th>
+                      <div class="weekday-field">Суббота</div>
+                      <div class="day-field">{{currentDay+5}}</div>
+                    </th>
+                    <th>
+                      <div class="weekday-field">Воскресенье</div>
+                      <div class="day-field">{{currentDay+6}}</div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th class="hour-field">1 параth>
+                    <td data-date-time="22/05/2022 01:00">
+                      <div class="events-wrapper">
+                        <div
+                          class="event event-2 event-end"
+                          data-mdb-event-key="1"
+                          data-mdb-event-order="0"
+                          draggable="true"
+                          data-mdb-toggle="tooltip"
+                          data-mdb-offset="0,10"
+                          data-mdb-html="true"
+                          title=""
+                          style="
+
                             order: 2;
                             background: rgb(199, 245, 217);
                             color: rgb(11, 65, 33);
@@ -124,25 +128,32 @@
         22/05/2022</small></p>'>
                         JS Conference
                       </div>
-                    </div>
-                  </td>
-                  <td data-date-time="23/05/2022 01:00"></td>
-                  <td data-date-time="24/05/2022 01:00"></td>
-                  <td data-date-time="25/05/2022 01:00"></td>
-                  <td data-date-time="26/05/2022 01:00"></td>
-                  <td data-date-time="27/05/2022 01:00"></td>
-                  <td data-date-time="28/05/2022 01:00"></td>
-                </tr>
-                <tr>
-                  <th class="hour-field">2</th>
-                  <td data-date-time="22/05/2022 02:00"></td>
-                  <td data-date-time="23/05/2022 02:00"></td>
-                  <td data-date-time="24/05/2022 02:00"></td>
-                  <td data-date-time="25/05/2022 02:00">
-                    <div class="events-wrapper">
-                      <div class="event event-2 event-end" data-mdb-event-key="2" data-mdb-event-order="1"
-                        draggable="true" data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true" title=""
-                        style="
+
+                    </td>
+                    <td data-date-time="23/05/2022 01:00"></td>
+                    <td data-date-time="24/05/2022 01:00"></td>
+                    <td data-date-time="25/05/2022 01:00"></td>
+                    <td data-date-time="26/05/2022 01:00"></td>
+                    <td data-date-time="27/05/2022 01:00"></td>
+                    <td data-date-time="28/05/2022 01:00"></td>
+                  </tr>
+                  <tr>
+                    <th class="hour-field">2 пара</th>
+                    <td data-date-time="22/05/2022 02:00"></td>
+                    <td data-date-time="23/05/2022 02:00"></td>
+                    <td data-date-time="24/05/2022 02:00"></td>
+                    <td data-date-time="25/05/2022 02:00">
+                      <div class="events-wrapper">
+                        <div
+                          class="event event-2 event-end"
+                          data-mdb-event-key="2"
+                          data-mdb-event-order="1"
+                          draggable="true"
+                          data-mdb-toggle="tooltip"
+                          data-mdb-offset="0,10"
+                          data-mdb-html="true"
+                          title=""
+                          style="
                             order: 2;
                             background: rgb(235, 205, 254);
                             color: rgb(110, 2, 177);
@@ -158,30 +169,36 @@
       23/05/2022 <small class="fw-light">08:00 - 12:00</small></small></p>'>
                         <i class="fas fa-circle pe-1 event-circle" style="color: rgb(207, 224, 252)"></i>Meeting
                       </div>
-                    </div>
-                  </td>
-                  <td data-date-time="26/05/2022 02:00"></td>
-                  <td data-date-time="27/05/2022 02:00"></td>
-                  <td data-date-time="28/05/2022 02:00"></td>
-                </tr>
-                <tr>
-                  <th class="hour-field">3</th>
-                  <td data-date-time="22/05/2022 03:00"></td>
-                  <td data-date-time="23/05/2022 03:00"></td>
-                  <td data-date-time="24/05/2022 03:00"></td>
-                  <td data-date-time="25/05/2022 03:00"></td>
-                  <td data-date-time="26/05/2022 03:00"></td>
-                  <td data-date-time="27/05/2022 03:00"></td>
-                  <td data-date-time="28/05/2022 03:00"></td>
-                </tr>
-                <tr>
-                  <th class="hour-field">4</th>
-                  <td data-date-time="22/05/2022 04:00">
-                    <div class="events-wrapper">
-                      <div class="event event-6 event-end" data-mdb-event-key="6" data-mdb-event-order="2"
-                        draggable="true" data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true" title=""
-                        style="
 
+                    </td>
+                    <td data-date-time="26/05/2022 02:00"></td>
+                    <td data-date-time="27/05/2022 02:00"></td>
+                    <td data-date-time="28/05/2022 02:00"></td>
+                  </tr>
+                  <tr>
+                    <th class="hour-field">3 пара</th>
+                    <td data-date-time="22/05/2022 03:00"></td>
+                    <td data-date-time="23/05/2022 03:00"></td>
+                    <td data-date-time="24/05/2022 03:00"></td>
+                    <td data-date-time="25/05/2022 03:00"></td>
+                    <td data-date-time="26/05/2022 03:00"></td>
+                    <td data-date-time="27/05/2022 03:00"></td>
+                    <td data-date-time="28/05/2022 03:00"></td>
+                  </tr>
+                  <tr>
+                    <th class="hour-field">4 пара</th>
+                    <td data-date-time="22/05/2022 04:00">
+                      <div class="events-wrapper">
+                        <div
+                          class="event event-6 event-end"
+                          data-mdb-event-key="6"
+                          data-mdb-event-order="2"
+                          draggable="true"
+                          data-mdb-toggle="tooltip"
+                          data-mdb-offset="0,10"
+                          data-mdb-html="true"
+                          title=""
+                          style="
                             order: 6;
                             background: rgb(253, 216, 222);
                             color: rgb(121, 6, 25);
@@ -191,66 +208,92 @@
         30/05/2022</small></p>'>
                         React Meetup
                       </div>
-                    </div>
-                  </td>
-                  <td data-date-time="23/05/2022 04:00"></td>
-                  <td data-date-time="24/05/2022 04:00"></td>
-                  <td data-date-time="25/05/2022 04:00"></td>
-                  <td data-date-time="26/05/2022 04:00"></td>
-                  <td data-date-time="27/05/2022 04:00"></td>
-                  <td data-date-time="28/05/2022 04:00"></td>
-                </tr>
-                <tr>
-                  <th class="hour-field">5</th>
-
-                  <td data-date-time="22/05/2022 05:00"></td>
-                  <td data-date-time="23/05/2022 05:00"></td>
-                  <td data-date-time="24/05/2022 05:00"></td>
-                  <td data-date-time="25/05/2022 05:00"></td>
-                  <td data-date-time="26/05/2022 05:00"></td>
-                  <td data-date-time="27/05/2022 05:00"></td>
-                  <td data-date-time="28/05/2022 05:00"></td>
-                </tr>
-                <tr>
-                  <th class="hour-field">6</th>
-                  <td data-date-time="22/05/2022 06:00">
-                    <div class="event event-short event-4" draggable="true" data-mdb-toggle="tooltip"
-                      data-mdb-offset="0,10" data-mdb-html="true" title="" data-mdb-original-title='<h6><strong>Meeting</strong></h6><p class="mb-0"><small>
+                    </td>
+                    <td data-date-time="23/05/2022 04:00"></td>
+                    <td data-date-time="24/05/2022 04:00"></td>
+                    <td data-date-time="25/05/2022 04:00"></td>
+                    <td data-date-time="26/05/2022 04:00"></td>
+                    <td data-date-time="27/05/2022 04:00"></td>
+                    <td data-date-time="28/05/2022 04:00"></td>
+                  </tr>
+                  <tr>
+                    <th class="hour-field">5 пара</th>
+                    <td data-date-time="22/05/2022 05:00"></td>
+                    <td data-date-time="23/05/2022 05:00"></td>
+                    <td data-date-time="24/05/2022 05:00"></td>
+                    <td data-date-time="25/05/2022 05:00"></td>
+                    <td data-date-time="26/05/2022 05:00"></td>
+                    <td data-date-time="27/05/2022 05:00"></td>
+                    <td data-date-time="28/05/2022 05:00"></td>
+                  </tr>
+                  <tr>
+                    <th class="hour-field">6 пара</th>
+                    <td data-date-time="22/05/2022 06:00">
+                      <div
+                        class="event event-short event-4"
+                        draggable="true"
+                        data-mdb-toggle="tooltip"
+                        data-mdb-offset="0,10"
+                        data-mdb-html="true"
+                        title=""
+                        data-mdb-original-title='<h6><strong>Meeting</strong></h6><p class="mb-0"><small>
         <i class="fas fa-calendar-alt pr-1"></i>
-        23/05/2022 <small class="fw-light">08:00 - 12:00</small></small></p>'>
-                      <i class="fas fa-circle event-circle pe-1" style="color: #cfe0fc"></i>Meeting
-                    </div>
-                  </td>
-                  <td data-date-time="23/05/2022 06:00"></td>
-                  <td data-date-time="24/05/2022 06:00"></td>
-                  <td data-date-time="25/05/2022 06:00"></td>
-                  <td data-date-time="26/05/2022 06:00"></td>
-                  <td data-date-time="27/05/2022 06:00"></td>
-                  <td data-date-time="28/05/2022 06:00"></td>
-                </tr>
-                <tr>
-                  <th class="hour-field">7</th>
-                  <td data-date-time="22/05/2022 07:00"></td>
-                  <td data-date-time="23/05/2022 07:00"></td>
-                  <td data-date-time="24/05/2022 07:00"></td>
-                  <td data-date-time="25/05/2022 07:00"></td>
-                  <td data-date-time="26/05/2022 07:00"></td>
-                  <td data-date-time="27/05/2022 07:00">
-                    <div class="event event-short event-4" draggable="true" data-mdb-toggle="tooltip"
-                      data-mdb-offset="0,10" data-mdb-html="true" title="" data-mdb-original-title='<h6><strong>Meeting</strong></h6><p class="mb-0"><small>
+        23/05/2022 <small class="fw-light">08:00 - 12:00</small></small></p>'
+                      >
+                        <i
+                          class="fas fa-circle event-circle pe-1"
+                          style="color: #cfe0fc"
+                        ></i
+                        >Meeting
+                      </div>
+                    </td>
+                    <td data-date-time="23/05/2022 06:00"></td>
+                    <td data-date-time="24/05/2022 06:00"></td>
+                    <td data-date-time="25/05/2022 06:00"></td>
+                    <td data-date-time="26/05/2022 06:00"></td>
+                    <td data-date-time="27/05/2022 06:00"></td>
+                    <td data-date-time="28/05/2022 06:00"></td>
+                  </tr>
+                  <tr>
+                    <th class="hour-field">7 пара</th>
+                    <td data-date-time="22/05/2022 07:00"></td>
+                    <td data-date-time="23/05/2022 07:00"></td>
+                    <td data-date-time="24/05/2022 07:00"></td>
+                    <td data-date-time="25/05/2022 07:00"></td>
+                    <td data-date-time="26/05/2022 07:00"></td>
+                    <td data-date-time="27/05/2022 07:00">
+                      <div
+                        class="event event-short event-4"
+                        draggable="true"
+                        data-mdb-toggle="tooltip"
+                        data-mdb-offset="0,10"
+                        data-mdb-html="true"
+                        title=""
+                        data-mdb-original-title='<h6><strong>Meeting</strong></h6><p class="mb-0"><small>
         <i class="fas fa-calendar-alt pr-1"></i>
-        23/05/2022 <small class="fw-light">08:00 - 12:00</small></small></p>'>
-                      <i class="fas fa-circle event-circle pe-1" style="color: #cfe0fc"></i>Meeting
-                    </div>
-                  </td>
-                  <td data-date-time="28/05/2022 07:00"></td>
-                </tr>
-                <tr>
-                  <th class="hour-field">8</th>
-                  <td data-date-time="22/05/2022 08:00"></td>
-                  <td data-date-time="23/05/2022 08:00">
-                    <div class="event event-short event-4" draggable="true" data-mdb-toggle="tooltip"
-                      data-mdb-offset="0,10" data-mdb-html="true" title="" data-mdb-original-title='<h6><strong>Meeting</strong></h6><p class="mb-0"><small>
+        23/05/2022 <small class="fw-light">08:00 - 12:00</small></small></p>'
+                      >
+                        <i
+                          class="fas fa-circle event-circle pe-1"
+                          style="color: #cfe0fc"
+                        ></i
+                        >Meeting
+                      </div>
+                    </td>
+                    <td data-date-time="28/05/2022 07:00"></td>
+                  </tr>
+                  <tr>
+                    <th class="hour-field">8 пара</th>
+                    <td data-date-time="22/05/2022 08:00"></td>
+                    <td data-date-time="23/05/2022 08:00">
+                      <div
+                        class="event event-short event-4"
+                        draggable="true"
+                        data-mdb-toggle="tooltip"
+                        data-mdb-offset="0,10"
+                        data-mdb-html="true"
+                        title=""
+                        data-mdb-original-title='<h6><strong>Meeting</strong></h6><p class="mb-0"><small>
         <i class="fas fa-calendar-alt pr-1"></i>
         23/05/2022 <small class="fw-light">08:00 - 12:00</small></small></p>'>
                       <i class="fas fa-circle event-circle pe-1" style="color: #cfe0fc"></i>Meeting

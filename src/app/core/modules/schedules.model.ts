@@ -4,7 +4,7 @@
     day: number;
     pair:number;
     week_begining:string;
-    groups: string;
+    groups: [];
     subgroup_number: number;
     discipline: string;
     teachers:[];
