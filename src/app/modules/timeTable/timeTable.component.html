@@ -7,9 +7,9 @@
         <div class="col-3" style=" background-color: rgb(216, 216, 216)">
           <div class="row">фильтры</div>
           <div class="row">фильтры</div>
-          <div class="row">календарик</div>
+          <tui-calendar [value]="date"(dayClick)="onDayClick($event)"></tui-calendar>
         </div>
-
+        
         <div class="col-9">
           <div class="calendar">
             <div class="row justify-content-center">
