@@ -1,45 +1,55 @@
 <div class="container">
   <button style="height: 100px; width: 100px; background-color: red; " type="button"
     (click)='clickButton()'>AAAAAAAAA</button>
-  
-    <div class="container">
-      <div class="row">
-        <div class="col-4" style=" background-color: rgb(216, 216, 216)">
-          <div class="row">фильтры</div>
-          <div class="row">фильтры</div>
-          <div class="card">
-            <div class="card-body">
-              <tui-calendar [value]="date" (dayClick)="onDayClick($event)"></tui-calendar>
+    <div class="row">
+      <div class="col-4 p-2 card">
+
+          <div class="row mb-2" style=" padding-left: 10px;">
+            <tui-select class="control" [identityMatcher]="identityMatcher" 
+              [(ngModel)]="valueGroups">
+              Группы
+              <custom-list *tuiDataList [items]="itemsGroups"></custom-list>
+            </tui-select>
+          </div>
+          <div class="row mb-2" style=" padding-left: 10px;">
+            <tui-select class="control" [identityMatcher]="identityMatcher" 
+              [(ngModel)]="valueTeachers">
+              Преподы
+              <custom-list *tuiDataList [items]="itemsTeachers"></custom-list>
+            </tui-select>
+          </div>
+          <div class="row mb-2" style=" padding-left: 10px;">
+            <tui-select class="control" [identityMatcher]="identityMatcher"
+              [(ngModel)]="valueAuditories">
+              Аудитории
+              <custom-list *tuiDataList [items]="itemsAuditories"></custom-list>
+            </tui-select>
+
+          </div>
+          <div class="card shadow-lg">
+            <tui-calendar [value]="date"(dayClick)="onDayClick($event)"></tui-calendar>
+          </div>
+      </div>
+
+
+      <div class="col-8 ">
+        <div class="calendar card p-2 shadow-lg">
+          <div class="row justify-content-center">
+            <div class="my-2 me-2 my-lg-0 justify-content-center">
+              <button data-mdb-ripple-color="dark" class="btn btn-link text-dark">
+                Today</button><button data-mdb-ripple-color="dark" class="btn btn-link text-dark">
+                <i class="fas fa-chevron-left"></i></button><button data-mdb-ripple-color="dark"
+                class="btn btn-link text-dark">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+
+              <span class="calendar-heading">May 2022</span>
             </div>
           </div>
-        </div>
- 
-        <div class="col-8">
-          <div class="calendar card p-2">
-            <div class="row justify-content-center">
-              <div class="my-2 me-2 my-lg-0 justify-content-center">
-                <button data-mdb-ripple-color="dark" class="btn btn-link text-dark">
-                  Расписание</button
-                ><button
-                  data-mdb-ripple-color="dark"
-                  class="btn btn-link text-dark"
-                >
-                  <i class="fas fa-chevron-left"></i></button
-                ><button
-                  data-mdb-ripple-color="dark"
-                  class="btn btn-link text-dark"
-                >
-                  <i class="fas fa-chevron-right"></i>
-                </button>
-    
-                <span class="calendar-heading">Май 2022</span>
-              </div>
-            </div>
-            <div class="row-auto">
-              <table class="week">
-                <thead>
-                  <tr>
-
+          <div class="row-auto">
+            <table class="week">
+              <thead>
+                <tr>
                     <th></th>
                     <th>
                       <div class="weekday-field">Понедельник</div>
@@ -87,38 +97,28 @@
                           data-mdb-html="true"
                           title=""
                           style="
+
                             order: 2;
                             background: rgb(199, 245, 217);
                             color: rgb(11, 65, 33);
                             padding-left: 7px;
-                          "
-                          data-mdb-original-title='<h6><strong>JS Conference</strong></h6><p class="mb-0"><small>
+                          " data-mdb-original-title='<h6><strong>JS Conference</strong></h6><p class="mb-0"><small>
         <i class="fas fa-calendar-alt pr-1"></i>
-        22/05/2022</small></p>'
-                        >
-                          Angular Meetup
-                        </div>
-                        <div
-                          class="event event-2 event-end"
-                          data-mdb-event-key="2"
-                          data-mdb-event-order="1"
-                          draggable="true"
-                          data-mdb-toggle="tooltip"
-                          data-mdb-offset="0,10"
-                          data-mdb-html="true"
-                          title=""
-                          style="
+        22/05/2022</small></p>'>
+                        Angular Meetup
+                      </div>
+                      <div class="event event-2 event-end" data-mdb-event-key="2" data-mdb-event-order="1"
+                        draggable="true" data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true" title=""
+                        style="
                             order: 2;
                             background: rgb(207, 224, 252);
                             color: rgb(10, 71, 169);
-                          "
-                          data-mdb-original-title='<h6><strong>JS Conference</strong></h6><p class="mb-0"><small>
+                          " data-mdb-original-title='<h6><strong>JS Conference</strong></h6><p class="mb-0"><small>
         <i class="fas fa-calendar-alt pr-1"></i>
-        22/05/2022</small></p>'
-                        >
-                          JS Conference
-                        </div>
+        22/05/2022</small></p>'>
+                        JS Conference
                       </div>
+                    </div>
                     </td>
                     <td data-date-time="23/05/2022 01:00"></td>
                     <td data-date-time="24/05/2022 01:00"></td>
@@ -147,34 +147,19 @@
                             order: 2;
                             background: rgb(235, 205, 254);
                             color: rgb(110, 2, 177);
-                          "
-                          data-mdb-original-title='<h6><strong>JS Conference</strong></h6><p class="mb-0"><small>
+                          " data-mdb-original-title='<h6><strong>JS Conference</strong></h6><p class="mb-0"><small>
     <i class="fas fa-calendar-alt pr-1"></i>
-    22/05/2022</small></p>'
-                        >
-                          Vue Meetup
-                        </div>
-                        <div
-                          class="event event-4 event-short event-end"
-                          data-mdb-event-key="4"
-                          data-mdb-event-order="2"
-                          draggable="true"
-                          data-mdb-toggle="tooltip"
-                          data-mdb-offset="0,10"
-                          data-mdb-html="true"
-                          title=""
-                          style="order: 4"
-                          data-mdb-original-title='<h6><strong>Meeting</strong></h6><p class="mb-0"><small>
-      <i class="fas fa-calendar-alt pr-1"></i>
-      23/05/2022 <small class="fw-light">08:00 - 12:00</small></small></p>'
-                        >
-                          <i
-                            class="fas fa-circle pe-1 event-circle"
-                            style="color: rgb(207, 224, 252)"
-                          ></i
-                          >Meeting
-                        </div>
+    22/05/2022</small></p>'>
+                        Vue Meetup
                       </div>
+                      <div class="event event-4 event-short event-end" data-mdb-event-key="4" data-mdb-event-order="2"
+                        draggable="true" data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true" title=""
+                        style="order: 4" data-mdb-original-title='<h6><strong>Meeting</strong></h6><p class="mb-0"><small>
+      <i class="fas fa-calendar-alt pr-1"></i>
+      23/05/2022 <small class="fw-light">08:00 - 12:00</small></small></p>'>
+                        <i class="fas fa-circle pe-1 event-circle" style="color: rgb(207, 224, 252)"></i>Meeting
+                      </div>
+                    </div>
                     </td>
                     <td data-date-time="26/05/2022 02:00"></td>
                     <td data-date-time="27/05/2022 02:00"></td>
@@ -207,15 +192,13 @@
                             order: 6;
                             background: rgb(253, 216, 222);
                             color: rgb(121, 6, 25);
-                          "
-                          data-mdb-original-title='<h6><strong>React Meetup</strong></h6><p class="mb-0"><small>
+                          " data-mdb-original-title='<h6><strong>React Meetup</strong></h6><p class="mb-0"><small>
         <i class="fas fa-calendar-alt pr-1"></i>
         27/05/2022 -
-        30/05/2022</small></p>'
-                        >
-                          React Meetup
-                        </div>
+        30/05/2022</small></p>'>
+                        React Meetup
                       </div>
+                    </div>
                     </td>
                     <td data-date-time="23/05/2022 04:00"></td>
                     <td data-date-time="24/05/2022 04:00"></td>
@@ -303,42 +286,25 @@
                         title=""
                         data-mdb-original-title='<h6><strong>Meeting</strong></h6><p class="mb-0"><small>
         <i class="fas fa-calendar-alt pr-1"></i>
-        23/05/2022 <small class="fw-light">08:00 - 12:00</small></small></p>'
-                      >
-                        <i
-                          class="fas fa-circle event-circle pe-1"
-                          style="color: #cfe0fc"
-                        ></i
-                        >Meeting
-                      </div>
-                    </td>
-                    <td data-date-time="24/05/2022 08:00"></td>
-                    <td data-date-time="25/05/2022 08:00"></td>
-                    <td data-date-time="26/05/2022 08:00">
-                      <div
-                        class="event event-short event-5"
-                        draggable="true"
-                        data-mdb-toggle="tooltip"
-                        data-mdb-offset="0,10"
-                        data-mdb-html="true"
-                        title=""
-                        data-mdb-original-title='<h6><strong>Call</strong></h6><p class="mb-0"><small>
+        23/05/2022 <small class="fw-light">08:00 - 12:00</small></small></p>'>
+                      <i class="fas fa-circle event-circle pe-1" style="color: #cfe0fc"></i>Meeting
+                    </div>
+                  </td>
+                  <td data-date-time="24/05/2022 08:00"></td>
+                  <td data-date-time="25/05/2022 08:00"></td>
+                  <td data-date-time="26/05/2022 08:00">
+                    <div class="event event-short event-5" draggable="true" data-mdb-toggle="tooltip"
+                      data-mdb-offset="0,10" data-mdb-html="true" title="" data-mdb-original-title='<h6><strong>Call</strong></h6><p class="mb-0"><small>
         <i class="fas fa-calendar-alt pr-1"></i>
-        24/05/2022 <small class="fw-light">11:00 - 14:00</small></small></p>'
-                      >
-                        <i
-                          class="fas fa-circle event-circle pe-1"
-                          style="color: #292929"
-                        ></i
-                        >Call
-                      </div>
-                    </td>
-                    <td data-date-time="27/05/2022 08:00"></td>
-                    <td data-date-time="28/05/2022 08:00"></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+        24/05/2022 <small class="fw-light">11:00 - 14:00</small></small></p>'>
+                      <i class="fas fa-circle event-circle pe-1" style="color: #292929"></i>Call
+                    </div>
+                  </td>
+                  <td data-date-time="27/05/2022 08:00"></td>
+                  <td data-date-time="28/05/2022 08:00"></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
