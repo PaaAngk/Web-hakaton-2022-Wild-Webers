@@ -1,15 +1,45 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { Schedules } from './../../core/modules/schedules.model';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Schedules } from './../../core/modules/schedules.model';
 import { SchedulesService } from 'src/app/core/services';
-import { ActivitiesService } from 'src/app/core/services/activities.service';
-import { TuiDay, TuiDayOfWeek } from '@taiga-ui/cdk';
+import {
+  TuiContextWithImplicit,
+  TuiIdentityMatcher,
+  TuiStringHandler,
+} from '@taiga-ui/cdk';
+import {TuiDay,TuiDayOfWeek} from '@taiga-ui/cdk';
+const INCOME = {
+  name: 'Income',
+  items: [
+      'Donations',
+      'Product placement',
+      'Sponsorship',
+      'Found on the street',
+      'Unexpected inheritance',
+      'Investments',
+      'Color copier',
+  ],
+};
+
+const EXPENSES = {
+  name: 'Expenses',
+  items: [
+      'Energy drinks',
+      'Coffee',
+      'Ramen',
+      'Bills',
+      'Back medicine',
+      'Warhammer 40000 figurines',
+  ],
+};
+
+
 
 @Component({
   selector: 'app-timeTable',
   templateUrl: './timeTable.component.html',
   styleUrls: ['./timeTable.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TimeTableComponent implements OnInit {
 
@@ -18,10 +48,37 @@ export class TimeTableComponent implements OnInit {
 
   tableGroupData?: Array<Schedules> =[]
 
+  valueGroups = [];
+  valueTeachers = [];
+  valueAuditories = [];
+ 
+    
+    readonly itemsGroups = ["df", "gfdg"];
+    readonly itemsTeachers = ["fff"];
+    readonly itemsAuditories = ["bbb"];
+    items = [];
+
+ 
+    readonly identityMatcher: TuiIdentityMatcher<readonly string[]> = (items1, items2) =>
+        items1.length === items2.length && items1.every(item => items2.includes(item));
+ 
+    // readonly valueContent: TuiStringHandler<TuiContextWithImplicit<readonly string[]>> =
+    //     ({$implicit}) => {
+    //         if (!$implicit.length) {
+    //             return ' ';
+    //         }
+ 
+    //         const selected = this.items.find(({items}) =>
+    //             this.identityMatcher($implicit, items),
+    //         );
+ 
+    //         return selected ? `${selected.name} only` : `Selected: ${$implicit.length}`;
+    //     };
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private schedulesService: SchedulesService //private activitiesService: ActivitiesService
+    private schedulesService: SchedulesService
   ) { 
     this.onDayClick(TuiDay.fromLocalNativeDate(new Date()))
   }
@@ -72,4 +129,5 @@ export class TimeTableComponent implements OnInit {
     console.log(this.schedulesService.listAuditories);
     console.log(this.schedulesService.listTeachers);
   }
+  
 }
