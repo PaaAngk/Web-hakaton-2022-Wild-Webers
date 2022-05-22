@@ -9,6 +9,7 @@ import {TuiDataListWrapperModule, TuiSelectModule} from '@taiga-ui/kit';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TuiRadioListModule} from '@taiga-ui/kit';
 import { CustomListComponent } from 'src/app/UI/custom-list.component';
+import {TuiCalendarModule} from '@taiga-ui/core';
 
 @NgModule({
   imports: [
@@ -17,13 +18,13 @@ import { CustomListComponent } from 'src/app/UI/custom-list.component';
     TuiDataListModule,
     TuiPrimitiveTextfieldModule,
     TuiTextfieldControllerModule,
-    
     FormsModule,
         ReactiveFormsModule,
         TuiSelectModule,
         TuiDataListModule,
         TuiDataListWrapperModule,
         TuiRadioListModule
+    TuiCalendarModule
   ],
   declarations: [TimeTableComponent,
     CustomListComponent]
