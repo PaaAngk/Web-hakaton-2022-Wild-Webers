@@ -23,7 +23,7 @@ import {TuiCalendarModule} from '@taiga-ui/core';
         TuiSelectModule,
         TuiDataListModule,
         TuiDataListWrapperModule,
-        TuiRadioListModule
+        TuiRadioListModule,
     TuiCalendarModule
   ],
   declarations: [TimeTableComponent,
