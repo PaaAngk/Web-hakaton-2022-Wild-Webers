@@ -4,14 +4,18 @@
   
     <div class="container">
       <div class="row">
-        <div class="col-3" style=" background-color: rgb(216, 216, 216)">
+        <div class="col-4" style=" background-color: rgb(216, 216, 216)">
           <div class="row">фильтры</div>
           <div class="row">фильтры</div>
-          <tui-calendar [value]="date"(dayClick)="onDayClick($event)"></tui-calendar>
+          <div class="card">
+            <div class="card-body">
+              <tui-calendar [value]="date" (dayClick)="onDayClick($event)"></tui-calendar>
+            </div>
+          </div>
         </div>
-        
-        <div class="col-9">
-          <div class="calendar">
+ 
+        <div class="col-8">
+          <div class="calendar card p-2">
             <div class="row justify-content-center">
               <div class="my-2 me-2 my-lg-0 justify-content-center">
                 <button data-mdb-ripple-color="dark" class="btn btn-link text-dark">
@@ -28,7 +32,7 @@
                   <i class="fas fa-chevron-right"></i>
                 </button>
     
-                <span class="calendar-heading">May 2022</span>
+                <span class="calendar-heading">Май 2022</span>
               </div>
             </div>
             <div class="row-auto">
@@ -37,43 +41,40 @@
                   <tr>
 
                     <th></th>
-                    <th *ngFor="let hero of tableGroupData">
+                    <th>
+                      <div class="weekday-field">Понедельник</div>
+                      <div class="day-field">{{currentDay}}</div>
 
                     </th>
                     <th>
-                      <div class="weekday-field">Mon</div>
-                      <div class="day-field">23</div>
-
+                      <div class="weekday-field">Вторник</div>
+                      <div class="day-field">{{currentDay+1}}</div>
                     </th>
                     <th>
-                      <div class="weekday-field">Tue</div>
-                      <div class="day-field">24</div>
+                      <div class="weekday-field">Среда</div>
+                      <div class="day-field">{{currentDay+2}}</div>
                     </th>
                     <th>
-                      <div class="weekday-field">Wed</div>
-                      <div class="day-field">25</div>
+                      <div class="weekday-field">Четверг</div>
+                      <div class="day-field">{{currentDay+3}}</div>
                     </th>
                     <th>
-                      <div class="weekday-field">Thu</div>
-                      <div class="day-field">26</div>
+                      <div class="weekday-field">Пятница</div>
+                      <div class="day-field">{{currentDay+4}}</div>
                     </th>
                     <th>
-                      <div class="weekday-field">Fri</div>
-                      <div class="day-field">27</div>
+                      <div class="weekday-field">Суббота</div>
+                      <div class="day-field">{{currentDay+5}}</div>
                     </th>
                     <th>
-                      <div class="weekday-field">Sat</div>
-                      <div class="day-field">28</div>
-                    </th>
-                    <th>
-                      <div class="weekday-field">Sun</div>
-                      <div class="day-field">29</div>
+                      <div class="weekday-field">Воскресенье</div>
+                      <div class="day-field">{{currentDay+6}}</div>
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <th class="hour-field">1 пара 8:15-10:15</th>
+                    <th class="hour-field">1 параth>
                     <td data-date-time="22/05/2022 01:00">
                       <div class="events-wrapper">
                         <div
@@ -127,7 +128,7 @@
                     <td data-date-time="28/05/2022 01:00"></td>
                   </tr>
                   <tr>
-                    <th class="hour-field">2 пара 10:30-11:45</th>
+                    <th class="hour-field">2 пара</th>
                     <td data-date-time="22/05/2022 02:00"></td>
                     <td data-date-time="23/05/2022 02:00"></td>
                     <td data-date-time="24/05/2022 02:00"></td>
@@ -180,7 +181,7 @@
                     <td data-date-time="28/05/2022 02:00"></td>
                   </tr>
                   <tr>
-                    <th class="hour-field">3 пара 8:15-10:00</th>
+                    <th class="hour-field">3 пара</th>
                     <td data-date-time="22/05/2022 03:00"></td>
                     <td data-date-time="23/05/2022 03:00"></td>
                     <td data-date-time="24/05/2022 03:00"></td>
@@ -190,7 +191,7 @@
                     <td data-date-time="28/05/2022 03:00"></td>
                   </tr>
                   <tr>
-                    <th class="hour-field">4</th>
+                    <th class="hour-field">4 пара</th>
                     <td data-date-time="22/05/2022 04:00">
                       <div class="events-wrapper">
                         <div
@@ -224,7 +225,7 @@
                     <td data-date-time="28/05/2022 04:00"></td>
                   </tr>
                   <tr>
-                    <th class="hour-field">5</th>
+                    <th class="hour-field">5 пара</th>
                     <td data-date-time="22/05/2022 05:00"></td>
                     <td data-date-time="23/05/2022 05:00"></td>
                     <td data-date-time="24/05/2022 05:00"></td>
@@ -234,7 +235,7 @@
                     <td data-date-time="28/05/2022 05:00"></td>
                   </tr>
                   <tr>
-                    <th class="hour-field">6</th>
+                    <th class="hour-field">6 пара</th>
                     <td data-date-time="22/05/2022 06:00">
                       <div
                         class="event event-short event-4"
@@ -262,7 +263,7 @@
                     <td data-date-time="28/05/2022 06:00"></td>
                   </tr>
                   <tr>
-                    <th class="hour-field">7</th>
+                    <th class="hour-field">7 пара</th>
                     <td data-date-time="22/05/2022 07:00"></td>
                     <td data-date-time="23/05/2022 07:00"></td>
                     <td data-date-time="24/05/2022 07:00"></td>
@@ -290,7 +291,7 @@
                     <td data-date-time="28/05/2022 07:00"></td>
                   </tr>
                   <tr>
-                    <th class="hour-field">8</th>
+                    <th class="hour-field">8 пара</th>
                     <td data-date-time="22/05/2022 08:00"></td>
                     <td data-date-time="23/05/2022 08:00">
                       <div

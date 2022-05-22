@@ -17,6 +17,7 @@ export class SchedulesService {
     this.getListAuditories();
   }
 
+
   get(): Observable<Schedules[]> {
     return this.apiService
       .get('/schedules')
@@ -27,6 +28,7 @@ export class SchedulesService {
         )
       );
   }
+
 
   getGroup(group: string, week_begining: string): Observable<Schedules[]> {
     return this.apiService
