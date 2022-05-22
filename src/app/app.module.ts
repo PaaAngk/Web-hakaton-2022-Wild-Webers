@@ -9,6 +9,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './core/layout/layout.module';
 import { HttpClientModule } from "@angular/common/http";
+import {TUI_LANGUAGE, TUI_RUSSIAN_LANGUAGE} from '@taiga-ui/i18n';
+import { of } from "rxjs";
+
 
 @NgModule({
   declarations: [
@@ -26,7 +29,12 @@ import { HttpClientModule } from "@angular/common/http";
       TuiDialogModule,
       TuiNotificationsModule
 ],
-  providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}],
+  providers: [
+    {
+      provide: TUI_LANGUAGE,
+      useValue: of(TUI_RUSSIAN_LANGUAGE),
+    },
+    {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
