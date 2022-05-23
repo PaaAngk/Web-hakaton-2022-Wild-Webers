@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable ,  BehaviorSubject ,  ReplaySubject } from 'rxjs';
+
 import { Schedules } from '../modules/schedules.model';
 import { ApiService } from './api.service';
 import { map } from 'rxjs/operators';
@@ -8,15 +9,17 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class SchedulesService {
-  listGroup: string[] = [];
-  listTeachers: string[] = [];
-  listAuditories: string[] = [];
-  constructor(private apiService: ApiService) {
-    this.getListGroup();
-    this.getListTeachers();
-    this.getListAuditories();
-  }
 
+  constructor(private apiService: ApiService) {
+    this.findListGroupAndTeachersAndAuditories();
+    
+  }
+  private listGroupSubject = new ReplaySubject<string[]>(1);
+  public listGroup = this.listGroupSubject.asObservable();
+  private listTeachersSubject = new ReplaySubject<string[]>(1);
+  public listTeachers = this.listTeachersSubject.asObservable();
+  private listAuditoriesSubject = new ReplaySubject<string[]>(1);
+  public listAuditories = this.listAuditoriesSubject.asObservable();
 
   get(): Observable<Schedules[]> {
     return this.apiService
@@ -28,7 +31,6 @@ export class SchedulesService {
         )
       );
   }
-
 
   getGroup(group: string, week_begining: string): Observable<Schedules[]> {
     return this.apiService
@@ -85,9 +87,11 @@ export class SchedulesService {
       );
   }
 
-  getListGroup() {
+  findListGroupAndTeachersAndAuditories() {
     var schedules: Schedules[] = [];
     var listGroup: string[] = [];
+    var listTeachers: string[] = [];
+    var listAuditories: string[] = [];
     this.get().subscribe((data) => {
       schedules = data;
 
@@ -97,42 +101,22 @@ export class SchedulesService {
             listGroup.push(item.groups[i]);
           }
         }
-      }
-      this.listGroup = listGroup;
-    });
-  }
 
-  getListTeachers() {
-    var schedules: Schedules[] = [];
-    var listTeachers: string[] = [];
-    this.get().subscribe((data) => {
-      schedules = data;
-
-      for (let item of schedules) {
         for (let i in item.teachers) {
           if (!listTeachers.includes(item.teachers[i])) {
             listTeachers.push(item.teachers[i]);
           }
         }
-      }
-      this.listTeachers = listTeachers;
-    });
-  }
 
-  getListAuditories() {
-    var schedules: Schedules[] = [];
-    var listAuditories: string[] = [];
-    this.get().subscribe((data) => {
-      schedules = data;
-
-      for (let item of schedules) {
         for (let i in item.auditories) {
           if (!listAuditories.includes(item.auditories[i])) {
             listAuditories.push(item.auditories[i]);
           }
         }
       }
-      this.listAuditories = listAuditories;
+      this.listGroupSubject.next(listGroup);
+      this.listTeachersSubject.next(listTeachers);
+      this.listAuditoriesSubject.next(listAuditories);
     });
   }
 }

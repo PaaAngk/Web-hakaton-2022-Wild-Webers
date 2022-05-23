@@ -44,7 +44,7 @@ const EXPENSES = {
 export class TimeTableComponent implements OnInit {
 
   schedules: Schedules[]=[];
-  currentDay:number =1 
+  weekDays:TuiDay[] = [];
 
   tableGroupData?: Array<Schedules> =[]
 
@@ -53,9 +53,9 @@ export class TimeTableComponent implements OnInit {
   valueAuditories = [];
  
     
-    readonly itemsGroups = ["df", "gfdg"];
-    readonly itemsTeachers = ["fff"];
-    readonly itemsAuditories = ["bbb"];
+    itemsGroups:string[] =[];
+    itemsTeachers:string[] =[];
+    itemsAuditories :string[] =[];
     items = [];
 
  
@@ -81,54 +81,76 @@ export class TimeTableComponent implements OnInit {
     private schedulesService: SchedulesService
   ) { 
     this.onDayClick(TuiDay.fromLocalNativeDate(new Date()))
+    this.schedulesService.listGroup.subscribe(
+      (data) => {
+        this.itemsGroups = data;
+      }
+    );
+    this.schedulesService.listTeachers.subscribe(
+      (data) => {
+        this.itemsTeachers = data;
+      }
+    );
+    this.schedulesService.listAuditories.subscribe(
+      (data) => {
+        this.itemsAuditories = data;
+      }
+    );
   }
 
 
   date: TuiDay | null = null;
   onDayClick(day: TuiDay): void {
+    this.weekDays = [];
     this.date = day;
     var weekStartDate: TuiDay;
     switch (day.dayOfWeek()) {
       case 0:
-        weekStartDate = day;
+        weekStartDate=day;
         break;
       case 1:
-        weekStartDate = new TuiDay(day.year, day.month, day.day - 1);
+        weekStartDate=day.append(new TuiDay(0,0,1),true);
         break;
       case 2:
-        weekStartDate = new TuiDay(day.year, day.month, day.day - 2);
+        weekStartDate=day.append(new TuiDay(0,0,2),true);
         break;
       case 3:
-        weekStartDate = new TuiDay(day.year, day.month, day.day - 3);
+        weekStartDate=day.append(new TuiDay(0,0,3),true);
         break;
       case 4:
-        weekStartDate = new TuiDay(day.year, day.month, day.day - 4);
+        weekStartDate=day.append(new TuiDay(0,0,4),true);
         break;
       case 5:
-        weekStartDate = new TuiDay(day.year, day.month, day.day - 5);
+        weekStartDate=day.append(new TuiDay(0,0,5),true);
         break;
       case 6:
-        weekStartDate = new TuiDay(day.year, day.month, day.day - 6);
+        weekStartDate=day.append(new TuiDay(0,0,6),true);
         break;
       default: weekStartDate = day
     }
-
-    // Найти расписание группы
-    this.currentDay = weekStartDate.day
+    this.weekDays.push(weekStartDate, weekStartDate.append(new TuiDay(0,0,1)),
+    weekStartDate.append(new TuiDay(0,0,2)), weekStartDate.append(new TuiDay(0,0,3)),
+    weekStartDate.append(new TuiDay(0,0,4)), weekStartDate.append(new TuiDay(0,0,5)),
+    weekStartDate.append(new TuiDay(0,0,6)));
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+    
+  }
 
   clickButton() {
     const d: Date = new Date();
 
-    this.schedulesService.getGroup("Муми-тролли","2022-05-23").subscribe(data => this.tableGroupData=data);
+    this.schedulesService.getGroup("Муми-тролли","2022-05-23").subscribe(data => {this.tableGroupData=data
+      console.log(data)});
     //this.schedulesService.getTeachers("Морра","2022-04-11").subscribe(data=>( console.log(data)))
     //this.schedulesService.getAuditories("Танцплощадка","2022-04-11").subscribe(data=>( console.log(data)))
 
     console.log(this.schedulesService.listGroup);
     console.log(this.schedulesService.listAuditories);
     console.log(this.schedulesService.listTeachers);
+    
   }
   
 }
