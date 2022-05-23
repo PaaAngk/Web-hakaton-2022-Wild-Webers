@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable ,  BehaviorSubject ,  ReplaySubject } from 'rxjs';
+
 import { Schedules } from '../modules/schedules.model';
 import { ApiService } from './api.service';
 import { map } from 'rxjs/operators';
@@ -8,12 +9,17 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class SchedulesService {
-  listGroup: string[] = [];
-  listTeachers: string[] = [];
-  listAuditories: string[] = [];
+
   constructor(private apiService: ApiService) {
-    this.getListGroupAndTeachersAndAuditories();
+    this.findListGroupAndTeachersAndAuditories();
+    
   }
+  private listGroupSubject = new ReplaySubject<string[]>(1);
+  public listGroup = this.listGroupSubject.asObservable();
+  private listTeachersSubject = new ReplaySubject<string[]>(1);
+  public listTeachers = this.listTeachersSubject.asObservable();
+  private listAuditoriesSubject = new ReplaySubject<string[]>(1);
+  public listAuditories = this.listAuditoriesSubject.asObservable();
 
   get(): Observable<Schedules[]> {
     return this.apiService
@@ -24,36 +30,6 @@ export class SchedulesService {
             data as any as Array<Schedules>
         )
       );
-  }
-
-  search(input: string, week_begining: string): Observable<Schedules[]> {
-    var string:string ='';
-    if (this.listGroup.includes(input)) {
-      //вернуть расписание группы
-      string='groups'
-    } else if (this.listTeachers.includes(input)) {
-      //вернуть расписание препода
-      string='teachers'
-    } else if (this.listAuditories.includes(input)) {
-      //вернуть расписание аудитории
-      string='auditories'
-    } else {
-      //вернуть ошибку
-    }
-    return this.apiService
-        .get(
-          '/schedules?'+string+'=' +
-            input +
-            '&week_begining=' +
-            week_begining +
-            '&_sort=day,pair&_order=asc'
-        )
-        .pipe(
-          map(
-            (data: { schedules: Array<Schedules> }) =>
-              data as any as Array<Schedules>
-          )
-        );
   }
 
   getGroup(group: string, week_begining: string): Observable<Schedules[]> {
@@ -111,7 +87,7 @@ export class SchedulesService {
       );
   }
 
-  getListGroupAndTeachersAndAuditories() {
+  findListGroupAndTeachersAndAuditories() {
     var schedules: Schedules[] = [];
     var listGroup: string[] = [];
     var listTeachers: string[] = [];
@@ -138,9 +114,9 @@ export class SchedulesService {
           }
         }
       }
-      this.listTeachers = listTeachers;
-      this.listGroup = listGroup;
-      this.listAuditories = listAuditories;
+      this.listGroupSubject.next(listGroup);
+      this.listTeachersSubject.next(listTeachers);
+      this.listAuditoriesSubject.next(listAuditories);
     });
   }
 }
