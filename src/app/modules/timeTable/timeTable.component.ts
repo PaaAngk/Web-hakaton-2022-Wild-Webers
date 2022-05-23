@@ -44,7 +44,7 @@ const EXPENSES = {
 export class TimeTableComponent implements OnInit {
 
   schedules: Schedules[]=[];
-  currentDay:number =1 
+  weekDays:TuiDay[] = [];
 
   tableGroupData?: Array<Schedules> =[]
 
@@ -86,35 +86,37 @@ export class TimeTableComponent implements OnInit {
 
   date: TuiDay | null = null;
   onDayClick(day: TuiDay): void {
+    this.weekDays = [];
     this.date = day;
     var weekStartDate: TuiDay;
     switch (day.dayOfWeek()) {
       case 0:
-        weekStartDate = day;
+        weekStartDate=day;
         break;
       case 1:
-        weekStartDate = new TuiDay(day.year, day.month, day.day - 1);
+        weekStartDate=day.append(new TuiDay(0,0,1),true);
         break;
       case 2:
-        weekStartDate = new TuiDay(day.year, day.month, day.day - 2);
+        weekStartDate=day.append(new TuiDay(0,0,2),true);
         break;
       case 3:
-        weekStartDate = new TuiDay(day.year, day.month, day.day - 3);
+        weekStartDate=day.append(new TuiDay(0,0,3),true);
         break;
       case 4:
-        weekStartDate = new TuiDay(day.year, day.month, day.day - 4);
+        weekStartDate=day.append(new TuiDay(0,0,4),true);
         break;
       case 5:
-        weekStartDate = new TuiDay(day.year, day.month, day.day - 5);
+        weekStartDate=day.append(new TuiDay(0,0,5),true);
         break;
       case 6:
-        weekStartDate = new TuiDay(day.year, day.month, day.day - 6);
+        weekStartDate=day.append(new TuiDay(0,0,6),true);
         break;
       default: weekStartDate = day
     }
-
-    // Найти расписание группы
-    this.currentDay = weekStartDate.day
+    this.weekDays.push(weekStartDate, weekStartDate.append(new TuiDay(0,0,1)),
+    weekStartDate.append(new TuiDay(0,0,2)), weekStartDate.append(new TuiDay(0,0,3)),
+    weekStartDate.append(new TuiDay(0,0,4)), weekStartDate.append(new TuiDay(0,0,5)),
+    weekStartDate.append(new TuiDay(0,0,6)));
   }
 
   ngOnInit() {}
