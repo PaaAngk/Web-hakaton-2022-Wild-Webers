@@ -45,6 +45,9 @@ export class TimeTableComponent implements OnInit {
   schedules: Schedules[]=[];
   weekDays:TuiDay[] = [];
 
+  listPairs:number[]=[1,2,3,4,5,6,7];
+  listDays:number[]=[1,2,3,4,5,6,7,8];
+
   loadCompleted : boolean = false;
   tableGroupData: Array<Schedules> =[]
 
@@ -82,19 +85,22 @@ export class TimeTableComponent implements OnInit {
     this.onDayClick(TuiDay.fromLocalNativeDate(new Date()))
     this.schedulesService.listGroup.subscribe(
       (data) => {
-        this.itemsGroups = data;
+        this.itemsGroups = data;console.log(this.itemsGroups);
       }
     );
     this.schedulesService.listTeachers.subscribe(
       (data) => {
-        this.itemsTeachers = data;
+        this.itemsTeachers = data;console.log(this.itemsTeachers);
       }
     );
     this.schedulesService.listAuditories.subscribe(
       (data) => {
-        this.itemsAuditories = data;
+        this.itemsAuditories = data;console.log(this.itemsAuditories);
       }
     );
+    
+    
+    
   }
 
 
@@ -131,6 +137,12 @@ export class TimeTableComponent implements OnInit {
     weekStartDate.append(new TuiDay(0,0,2)), weekStartDate.append(new TuiDay(0,0,3)),
     weekStartDate.append(new TuiDay(0,0,4)), weekStartDate.append(new TuiDay(0,0,5)),
     weekStartDate.append(new TuiDay(0,0,6)));
+    this.schedulesService.getGroup("Муми-тролли",(weekStartDate.year+'-0'+(weekStartDate.month+1)+'-'+weekStartDate.day).toString()).subscribe(
+      data => {
+        this.tableGroupData=data,
+        this.loadCompleted = true
+       },
+    );
   }
 
   ngOnInit() {  
@@ -146,7 +158,7 @@ export class TimeTableComponent implements OnInit {
   }
 
   filterFun(arr:  Array<Schedules>, day:number, pair:number){
-    console.log(this.tableGroupData)
+    //console.log(this.tableGroupData)
     return arr.filter(
       function (el)
       {
