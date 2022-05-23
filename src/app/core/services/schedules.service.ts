@@ -12,9 +12,7 @@ export class SchedulesService {
   listTeachers: string[] = [];
   listAuditories: string[] = [];
   constructor(private apiService: ApiService) {
-    this.getListGroup();
-    this.getListTeachers();
-    this.getListAuditories();
+    this.getListGroupAndTeachersAndAuditories();
   }
 
 
@@ -85,9 +83,11 @@ export class SchedulesService {
       );
   }
 
-  getListGroup() {
+  getListGroupAndTeachersAndAuditories() {
     var schedules: Schedules[] = [];
     var listGroup: string[] = [];
+    var listTeachers: string[] = [];
+    var listAuditories: string[] = [];
     this.get().subscribe((data) => {
       schedules = data;
 
@@ -99,14 +99,6 @@ export class SchedulesService {
         }
       }
       this.listGroup = listGroup;
-    });
-  }
-
-  getListTeachers() {
-    var schedules: Schedules[] = [];
-    var listTeachers: string[] = [];
-    this.get().subscribe((data) => {
-      schedules = data;
 
       for (let item of schedules) {
         for (let i in item.teachers) {
@@ -116,14 +108,6 @@ export class SchedulesService {
         }
       }
       this.listTeachers = listTeachers;
-    });
-  }
-
-  getListAuditories() {
-    var schedules: Schedules[] = [];
-    var listAuditories: string[] = [];
-    this.get().subscribe((data) => {
-      schedules = data;
 
       for (let item of schedules) {
         for (let i in item.auditories) {
@@ -135,4 +119,6 @@ export class SchedulesService {
       this.listAuditories = listAuditories;
     });
   }
+
+  
 }
