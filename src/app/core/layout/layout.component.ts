@@ -23,5 +23,8 @@ export class LayoutComponent implements OnInit {
     console.log(this.schedulesService.listGroup);
     console.log(this.schedulesService.listAuditories);
     console.log(this.schedulesService.listTeachers);
+
+    this.schedulesService.search("Юксаре", "2022-05-23").subscribe(data => this.tableGroupData=data);
+    console.log(this.tableGroupData);
   }
 }

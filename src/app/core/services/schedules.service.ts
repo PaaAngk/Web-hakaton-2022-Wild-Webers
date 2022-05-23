@@ -15,7 +15,6 @@ export class SchedulesService {
     this.getListGroupAndTeachersAndAuditories();
   }
 
-
   get(): Observable<Schedules[]> {
     return this.apiService
       .get('/schedules')
@@ -27,6 +26,35 @@ export class SchedulesService {
       );
   }
 
+  search(input: string, week_begining: string): Observable<Schedules[]> {
+    var string:string ='';
+    if (this.listGroup.includes(input)) {
+      //вернуть расписание группы
+      string='groups'
+    } else if (this.listTeachers.includes(input)) {
+      //вернуть расписание препода
+      string='teachers'
+    } else if (this.listAuditories.includes(input)) {
+      //вернуть расписание аудитории
+      string='auditories'
+    } else {
+      //вернуть ошибку
+    }
+    return this.apiService
+        .get(
+          '/schedules?'+string+'=' +
+            input +
+            '&week_begining=' +
+            week_begining +
+            '&_sort=day,pair&_order=asc'
+        )
+        .pipe(
+          map(
+            (data: { schedules: Array<Schedules> }) =>
+              data as any as Array<Schedules>
+          )
+        );
+  }
 
   getGroup(group: string, week_begining: string): Observable<Schedules[]> {
     return this.apiService
@@ -97,28 +125,22 @@ export class SchedulesService {
             listGroup.push(item.groups[i]);
           }
         }
-      }
-      this.listGroup = listGroup;
 
-      for (let item of schedules) {
         for (let i in item.teachers) {
           if (!listTeachers.includes(item.teachers[i])) {
             listTeachers.push(item.teachers[i]);
           }
         }
-      }
-      this.listTeachers = listTeachers;
 
-      for (let item of schedules) {
         for (let i in item.auditories) {
           if (!listAuditories.includes(item.auditories[i])) {
             listAuditories.push(item.auditories[i]);
           }
         }
       }
+      this.listTeachers = listTeachers;
+      this.listGroup = listGroup;
       this.listAuditories = listAuditories;
     });
   }
-
-  
 }
