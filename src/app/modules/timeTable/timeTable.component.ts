@@ -53,9 +53,9 @@ export class TimeTableComponent implements OnInit {
   valueAuditories = [];
  
     
-    readonly itemsGroups = ["df", "gfdg"];
-    readonly itemsTeachers = ["fff"];
-    readonly itemsAuditories = ["bbb"];
+    itemsGroups:string[] =[];
+    itemsTeachers:string[] =[];
+    itemsAuditories :string[] =[];
     items = [];
 
  
@@ -81,6 +81,21 @@ export class TimeTableComponent implements OnInit {
     private schedulesService: SchedulesService
   ) { 
     this.onDayClick(TuiDay.fromLocalNativeDate(new Date()))
+    this.schedulesService.listGroup.subscribe(
+      (data) => {
+        this.itemsGroups = data;
+      }
+    );
+    this.schedulesService.listTeachers.subscribe(
+      (data) => {
+        this.itemsTeachers = data;
+      }
+    );
+    this.schedulesService.listAuditories.subscribe(
+      (data) => {
+        this.itemsAuditories = data;
+      }
+    );
   }
 
 
@@ -119,18 +134,23 @@ export class TimeTableComponent implements OnInit {
     weekStartDate.append(new TuiDay(0,0,6)));
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+    
+  }
 
   clickButton() {
     const d: Date = new Date();
 
-    this.schedulesService.getGroup("Муми-тролли","2022-05-23").subscribe(data => this.tableGroupData=data);
+    this.schedulesService.getGroup("Муми-тролли","2022-05-23").subscribe(data => {this.tableGroupData=data
+      console.log(data)});
     //this.schedulesService.getTeachers("Морра","2022-04-11").subscribe(data=>( console.log(data)))
     //this.schedulesService.getAuditories("Танцплощадка","2022-04-11").subscribe(data=>( console.log(data)))
 
     console.log(this.schedulesService.listGroup);
     console.log(this.schedulesService.listAuditories);
     console.log(this.schedulesService.listTeachers);
+    
   }
   
 }
