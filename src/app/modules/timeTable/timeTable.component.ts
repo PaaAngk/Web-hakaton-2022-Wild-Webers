@@ -38,31 +38,29 @@ const EXPENSES = {
 @Component({
   selector: 'app-timeTable',
   templateUrl: './timeTable.component.html',
-  styleUrls: ['./timeTable.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./timeTable.component.scss']
 })
 export class TimeTableComponent implements OnInit {
 
   schedules: Schedules[]=[];
   weekDays:TuiDay[] = [];
 
-  tableGroupData?: Array<Schedules> =[]
+  loadCompleted : boolean = false;
+  tableGroupData: Array<Schedules> =[]
 
   valueGroups = [];
   valueTeachers = [];
   valueAuditories = [];
  
-    
-    itemsGroups:string[] =[];
-    itemsTeachers:string[] =[];
-    itemsAuditories :string[] =[];
-    items = [];
+  itemsGroups:string[] =[];
+  itemsTeachers:string[] =[];
+  itemsAuditories :string[] =[];
+  items = [];
 
- 
-    readonly identityMatcher: TuiIdentityMatcher<readonly string[]> = (items1, items2) =>
-        items1.length === items2.length && items1.every(item => items2.includes(item));
- 
-    // readonly valueContent: TuiStringHandler<TuiContextWithImplicit<readonly string[]>> =
+  readonly identityMatcher: TuiIdentityMatcher<readonly string[]> = (items1, items2) =>
+      items1.length === items2.length && items1.every(item => items2.includes(item));
+
+  // readonly valueContent: TuiStringHandler<TuiContextWithImplicit<readonly string[]>> =
     //     ({$implicit}) => {
     //         if (!$implicit.length) {
     //             return ' ';
@@ -80,6 +78,7 @@ export class TimeTableComponent implements OnInit {
     private router: Router,
     private schedulesService: SchedulesService
   ) { 
+    this.clickButton()
     this.onDayClick(TuiDay.fromLocalNativeDate(new Date()))
     this.schedulesService.listGroup.subscribe(
       (data) => {
@@ -134,23 +133,26 @@ export class TimeTableComponent implements OnInit {
     weekStartDate.append(new TuiDay(0,0,6)));
   }
 
-  ngOnInit() {
-    
-    
+  ngOnInit() {  
   }
 
   clickButton() {
-    const d: Date = new Date();
+    this.schedulesService.getGroup("Муми-тролли","2022-05-23").subscribe(
+      data => {
+        this.tableGroupData=data,
+        this.loadCompleted = true
+       },
+    );
+  }
 
-    this.schedulesService.getGroup("Муми-тролли","2022-05-23").subscribe(data => {this.tableGroupData=data
-      console.log(data)});
-    //this.schedulesService.getTeachers("Морра","2022-04-11").subscribe(data=>( console.log(data)))
-    //this.schedulesService.getAuditories("Танцплощадка","2022-04-11").subscribe(data=>( console.log(data)))
-
-    console.log(this.schedulesService.listGroup);
-    console.log(this.schedulesService.listAuditories);
-    console.log(this.schedulesService.listTeachers);
-    
+  filterFun(arr:  Array<Schedules>, day:number, pair:number){
+    console.log(this.tableGroupData)
+    return arr.filter(
+      function (el)
+      {
+        return el.day == day && el.pair ==  pair;
+      }
+    )
   }
   
 }

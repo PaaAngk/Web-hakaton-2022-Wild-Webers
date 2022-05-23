@@ -31,7 +31,13 @@
       </div>
 
 
-      <div class="col-8 rounded-3">
+      <div class="col-8 rounded-3" >
+        <!-- <tui-loader
+                class="inline-flex tui-space_right-2"
+                [showLoader]="loadCompleted == true"
+                [inheritColor]="true"
+                [overlay]="true"
+            > -->
         <div class="calendar card p-2 shadow-lg">
           <div class="row justify-content-center">
             <div class="my-2 me-2 my-lg-0 justify-content-center">
@@ -46,6 +52,7 @@
             </div>
           </div>
           <div class="row-auto">
+            
             <table class="week">
               <thead>
                 <tr>
@@ -86,36 +93,9 @@
                     <th class="hour-field">1 пара</th>
                     <td data-date-time="22/05/2022 01:00">
                       <div class="events-wrapper">
-                        <div
-                          class="event event-2 event-end"
-                          data-mdb-event-key="1"
-                          data-mdb-event-order="0"
-                          draggable="true"
-                          data-mdb-toggle="tooltip"
-                          data-mdb-offset="0,10"
-                          data-mdb-html="true"
-                          title=""
-                          style="
-                            order: 2;
-                            background: rgb(199, 245, 217);
-                            color: rgb(11, 65, 33);
-                            padding-left: 7px;
-                          " data-mdb-original-title='<h6><strong>JS Conference</strong></h6><p class="mb-0"><small>
-        <i class="fas fa-calendar-alt pr-1"></i>
-        22/05/2022</small></p>'>
-                        Angular Meetup
-                      </div>
-                      <div class="event event-2 event-end" data-mdb-event-key="2" data-mdb-event-order="1"
-                        draggable="true" data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true" title=""
-                        style="
-                            order: 2;
-                            background: rgb(207, 224, 252);
-                            color: rgb(10, 71, 169);
-                          " data-mdb-original-title='<h6><strong>JS Conference</strong></h6><p class="mb-0"><small>
-        <i class="fas fa-calendar-alt pr-1"></i>
-        22/05/2022</small></p>'>
-                        JS Conference
-                      </div>
+                        <ng-container *ngFor="let i of filterFun(tableGroupData, 5,5)">
+                        <app-calendar-card class="event event-end" [scheduleItem] = "i" [class] = "'calendar__green-card'"></app-calendar-card>
+                      </ng-container>
                     </div>
                     </td>
                     <td data-date-time="23/05/2022 01:00"></td>
@@ -303,8 +283,10 @@
                 </tr>
               </tbody>
             </table>
+            
           </div>
         </div>
+      <!-- </tui-loader> -->
       </div>
     </div>
 </div>
