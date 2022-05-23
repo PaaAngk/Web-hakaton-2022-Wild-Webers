@@ -1,7 +1,19 @@
-<div
+
+<ng-container *ngIf="scheduleItem">
+    <div
     class="calendar-item"
     [ngClass]="{'calendar__green-card': scheduleItem?.type == 3}"
     title="">                         
     <p>{{scheduleItem?.discipline}}</p>
     <p class="calendar-auditories">{{scheduleItem?.auditories}}</p>
 </div>
+</ng-container>
+<ng-container *ngIf="activitiesItem">
+    <div
+    class="calendar-item calendar__blue-card"
+    
+    title="">                         
+    <p>{{activitiesItem?.description}}</p>
+    <p class="calendar-auditories">{{activitiesItem?.auditories}}</p>
+</div>
+</ng-container>
