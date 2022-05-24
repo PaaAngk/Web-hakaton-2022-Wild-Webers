@@ -10,6 +10,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TuiRadioListModule, TuiFilterModule} from '@taiga-ui/kit';
 import { CustomListComponent } from 'src/app/UI/custom-list.component';
 import {TuiCalendarModule} from '@taiga-ui/core';
+
+import {TuiCheckboxLabeledModule} from '@taiga-ui/kit';
+
 import { CalendarCardComponent } from './../../UI/calendar-card/calendar-card.component';
 import {TuiLetModule} from '@taiga-ui/cdk';
 
