@@ -61,12 +61,12 @@
                 [overlay]="true"
             > -->
       <div class="calendar card p-2 shadow-lg">
-        <!-- <div class="row justify-content-center">
+        <div class="row justify-content-center">
           <div class="my-2 me-2 my-lg-0 justify-content-center">
             <button data-mdb-ripple-color="dark" class="btn btn-link text-dark">Неделя</button>
             <span class="calendar-heading"> 2022</span>
           </div>
-        </div> -->
+        </div> 
         <div class="row-auto">
           <table class="week">
             <thead>
@@ -103,10 +103,11 @@
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngFor="let day of listDays" >
+              <ng-container *ngFor="let pair of listPairs " >
                 <tr>
-                  <th class="hour-field">{{day}} пара</th>
-                    <ng-container *ngFor="let pair of listPairs " >
+                  <th class="hour-field">1 пара</th>
+                  <ng-container *ngFor="let day of listDays" >
+                    
                       <td>
                         <div class="events-wrapper">
                           <ng-container *ngFor="let i of filterSchedules(tableGroupData, day, pair) ">

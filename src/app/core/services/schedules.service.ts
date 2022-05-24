@@ -35,7 +35,7 @@ export class SchedulesService {
   getByGroup(group: string, week_begining: string): Observable<Schedules[]> {
     return this.apiService
       .get(
-        '/schedules?groups=' +
+        '/schedules?groups_like=' +
           group +
           '&week_begining=' +
           week_begining +
@@ -52,9 +52,11 @@ export class SchedulesService {
     teachers: string,
     week_begining: string
   ): Observable<Schedules[]> {
+    console.log("получаем занятия getByTeachers")
+    console.log(teachers)
     return this.apiService
       .get(
-        '/schedules?teachers=' +
+        '/schedules?teachers_like=' +
           teachers +
           '&week_begining=' +
           week_begining +
@@ -73,7 +75,7 @@ export class SchedulesService {
   ): Observable<Schedules[]> {
     return this.apiService
       .get(
-        '/schedules?auditories=' +
+        '/schedules?auditories_like=' +
           auditories +
           '&week_begining=' +
           week_begining +
