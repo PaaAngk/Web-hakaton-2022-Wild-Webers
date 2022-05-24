@@ -31,6 +31,23 @@
           <custom-list *tuiDataList [items]="itemsAuditories"></custom-list>
         </tui-select>
       </div>
+     <h4>Отображать:</h4>
+      <form [formGroup]="showCriteria">
+        <tui-checkbox-labeled
+            formControlName="lessons"
+            class="tui-space_bottom-3"
+        >Занятия</tui-checkbox-labeled>
+     
+        <tui-checkbox-labeled
+            formControlName="projects"
+            class="tui-space_bottom-3"
+        >Проекты</tui-checkbox-labeled>
+     
+        <tui-checkbox-labeled
+            formControlName="events"
+            class="tui-space_bottom-3"
+        >Мероприятия</tui-checkbox-labeled>
+    </form>
       <div class="card shadow-lg">
         <tui-calendar
           [value]="date"
