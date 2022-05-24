@@ -100,7 +100,7 @@
                           <ng-container *ngFor="let i of filterSchedules(tableGroupData, day, pair)">
                             <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
                           </ng-container>
-                          <ng-container *ngFor="let i of filterActivities(tableGroupDataActivities, {dateForProject}, pair)">
+                          <ng-container *ngFor="let i of filterActivities(tableGroupDataActivities, dateForProject, pair)">
                             <app-calendar-card class="event event-end" [activitiesItem]="i" ></app-calendar-card>
                           </ng-container>
                         </div>

@@ -64,7 +64,7 @@ export class TimeTableComponent implements OnInit {
   itemsAuditories :string[] =[];
 
   date: TuiDay | null=null;
-  dateForProject?: string='';
+  dateForProject: string='';
   weekStartDate?: TuiDay;
 
   readonly identityMatcher: TuiIdentityMatcher<readonly string[]> = (items1, items2) =>
