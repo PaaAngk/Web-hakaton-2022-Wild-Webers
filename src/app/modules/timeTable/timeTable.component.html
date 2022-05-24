@@ -51,18 +51,7 @@
           <div class="my-2 me-2 my-lg-0 justify-content-center">
             <button data-mdb-ripple-color="dark" class="btn btn-link text-dark">
               Today</button
-            ><button
-              data-mdb-ripple-color="dark"
-              class="btn btn-link text-dark"
             >
-              <i class="fas fa-chevron-left"></i></button
-            ><button
-              data-mdb-ripple-color="dark"
-              class="btn btn-link text-dark"
-            >
-              <i class="fas fa-chevron-right"></i>
-            </button>
-
             <span class="calendar-heading">May 2022</span>
           </div>
         </div>
@@ -111,7 +100,7 @@
                           <ng-container *ngFor="let i of filterSchedules(tableGroupData, day, pair)">
                             <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
                           </ng-container>
-                          <ng-container *ngFor="let i of filterActivities(tableGroupDataActivities, {{ date.toString() }}, pair)">
+                          <ng-container *ngFor="let i of filterActivities(tableGroupDataActivities, {dateForProject}, pair)">
                             <app-calendar-card class="event event-end" [activitiesItem]="i" ></app-calendar-card>
                           </ng-container>
                         </div>

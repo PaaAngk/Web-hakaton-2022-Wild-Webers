@@ -63,7 +63,8 @@ export class TimeTableComponent implements OnInit {
   itemsTeachers:string[] =[];
   itemsAuditories :string[] =[];
 
-  date: TuiDay | null = null;
+  date: TuiDay | null=null;
+  dateForProject?: string='';
   weekStartDate?: TuiDay;
 
   readonly identityMatcher: TuiIdentityMatcher<readonly string[]> = (items1, items2) =>
@@ -111,7 +112,7 @@ export class TimeTableComponent implements OnInit {
   onDayClick(day: TuiDay): void {
     this.weekDays = [];
     this.date = day;
-    
+    this.dateForProject=this.date.toString();
     switch (day.dayOfWeek()) {
       case 0:
         this.weekStartDate=day;
@@ -149,6 +150,7 @@ export class TimeTableComponent implements OnInit {
   updateData() {
     
     var date:string= ''+this.weekStartDate?.year+'-'+this.weekStartDate?.formattedMonthPart+'-'+this.weekStartDate?.formattedDayPart;
+    //получаем занятия 
     this.schedulesService.getByGroup(this.selectedGroup,date.toString()).subscribe(
       data => {
         this.tableGroupData=data,
@@ -156,9 +158,18 @@ export class TimeTableComponent implements OnInit {
        },
     );
     var date2:string= ''+this.date?.year+'-'+this.date?.formattedMonthPart+'-'+this.date?.formattedDayPart;
-    this.activitiesService.getByGroup(this.selectedGroup,date2.toString()).subscribe(
+    //получаем проекты выбранной группы  
+    this.activitiesService.getProject(date2.toString()).subscribe(
       data => {
-        this.tableGroupDataActivities=data,
+        var list:Activities[]=[];
+        for (let item of data) {
+          for (let i of item.groups) {
+            if (i==this.selectedGroup) {
+              list.push(item);
+            }
+          }
+        }
+        this.tableGroupDataActivities=list,
         //console.log(this.tableGroupDataActivities)
         this.loadCompleted = true
        },
