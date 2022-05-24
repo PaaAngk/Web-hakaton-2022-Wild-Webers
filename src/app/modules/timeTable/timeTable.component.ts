@@ -28,9 +28,6 @@ export class TimeTableComponent implements OnInit {
   listPairs: number[] = [1, 2, 3, 4, 5, 6, 7];
   listDays: number[] = [1, 2, 3, 4, 5, 6, 7, 8];
 
-  loadCompleted: boolean = false;
-
-
   loadCompleted : boolean = false;
   valueGroups:string = '';
   valueTeachers = '';
@@ -46,10 +43,6 @@ export class TimeTableComponent implements OnInit {
   itemsTeachers:string[] =[];
   itemsAuditories :string[] =[];
 
-
-  itemsGroups: string[] = [];
-  itemsTeachers: string[] = [];
-  itemsAuditories: string[] = [];
 
   date: TuiDay | null = null;
   dateForProject: string = '';
@@ -219,20 +212,20 @@ export class TimeTableComponent implements OnInit {
     
     var date2:string= ''+this.date?.year+'-'+this.date?.formattedMonthPart+'-'+this.date?.formattedDayPart;
     //получаем проекты выбранной группы  
-    this.activitiesService.getProject(date2.toString()).subscribe(
-      data => {
-        var list:Activities[]=[];
-        for (let item of data) {
-          for (let i of item.groups) {
-            if (i==this.selectedGroup) {
-              list.push(item);
-            }
-          }
-        }
-        this.tableGroupDataActivities=list,
-        this.loadCompleted = true
-       },
-    );
+    // this.activitiesService.getProject(date2.toString()).subscribe(
+    //   data => {
+    //     var list:Activities[]=[];
+    //     for (let item of data) {
+    //       for (let i of item.groups) {
+    //         if (i==this.selectedGroup) {
+    //           list.push(item);
+    //         }
+    //       }
+    //     }
+    //     this.tableGroupDataActivities=list,
+    //     this.loadCompleted = true
+    //    },
+    // );
 
   }
 
