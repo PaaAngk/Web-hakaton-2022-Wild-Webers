@@ -147,7 +147,7 @@ export class TimeTableComponent implements OnInit {
     var date:string= ''+this.weekStartDate?.year+'-'+this.weekStartDate?.formattedMonthPart+'-'+this.weekStartDate?.formattedDayPart;
     //если выбрана группа
     if(this.valueGroups!=''){
-      console.log("получаем занятия getByGroup")
+      
       //получаем занятия 
       this.schedulesService.getByGroup(this.valueGroups,date.toString()).subscribe(
         data => {
@@ -164,7 +164,7 @@ export class TimeTableComponent implements OnInit {
     }
     //если выбран препод
     else if (this.valueTeachers!=''){
-      console.log("получаем занятия getByTeachers")
+      
       //получаем занятия 
       this.schedulesService.getByTeachers(this.valueTeachers,date.toString()).subscribe(
         data => {
