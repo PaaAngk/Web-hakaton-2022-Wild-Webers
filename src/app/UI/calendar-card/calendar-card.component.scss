@@ -5,6 +5,20 @@
     padding-left: 7px;
 }
 
+.calendar__grey-card{
+    order: 2;
+    background: rgb(146, 146, 146);
+    color: rgb(0, 0, 0);
+    padding-left: 7px;
+}
+
+.calendar__red-card{
+    order: 2;
+    background: rgb(253, 169, 197);
+    color: rgb(11, 65, 33);
+    padding-left: 7px;
+}
+
 .calendar__blue-card{
     order: 2;
     background: rgb(199, 207, 245);

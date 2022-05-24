@@ -1,32 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
-import {Activities} from '../modules/activities.model'
+import { Activities } from '../modules/activities.model';
 import { ApiService } from './api.service';
 import { map } from 'rxjs/operators';
 import { Schedules } from '../modules/schedules.model';
+import { TuiDay } from '@taiga-ui/cdk';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ActivitiesService {
+  private listSubject = new ReplaySubject<Activities[]>(1);
+  public list = this.listSubject.asObservable();
 
-  constructor (
-    private apiService: ApiService
-  ) {}
+  constructor(private apiService: ApiService) {}
 
-  get(): Observable<Activities> {
-    return this.apiService.get('/activities')
-      .pipe(map((data: {activities: Activities}) => data.activities));
-  }
+  // get(): Observable<Activities> {
+  //   return this.apiService.get('/activities')
+  //     .pipe(map((data: {activities: Activities}) => data.activities));
+  // }
 
-  getProject(day: string): Observable<Activities[]> {
+  get(day: string): Observable<Activities[]> {
     return this.apiService
-      .get(
-        '/activities?type=1&' +
-          'dt=' +
-          day +
-          '&_sort=dt,pair&_order=asc'
-      )
+      .get('/activities?' + 'dt=' + day + '&_sort=dt,pair&_order=asc')
       .pipe(
         map(
           (data: { schedules: Array<Activities> }) =>
@@ -35,14 +31,24 @@ export class ActivitiesService {
       );
   }
 
-  getEvents(day: string): Observable<Activities[]> {
+  findList(week_begining?: TuiDay): Observable<Activities[]> {
+    var param:string='dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    
     return this.apiService
-      .get(
-        '/activities?type=0' +
-          '&dt=' +
-          day +
-          '&_sort=day,pair&_order=asc'
-      )
+      .get('/activities?' + param + '_sort=dt,pair&_order=asc')
       .pipe(
         map(
           (data: { schedules: Array<Activities> }) =>
