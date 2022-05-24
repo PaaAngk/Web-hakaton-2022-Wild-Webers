@@ -1,7 +1,6 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
 import {EMPTY_ARRAY, setNativeFocused, TUI_DEFAULT_MATCHER} from '@taiga-ui/cdk';
 import {isEditingKey, TuiDataListComponent} from '@taiga-ui/core';
-
 interface Items<T> {
     readonly name: string;
     readonly items: readonly T[];
@@ -16,6 +15,9 @@ interface Items<T> {
 export class CustomListComponent<T> {
     @Input()
     items: ReadonlyArray<string> = [];
+
+    @Output() 
+    setItemEvent = new EventEmitter<string>();
 
     valueGroups= 'gggg';
     valueTeachers= 'tttt';
@@ -34,5 +36,9 @@ export class CustomListComponent<T> {
         if (element && isEditingKey(key)) {
             setNativeFocused(element, true, true);
         }
+    }
+
+    selectItem(item:string){
+        this.setItemEvent.emit(item);
     }
 }

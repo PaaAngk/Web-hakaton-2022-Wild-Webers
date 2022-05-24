@@ -50,15 +50,16 @@ export class TimeTableComponent implements OnInit {
   listDays:number[]=[1,2,3,4,5,6,7,8];
 
   loadCompleted : boolean = false;
+  valueGroups:string = '';
+  valueTeachers = '';
+  valueAuditories = '';
 
   tableGroupData: Array<Schedules> =[]
   tableGroupDataActivities: Array<Activities> =[]
-  selectedGroup:string ="Муми-тролли";
+  selectedGroup:string ='';
+  selectedTeachers:string ='';
+  selectedAuditories:string ='';
 
-  valueGroups = [];
-  valueTeachers = [];
-  valueAuditories = [];
- 
   itemsGroups:string[] =[];
   itemsTeachers:string[] =[];
   itemsAuditories :string[] =[];
@@ -67,8 +68,8 @@ export class TimeTableComponent implements OnInit {
   dateForProject: string='';
   weekStartDate?: TuiDay;
 
-  readonly identityMatcher: TuiIdentityMatcher<readonly string[]> = (items1, items2) =>
-      items1.length === items2.length && items1.every(item => items2.includes(item));
+  // readonly identityMatcher: TuiIdentityMatcher<readonly string[]> = (items1, items2) =>
+  //     items1.length === items2.length && items1.every(item => items2.includes(item));
 
   // readonly valueContent: TuiStringHandler<TuiContextWithImplicit<readonly string[]>> =
     //     ({$implicit}) => {
@@ -107,6 +108,30 @@ export class TimeTableComponent implements OnInit {
         this.itemsAuditories = data;console.log(this.itemsAuditories);
       }
     );
+  }
+
+  selectGroup(item: string) {
+    this.selectedGroup = item;
+    this.updateData();
+    this.valueTeachers =''
+    this.valueAuditories =''
+    //console.log(this.valueGroups+"222")
+  }
+
+  selectTeachers(item: string) {
+    this.selectedGroup = item;
+    this.updateData();
+    this.valueGroups =''
+    this.valueAuditories =''
+    //console.log(this.valueGroups+"222")
+  }
+
+  selectAuditories(item: string) {
+    this.selectedGroup = item;
+    this.updateData();
+    this.valueGroups =''
+    this.valueTeachers =''
+    //console.log(this.valueGroups+"222")
   }
 
   onDayClick(day: TuiDay): void {
@@ -150,13 +175,36 @@ export class TimeTableComponent implements OnInit {
   updateData() {
     
     var date:string= ''+this.weekStartDate?.year+'-'+this.weekStartDate?.formattedMonthPart+'-'+this.weekStartDate?.formattedDayPart;
-    //получаем занятия 
-    this.schedulesService.getByGroup(this.selectedGroup,date.toString()).subscribe(
-      data => {
-        this.tableGroupData=data,
-        this.loadCompleted = true
-       },
-    );
+    if(this.selectedGroup!=''){
+      //получаем занятия 
+      this.schedulesService.getByGroup(this.selectedGroup,date.toString()).subscribe(
+        data => {
+          this.tableGroupData=data,
+          this.loadCompleted = true
+          console.log(this.tableGroupData)
+        },
+      );
+    }
+    else if (this.selectedTeachers!=''){
+      //получаем занятия 
+      this.schedulesService.getByTeachers(this.selectedTeachers,date.toString()).subscribe(
+        data => {
+          this.tableGroupData=data,
+          this.loadCompleted = true
+          console.log(this.tableGroupData)
+        },
+      );
+    }
+    else if (this.selectedAuditories!=''){
+      //получаем занятия 
+      this.schedulesService.getByAuditories(this.selectedAuditories,date.toString()).subscribe(
+        data => {
+          this.tableGroupData=data,
+          this.loadCompleted = true
+        },
+      );
+    }
+    
     var date2:string= ''+this.date?.year+'-'+this.date?.formattedMonthPart+'-'+this.date?.formattedDayPart;
     //получаем проекты выбранной группы  
     this.activitiesService.getProject(date2.toString()).subscribe(
@@ -170,7 +218,6 @@ export class TimeTableComponent implements OnInit {
           }
         }
         this.tableGroupDataActivities=list,
-        //console.log(this.tableGroupDataActivities)
         this.loadCompleted = true
        },
     );
@@ -186,7 +233,7 @@ export class TimeTableComponent implements OnInit {
     )
   }
   filterActivities(arr:  Array<Activities>, day:string, pair:number){
-    console.log(day)
+    //console.log(day)
     return arr.filter(
       function (el)
       {
