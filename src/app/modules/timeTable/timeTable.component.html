@@ -24,7 +24,6 @@
           class="control"
           [(ngModel)]="valueAuditories"
         >
-        <!-- [identityMatcher]="identityMatcher" -->
           Аудитория
           <custom-list *tuiDataList (setItemEvent)="selectAuditories($event)" [items]="itemsAuditories"></custom-list>
         </tui-select>
