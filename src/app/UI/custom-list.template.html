@@ -26,31 +26,24 @@
             *ngFor="let item of items"
             tuiOption
             [value]="item"
+            (click) ="selectItem(item)"
         >
             {{ item }} 
         </button> 
     </tui-opt-group>
     
-    
-    
-    
-    <ng-container *ngFor="let item of items">
-        <tui-opt-group
-            *tuiLet="item | tuiFilter: filter:value as filtered"
-            
-        >
-            <tui-opt-group
-                *ngIf="filtered.length"
+    <!-- <ng-container *ngFor="let item of items"> -->
+            <!-- <tui-opt-group           
                 tuiMultiSelectGroup
             >
                 <button
-                    *ngFor="let item of filtered"
+                    *ngFor="let item of items"
                     tuiOption
                     [value]="item"
+                    (click) ="selectItem(item)"
                 >
                     {{ item }}
                 </button>
-            </tui-opt-group>
-        </tui-opt-group>
-    </ng-container> 
+            </tui-opt-group> -->
+    <!-- </ng-container> *ngFor="let item of filtered" -->
 </tui-data-list>

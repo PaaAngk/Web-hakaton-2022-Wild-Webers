@@ -4,33 +4,47 @@
       <div class="row mb-2" style="padding-left: 10px">
         <tui-select
           class="control"
-          [identityMatcher]="identityMatcher"
           [(ngModel)]="valueGroups"
         >
           Группа
-          <custom-list *tuiDataList [items]="itemsGroups"></custom-list>
+          <custom-list *tuiDataList (setItemEvent)="selectGroup($event)" [items]="itemsGroups"></custom-list>
         </tui-select>
       </div>
       <div class="row mb-2" style="padding-left: 10px">
         <tui-select
           class="control"
-          [identityMatcher]="identityMatcher"
           [(ngModel)]="valueTeachers"
         >
           Преподаватель
-          <custom-list *tuiDataList [items]="itemsTeachers"></custom-list>
+          <custom-list *tuiDataList (setItemEvent)="selectTeachers($event)" [items]="itemsTeachers"></custom-list>
         </tui-select>
       </div>
       <div class="row mb-2" style="padding-left: 10px">
         <tui-select
           class="control"
-          [identityMatcher]="identityMatcher"
           [(ngModel)]="valueAuditories"
         >
           Аудитория
-          <custom-list *tuiDataList [items]="itemsAuditories"></custom-list>
+          <custom-list *tuiDataList (setItemEvent)="selectAuditories($event)" [items]="itemsAuditories"></custom-list>
         </tui-select>
       </div>
+      <h4>Отображать:</h4>
+      <form [formGroup]="showCriteria">
+        <tui-checkbox-labeled
+            formControlName="lessons"
+            class="tui-space_bottom-3"
+        >Занятия</tui-checkbox-labeled>
+
+        <tui-checkbox-labeled
+            formControlName="projects"
+            class="tui-space_bottom-3"
+        >Проекты</tui-checkbox-labeled>
+
+        <tui-checkbox-labeled
+            formControlName="events"
+            class="tui-space_bottom-3"
+        >Мероприятия</tui-checkbox-labeled>
+    </form>
       <div class="card shadow-lg">
         <tui-calendar
           [value]="date"
@@ -47,14 +61,12 @@
                 [overlay]="true"
             > -->
       <div class="calendar card p-2 shadow-lg">
-        <div class="row justify-content-center">
+        <!-- <div class="row justify-content-center">
           <div class="my-2 me-2 my-lg-0 justify-content-center">
-            <button data-mdb-ripple-color="dark" class="btn btn-link text-dark">
-              Today</button
-            >
-            <span class="calendar-heading">May 2022</span>
+            <button data-mdb-ripple-color="dark" class="btn btn-link text-dark">Неделя</button>
+            <span class="calendar-heading"> 2022</span>
           </div>
-        </div>
+        </div> -->
         <div class="row-auto">
           <table class="week">
             <thead>
@@ -91,17 +103,19 @@
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngFor="let day of listDays">
+              <ng-container *ngFor="let day of listDays" >
                 <tr>
                   <th class="hour-field">{{day}} пара</th>
-                    <ng-container *ngFor="let pair of listPairs">
+                    <ng-container *ngFor="let pair of listPairs " >
                       <td>
                         <div class="events-wrapper">
-                          <ng-container *ngFor="let i of filterSchedules(tableGroupData, day, pair)">
+                          <ng-container *ngFor="let i of filterSchedules(tableGroupData, day, pair) ">
                             <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
                           </ng-container>
+
                           <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, day, pair)">
                             <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
                           </ng-container>
                         </div>
                       </td>

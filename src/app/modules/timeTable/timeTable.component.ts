@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Schedules } from './../../core/modules/schedules.model';
 import { SchedulesService } from 'src/app/core/services';
+import {FormControl, FormGroup} from '@angular/forms';
+import {TuiCheckboxLabeledModule} from '@taiga-ui/kit';
 import {
   TuiContextWithImplicit,
   TuiIdentityMatcher,
@@ -10,35 +12,15 @@ import {
 import { TuiDay, TuiDayOfWeek } from '@taiga-ui/cdk';
 import { Activities } from 'src/app/core/modules/activities.model';
 import { ActivitiesService } from 'src/app/core/services/activities.service';
-const INCOME = {
-  name: 'Income',
-  items: [
-    'Donations',
-    'Product placement',
-    'Sponsorship',
-    'Found on the street',
-    'Unexpected inheritance',
-    'Investments',
-    'Color copier',
-  ],
-};
 
-const EXPENSES = {
-  name: 'Expenses',
-  items: [
-    'Energy drinks',
-    'Coffee',
-    'Ramen',
-    'Bills',
-    'Back medicine',
-    'Warhammer 40000 figurines',
-  ],
-};
 
 @Component({
   selector: 'app-timeTable',
   templateUrl: './timeTable.component.html',
   styleUrls: ['./timeTable.component.scss'],
+
+  changeDetection: ChangeDetectionStrategy.OnPush,
+
 })
 export class TimeTableComponent implements OnInit {
   weekDays: TuiDay[] = [];
@@ -48,13 +30,22 @@ export class TimeTableComponent implements OnInit {
 
   loadCompleted: boolean = false;
 
-  tableGroupData: Array<Schedules> = [];
-  tableGroupDataActivities: Array<Activities> = [];
-  selectedGroup: string = 'Муми-тролли';
 
-  valueGroups = [];
-  valueTeachers = [];
-  valueAuditories = [];
+  loadCompleted : boolean = false;
+  valueGroups:string = '';
+  valueTeachers = '';
+  valueAuditories = '';
+
+  tableGroupData: Array<Schedules> =[]
+  tableGroupDataActivities: Array<Activities> =[]
+  selectedGroup:string ='';
+  selectedTeachers:string ='';
+  selectedAuditories:string ='';
+
+  itemsGroups:string[] =[];
+  itemsTeachers:string[] =[];
+  itemsAuditories :string[] =[];
+
 
   itemsGroups: string[] = [];
   itemsTeachers: string[] = [];
@@ -64,12 +55,15 @@ export class TimeTableComponent implements OnInit {
   dateForProject: string = '';
   weekStartDate?: TuiDay;
 
-  readonly identityMatcher: TuiIdentityMatcher<readonly string[]> = (
-    items1,
-    items2
-  ) =>
-    items1.length === items2.length &&
-    items1.every((item) => items2.includes(item));
+
+  showCriteria = new FormGroup({
+    projects: new FormControl(false),
+    events: new FormControl(false),
+    lessons: new FormControl({value: true, disabled: true}),
+});
+
+  // readonly identityMatcher: TuiIdentityMatcher<readonly string[]> = (items1, items2) =>
+  //     items1.length === items2.length && items1.every(item => items2.includes(item));
 
   // readonly valueContent: TuiStringHandler<TuiContextWithImplicit<readonly string[]>> =
   //     ({$implicit}) => {
@@ -104,6 +98,30 @@ export class TimeTableComponent implements OnInit {
       this.itemsAuditories = data;
       //console.log(this.itemsAuditories);
     });
+  }
+
+  selectGroup(item: string) {
+    this.selectedGroup = item;
+    this.updateData();
+    this.valueTeachers =''
+    this.valueAuditories =''
+    //console.log(this.valueGroups+"222")
+  }
+
+  selectTeachers(item: string) {
+    this.selectedGroup = item;
+    this.updateData();
+    this.valueGroups =''
+    this.valueAuditories =''
+    //console.log(this.valueGroups+"222")
+  }
+
+  selectAuditories(item: string) {
+    this.selectedGroup = item;
+    this.updateData();
+    this.valueGroups =''
+    this.valueTeachers =''
+    //console.log(this.valueGroups+"222")
   }
 
   onDayClick(day: TuiDay): void {
@@ -150,21 +168,72 @@ export class TimeTableComponent implements OnInit {
   ngOnInit() {}
 
   updateData() {
-    var date: string =
-      '' +this.weekStartDate?.year +'-' +this.weekStartDate?.formattedMonthPart +
-      '-' +this.weekStartDate?.formattedDayPart;
-    //получаем занятия
-    this.schedulesService
-      .getByGroup(this.selectedGroup, date.toString())
-      .subscribe((data) => {
-        (this.tableGroupData = data), (this.loadCompleted = true);
-      });
+/////////////////////////////РАЗОБРАТЬСЯ С КОДОМ
+//     var date: string =
+//       '' +this.weekStartDate?.year +'-' +this.weekStartDate?.formattedMonthPart +
+//       '-' +this.weekStartDate?.formattedDayPart;
+//     //получаем занятия
+//     this.schedulesService
+//       .getByGroup(this.selectedGroup, date.toString())
+//       .subscribe((data) => {
+//         (this.tableGroupData = data), (this.loadCompleted = true);
+//       });
 
-    this.activitiesService
-      .findList(this.weekStartDate)
-      .subscribe((data) => {
-        (this.tableGroupDataActivities = data), (this.loadCompleted = true);
-      });
+//     this.activitiesService
+//       .findList(this.weekStartDate)
+//       .subscribe((data) => {
+//         (this.tableGroupDataActivities = data), (this.loadCompleted = true);
+//       });
+
+    
+    var date:string= ''+this.weekStartDate?.year+'-'+this.weekStartDate?.formattedMonthPart+'-'+this.weekStartDate?.formattedDayPart;
+    if(this.selectedGroup!=''){
+      //получаем занятия 
+      this.schedulesService.getByGroup(this.selectedGroup,date.toString()).subscribe(
+        data => {
+          this.tableGroupData=data,
+          this.loadCompleted = true
+          console.log(this.tableGroupData)
+        },
+      );
+    }
+    else if (this.selectedTeachers!=''){
+      //получаем занятия 
+      this.schedulesService.getByTeachers(this.selectedTeachers,date.toString()).subscribe(
+        data => {
+          this.tableGroupData=data,
+          this.loadCompleted = true
+          console.log(this.tableGroupData)
+        },
+      );
+    }
+    else if (this.selectedAuditories!=''){
+      //получаем занятия 
+      this.schedulesService.getByAuditories(this.selectedAuditories,date.toString()).subscribe(
+        data => {
+          this.tableGroupData=data,
+          this.loadCompleted = true
+        },
+      );
+    }
+    
+    var date2:string= ''+this.date?.year+'-'+this.date?.formattedMonthPart+'-'+this.date?.formattedDayPart;
+    //получаем проекты выбранной группы  
+    this.activitiesService.getProject(date2.toString()).subscribe(
+      data => {
+        var list:Activities[]=[];
+        for (let item of data) {
+          for (let i of item.groups) {
+            if (i==this.selectedGroup) {
+              list.push(item);
+            }
+          }
+        }
+        this.tableGroupDataActivities=list,
+        this.loadCompleted = true
+       },
+    );
+
   }
 
   filterSchedules(arr: Array<Schedules>, day: number, pair: number) {
@@ -173,6 +242,7 @@ export class TimeTableComponent implements OnInit {
       return el.day == day && el.pair == pair;
     });
   }
+
   filterActivities(arr: Array<Activities>, day: number, pair: number) {
     //console.log(arr);
 
@@ -183,5 +253,6 @@ export class TimeTableComponent implements OnInit {
       '-' +d?.formattedDayPart;
       return el.dt == date.toString()  && el.pair == pair;
     });
+
   }
 }
