@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Schedules } from './../../core/modules/schedules.model';
 import { SchedulesService } from 'src/app/core/services';
+import {FormControl, FormGroup} from '@angular/forms';
+import {TuiCheckboxLabeledModule} from '@taiga-ui/kit';
 import {
   TuiContextWithImplicit,
   TuiIdentityMatcher,
@@ -10,37 +12,14 @@ import {
 import {TuiDay,TuiDayOfWeek} from '@taiga-ui/cdk';
 import { Activities } from 'src/app/core/modules/activities.model';
 import { ActivitiesService } from 'src/app/core/services/activities.service';
-const INCOME = {
-  name: 'Income',
-  items: [
-      'Donations',
-      'Product placement',
-      'Sponsorship',
-      'Found on the street',
-      'Unexpected inheritance',
-      'Investments',
-      'Color copier',
-  ],
-};
-
-const EXPENSES = {
-  name: 'Expenses',
-  items: [
-      'Energy drinks',
-      'Coffee',
-      'Ramen',
-      'Bills',
-      'Back medicine',
-      'Warhammer 40000 figurines',
-  ],
-};
 
 
 
 @Component({
   selector: 'app-timeTable',
   templateUrl: './timeTable.component.html',
-  styleUrls: ['./timeTable.component.scss']
+  styleUrls: ['./timeTable.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimeTableComponent implements OnInit {
 
@@ -67,6 +46,12 @@ export class TimeTableComponent implements OnInit {
   date: TuiDay | null=null;
   dateForProject: string='';
   weekStartDate?: TuiDay;
+
+  showCriteria = new FormGroup({
+    projects: new FormControl(false),
+    events: new FormControl(false),
+    lessons: new FormControl({value: true, disabled: true}),
+});
 
   // readonly identityMatcher: TuiIdentityMatcher<readonly string[]> = (items1, items2) =>
   //     items1.length === items2.length && items1.every(item => items2.includes(item));
