@@ -25,8 +25,9 @@ import { ActivitiesService } from 'src/app/core/services/activities.service';
 export class TimeTableComponent implements OnInit {
   weekDays: TuiDay[] = [];
 
-  listPairs: number[] = [1, 2, 3, 4, 5, 6, 7];
-  listDays: number[] = [1, 2, 3, 4, 5, 6, 7, 8];
+  
+  listPairs: number[] = [1, 2, 3, 4, 5, 6, 7, 8];
+  listDays: number[] = [1, 2, 3, 4, 5, 6, 7];
 
   loadCompleted : boolean = false;
   valueGroups:string = '';
@@ -35,6 +36,7 @@ export class TimeTableComponent implements OnInit {
 
   tableGroupData: Array<Schedules> =[]
   tableGroupDataActivities: Array<Activities> =[]
+
   selectedGroup:string ='';
   selectedTeachers:string ='';
   selectedAuditories:string ='';
@@ -43,36 +45,17 @@ export class TimeTableComponent implements OnInit {
   itemsTeachers:string[] =[];
   itemsAuditories :string[] =[];
 
-
   date: TuiDay | null = null;
-  dateForProject: string = '';
   weekStartDate?: TuiDay;
   months: string[] = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август",
 "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
   sheduleMonths: string='';
 
-
   showCriteria = new FormGroup({
     projects: new FormControl(false),
     events: new FormControl(false),
     lessons: new FormControl({value: true, disabled: true}),
-});
-
-  // readonly identityMatcher: TuiIdentityMatcher<readonly string[]> = (items1, items2) =>
-  //     items1.length === items2.length && items1.every(item => items2.includes(item));
-
-  // readonly valueContent: TuiStringHandler<TuiContextWithImplicit<readonly string[]>> =
-  //     ({$implicit}) => {
-  //         if (!$implicit.length) {
-  //             return ' ';
-  //         }
-
-  //         const selected = this.items.find(({items}) =>
-  //             this.identityMatcher($implicit, items),
-  //         );
-
-  //         return selected ? `${selected.name} only` : `Selected: ${$implicit.length}`;
-  //     };
+  });
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -123,7 +106,6 @@ export class TimeTableComponent implements OnInit {
   onDayClick(day: TuiDay): void {
     this.weekDays = [];
     this.date = day;
-    this.dateForProject = this.date.toString();
     switch (day.dayOfWeek()) {
       case 0:
         this.weekStartDate = day;
@@ -168,72 +150,55 @@ export class TimeTableComponent implements OnInit {
   ngOnInit() {}
 
   updateData() {
-/////////////////////////////РАЗОБРАТЬСЯ С КОДОМ
-//     var date: string =
-//       '' +this.weekStartDate?.year +'-' +this.weekStartDate?.formattedMonthPart +
-//       '-' +this.weekStartDate?.formattedDayPart;
-//     //получаем занятия
-//     this.schedulesService
-//       .getByGroup(this.selectedGroup, date.toString())
-//       .subscribe((data) => {
-//         (this.tableGroupData = data), (this.loadCompleted = true);
-//       });
-
-//     this.activitiesService
-//       .findList(this.weekStartDate)
-//       .subscribe((data) => {
-//         (this.tableGroupDataActivities = data), (this.loadCompleted = true);
-//       });
-
-    
+   
     var date:string= ''+this.weekStartDate?.year+'-'+this.weekStartDate?.formattedMonthPart+'-'+this.weekStartDate?.formattedDayPart;
-    if(this.selectedGroup!=''){
+    //если выбрана группа
+    if(this.valueGroups!=''){
+      
       //получаем занятия 
-      this.schedulesService.getByGroup(this.selectedGroup,date.toString()).subscribe(
+      this.schedulesService.getByGroup(this.valueGroups,date.toString()).subscribe(
         data => {
           this.tableGroupData=data,
           this.loadCompleted = true
-          console.log(this.tableGroupData)
+          
         },
       );
+      //получаем активити 
+      this.activitiesService.getByGroup(this.valueGroups,this.weekStartDate).subscribe(
+        (data) => {
+          (this.tableGroupDataActivities = data), (this.loadCompleted = true);
+      });
     }
-    else if (this.selectedTeachers!=''){
+    //если выбран препод
+    else if (this.valueTeachers!=''){
+      
       //получаем занятия 
-      this.schedulesService.getByTeachers(this.selectedTeachers,date.toString()).subscribe(
+      this.schedulesService.getByTeachers(this.valueTeachers,date.toString()).subscribe(
         data => {
           this.tableGroupData=data,
           this.loadCompleted = true
-          console.log(this.tableGroupData)
         },
       );
+      //получаем активити 
+      this.activitiesService.getByTeachers(this.valueTeachers,this.weekStartDate).subscribe(
+        (data) => {
+          (this.tableGroupDataActivities = data), (this.loadCompleted = true);
+      });
     }
-    else if (this.selectedAuditories!=''){
+    //если выбрана аудитория
+    else if (this.valueAuditories!=''){
       //получаем занятия 
-      this.schedulesService.getByAuditories(this.selectedAuditories,date.toString()).subscribe(
+      this.schedulesService.getByAuditories(this.valueAuditories,date.toString()).subscribe(
         data => {
           this.tableGroupData=data,
           this.loadCompleted = true
         },
       );
+      this.activitiesService.getByAuditories(this.valueAuditories,this.weekStartDate).subscribe(
+        (data) => {
+          (this.tableGroupDataActivities = data), (this.loadCompleted = true);
+      });
     }
-    
-    var date2:string= ''+this.date?.year+'-'+this.date?.formattedMonthPart+'-'+this.date?.formattedDayPart;
-    //получаем проекты выбранной группы  
-    // this.activitiesService.getProject(date2.toString()).subscribe(
-    //   data => {
-    //     var list:Activities[]=[];
-    //     for (let item of data) {
-    //       for (let i of item.groups) {
-    //         if (i==this.selectedGroup) {
-    //           list.push(item);
-    //         }
-    //       }
-    //     }
-    //     this.tableGroupDataActivities=list,
-    //     this.loadCompleted = true
-    //    },
-    // );
-
   }
 
   filterSchedules(arr: Array<Schedules>, day: number, pair: number) {
@@ -247,7 +212,7 @@ export class TimeTableComponent implements OnInit {
     //console.log(arr);
 
     return arr.filter( (el) => {
-      var d=this.weekStartDate?.append(new TuiDay(0, 0, day))
+      var d=this.weekStartDate?.append(new TuiDay(0, 0, day-1))
       var date: string =
       '' +d?.year +'-' +d?.formattedMonthPart +
       '-' +d?.formattedDayPart;

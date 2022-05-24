@@ -31,7 +31,7 @@ export class ActivitiesService {
       );
   }
 
-  findList(week_begining?: TuiDay): Observable<Activities[]> {
+  getByGroup(group: string,week_begining?: TuiDay): Observable<Activities[]> {
     var param:string='dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
     week_begining=week_begining?.append(new TuiDay(0,0,1));
     param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
@@ -48,7 +48,59 @@ export class ActivitiesService {
     week_begining=week_begining?.append(new TuiDay(0,0,1));
     
     return this.apiService
-      .get('/activities?' + param + '_sort=dt,pair&_order=asc')
+      .get('/activities?groups_like=' +group+'&'+ param + '_sort=dt,pair&_order=asc')
+      .pipe(
+        map(
+          (data: { schedules: Array<Activities> }) =>
+            data as any as Array<Activities>
+        )
+      );
+  }
+
+  getByTeachers(teachers: string,week_begining?: TuiDay): Observable<Activities[]> {
+    var param:string='dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    
+    return this.apiService
+      .get('/activities?teachers_like=' +teachers+'&'+ param + '_sort=dt,pair&_order=asc')
+      .pipe(
+        map(
+          (data: { schedules: Array<Activities> }) =>
+            data as any as Array<Activities>
+        )
+      );
+  }
+
+  getByAuditories(auditories: string,week_begining?: TuiDay): Observable<Activities[]> {
+    var param:string='dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
+    week_begining=week_begining?.append(new TuiDay(0,0,1));
+    
+    return this.apiService
+      .get('/activities?auditories_like=' +auditories+'&'+ param + '_sort=dt,pair&_order=asc')
       .pipe(
         map(
           (data: { schedules: Array<Activities> }) =>

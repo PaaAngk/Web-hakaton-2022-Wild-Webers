@@ -61,7 +61,9 @@
                 [overlay]="true"
             > -->
       <div class="calendar card p-2 shadow-lg">
+
          <div class="row justify-content-center">
+
           <div class="my-2 me-2 my-lg-0 justify-content-center">
             <span class="calendar-heading"> {{sheduleMonths}}</span>
           </div>
@@ -102,10 +104,11 @@
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngFor="let day of listDays" >
+              <ng-container *ngFor="let pair of listPairs " >
                 <tr>
-                  <th class="hour-field">{{day}} пара</th>
-                    <ng-container *ngFor="let pair of listPairs " >
+                  <th class="hour-field">{{pair}} пара</th>
+                  <ng-container *ngFor="let day of listDays" >
+                    
                       <td>
                         <div class="events-wrapper">
                           <ng-container *ngFor="let i of filterSchedules(tableGroupData, day, pair) ">
