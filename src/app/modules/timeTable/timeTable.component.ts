@@ -47,6 +47,9 @@ export class TimeTableComponent implements OnInit {
 
   date: TuiDay | null = null;
   weekStartDate?: TuiDay;
+  months: string[] = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август",
+"Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+  sheduleMonths: string='';
 
   showCriteria = new FormGroup({
     projects: new FormControl(false),
@@ -137,6 +140,10 @@ export class TimeTableComponent implements OnInit {
       this.weekStartDate.append(new TuiDay(0, 0, 5)),
       this.weekStartDate.append(new TuiDay(0, 0, 6))
     );
+    if (this.weekDays[0].month != this.weekDays[6].month){
+      this.sheduleMonths = ""+this.months[this.weekDays[0].month]+" - "+this.months[this.weekDays[6].month];
+    }else this.sheduleMonths = ""+this.months[this.weekDays[0].month];
+
     this.updateData();
   }
 
