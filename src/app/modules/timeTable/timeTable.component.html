@@ -2,22 +2,22 @@
 	<div class="row justify-content-md-center">
 		<div class="col-md-auto mb-4 col-sm-12 card p-2 rounded-3">
       <tui-combo-box
-          class="b-form"
-          [stringify]="stringify"
-          [(ngModel)]="value"
-
-      >
-          Общий поиск
-          <input
-              tuiTextfield
-              placeholder="Введите название"
-          />
-          <tui-data-list-wrapper
-              *tuiDataList
-              [items]="itemsAll | tuiFilterByInputWith : stringify"
-              [itemContent]="stringify | tuiStringifyContent"
-          ></tui-data-list-wrapper>
-      </tui-combo-box>
+      class="b-form"
+      [stringify]="stringify"
+      [(ngModel)]="value"
+      
+  >
+      Общий поиск
+      <input
+          tuiTextfield
+          placeholder="Введите название"
+      />
+      <tui-data-list-wrapper
+          *tuiDataList
+          [items]="itemsAll | tuiFilterByInputWith : stringify"
+          [itemContent]="stringify | tuiStringifyContent"
+      ></tui-data-list-wrapper>
+  </tui-combo-box>
 			<div class="row mb-2">
 				<tui-select class="control" [(ngModel)]="valueGroups">
 					Группа
@@ -37,25 +37,25 @@
 				</tui-select>
 			</div>
 
-			 <div class="card shadow-lg mb-2 p-2">
-        <h6>Отображать:</h6>
-          <form [formGroup]="showCriteria" >
-            <div tuiGroup  orientation="vertical" class="group">
-                <tui-checkbox-block contentAlign="right" formControlName="lessons" size="l">
-                  Занятия
-                </tui-checkbox-block>
-                <tui-checkbox-block contentAlign="right"  formControlName="traffic"  size="l" >
-                  Перенос занятий
-                </tui-checkbox-block>
-                <tui-checkbox-block  contentAlign="right"  formControlName="projects"  size="l" (change)="updateData()">
-                  Проекты
-                </tui-checkbox-block>
-                <tui-checkbox-block contentAlign="right"   formControlName="events" size="l" (change)="updateData()">
-                  Мероприятия
-                </tui-checkbox-block>
-            </div>
-        </form>
-      </div>
+			<div class="card shadow-lg mb-2 p-2">
+				<h6>Отображать:</h6>
+        <form [formGroup]="showCriteria" >
+          <div tuiGroup  orientation="vertical" class="group">
+              <tui-checkbox-block contentAlign="right" formControlName="lessons" size="l">
+                Занятия
+              </tui-checkbox-block>
+              <tui-checkbox-block contentAlign="right"  formControlName="traffic"  size="l" >
+                Перенос занятий
+              </tui-checkbox-block>
+              <tui-checkbox-block  contentAlign="right"  formControlName="projects"  size="l" (change)="updateData()">
+                Проекты
+              </tui-checkbox-block>
+              <tui-checkbox-block contentAlign="right"   formControlName="events" size="l" (change)="updateData()">
+                Мероприятия
+              </tui-checkbox-block>
+          </div>
+      </form>
+			</div>
 			<div class="card shadow-lg">
 				<tui-calendar [value]="date" [(month)]="calendarMonth" (dayClick)="onDayClick($event)"></tui-calendar>
 			</div>
