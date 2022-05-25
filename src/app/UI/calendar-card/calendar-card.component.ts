@@ -21,6 +21,7 @@ export class CalendarCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.scheduleItem)
   }
 
 }
