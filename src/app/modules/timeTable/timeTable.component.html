@@ -47,16 +47,16 @@
         <h6>Отображать:</h6>
           <form [formGroup]="showCriteria" >
             <div tuiGroup  orientation="vertical" class="group">
-                <tui-checkbox-labeled class="tui-space_top-3" contentAlign="right" formControlName="lessons" size="l">
+                <tui-checkbox-labeled  style ="background: rgb(177, 245, 186);" class="tui-space_top-3 " contentAlign="right" formControlName="lessons" size="l">
                   Занятия
                 </tui-checkbox-labeled>
-                <tui-checkbox-labeled class="tui-space_top-3" contentAlign="right"  formControlName="traffic"  size="l" >
+                <tui-checkbox-labeled style ="background: rgb(255, 171, 171);" class="tui-space_top-3" contentAlign="right"  formControlName="traffic"  size="l" >
                   Перенос занятий
                 </tui-checkbox-labeled>
-                <tui-checkbox-labeled class="tui-space_top-3" contentAlign="right"  formControlName="projects"  size="l" (change)="updateData()">
+                <tui-checkbox-labeled style ="background: rgb(169, 182, 253);" class="tui-space_top-3" contentAlign="right"  formControlName="projects"  size="l" (change)="updateData()">
                   Проекты
                 </tui-checkbox-labeled>
-                <tui-checkbox-labeled class="tui-space_top-3" contentAlign="right"   formControlName="events" size="l" (change)="updateData()">
+                <tui-checkbox-labeled style ="background: rgb(220, 181, 247);;" class="tui-space_top-3" contentAlign="right"   formControlName="events" size="l" (change)="updateData()">
                   Мероприятия
                 </tui-checkbox-labeled>
             </div>
