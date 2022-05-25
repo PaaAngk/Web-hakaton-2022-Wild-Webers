@@ -9,10 +9,9 @@ import {
   TuiIdentityMatcher,
   TuiStringHandler,
 } from '@taiga-ui/cdk';
-import { TuiDay, TuiDayOfWeek,TuiMonth } from '@taiga-ui/cdk';
+import { TuiDay, TuiDayOfWeek } from '@taiga-ui/cdk';
 import { Activities } from 'src/app/core/modules/activities.model';
 import { ActivitiesService } from 'src/app/core/services/activities.service';
-import { elementAt } from 'rxjs';
 
 
 @Component({
@@ -31,20 +30,14 @@ export class TimeTableComponent implements OnInit {
 
   loadCompleted : boolean = false;
   valueGroups:string = '';
-
   valueTeachers = '';
   valueAuditories = '';
   
-  tableGroupData: Array<Schedules> =[];
-  tableGroupDataActivities: Array<Activities> =[];
+  // showProjects:boolean=false;
+  // showEvents:boolean=false;
 
-  value = null;
- 
-    readonly stringify = (item: string): string =>
-        `${item}`;
-
-
-
+  tableGroupData: Array<Schedules> =[]
+  tableGroupDataActivities: Array<Activities> =[]
 
   selectedGroup:string ='';
   selectedTeachers:string ='';
@@ -53,11 +46,8 @@ export class TimeTableComponent implements OnInit {
   itemsGroups:string[] =[];
   itemsTeachers:string[] =[];
   itemsAuditories :string[] =[];
-  itemsAll: string[] = [];
-  itemsCategory: number[]=[];
 
   date: TuiDay | null = null;
-  calendarMonth: TuiMonth = TuiMonth.currentLocal();
   weekStartDate?: TuiDay;
   months: string[] = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август",
 "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
@@ -66,8 +56,6 @@ export class TimeTableComponent implements OnInit {
 
   showCriteria:FormGroup;
  
-
-  
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -78,21 +66,16 @@ export class TimeTableComponent implements OnInit {
   ) {
     this.onDayClick(TuiDay.fromLocalNativeDate(new Date()));
     this.updateData();
-    
     this.schedulesService.listGroup.subscribe((data) => {
       this.itemsGroups = data;
-      
       //console.log(this.itemsGroups);
     });
     this.schedulesService.listTeachers.subscribe((data) => {
       this.itemsTeachers = data;
-      
       //console.log(this.itemsTeachers);
     });
     this.schedulesService.listAuditories.subscribe((data) => {
       this.itemsAuditories = data;
-      this.itemsAll = this.itemsGroups.concat(this.itemsTeachers,this.itemsAuditories);
-      this.itemsAll.sort((a,b) => a > b ? 1 : -1 );
       //console.log(this.itemsAuditories);
     });
 
@@ -102,7 +85,6 @@ export class TimeTableComponent implements OnInit {
        lessons: new FormControl({value: true, disabled: true}),
        traffic: new FormControl({value: true, disabled: true}),
     });
-
   }
 
   selectGroup(item: string) {
@@ -132,7 +114,6 @@ export class TimeTableComponent implements OnInit {
   onDayClick(day: TuiDay): void {
     this.weekDays = [];
     this.date = day;
-    this.calendarMonth = new TuiMonth(day.year, day.month);
     switch (day.dayOfWeek()) {
       case 0:
         this.weekStartDate = day;
@@ -168,8 +149,8 @@ export class TimeTableComponent implements OnInit {
       this.weekStartDate.append(new TuiDay(0, 0, 6))
     );
     if (this.weekDays[0].month != this.weekDays[6].month){
-      this.sheduleMonths = ""+this.weekDays[0].day+" "+this.months[this.weekDays[0].month]+" - "+this.weekDays[6].day+" "+this.months[this.weekDays[6].month];
-    }else this.sheduleMonths = ""+this.weekDays[0].day+" "+this.months[this.weekDays[0].month];
+      this.sheduleMonths = ""+this.months[this.weekDays[0].month]+" - "+this.months[this.weekDays[6].month];
+    }else this.sheduleMonths = ""+this.months[this.weekDays[0].month];
 
     this.updateData();
   }
@@ -252,11 +233,6 @@ export class TimeTableComponent implements OnInit {
       var date: string ='' +d?.year +'-' +d?.formattedMonthPart +'-' +d?.formattedDayPart;
       return el.dt == date.toString()  && el.pair == pair;
     });
-  }
-  changeWeekToNext(){
-    this.onDayClick(this.weekDays[0].append(new TuiDay(0,0,7)));
-  }
-  changeWeekToPrevious(){
-    this.onDayClick(this.weekDays[0].append(new TuiDay(0,0,7),true));
+
   }
 }

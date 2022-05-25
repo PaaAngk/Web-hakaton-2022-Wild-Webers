@@ -1,153 +1,135 @@
 <div class="container-xl mx-auto">
-	<div class="row justify-content-md-center">
-		<div class="col-md-auto mb-4 col-sm-12 card p-2 rounded-3">
-      <tui-combo-box
-      class="b-form"
-      [stringify]="stringify"
-      [(ngModel)]="value"
+  <div class="row justify-content-md-center">
+    <div class="col-md-auto mb-4 col-sm-12 card p-2 rounded-3">
+      <div class="row mb-2" >
+        <tui-select
+          class="control"
+          [(ngModel)]="valueGroups"
+        >
+          Группа
+          <custom-list *tuiDataList (setItemEvent)="selectGroup($event)" [items]="itemsGroups"></custom-list>
+        </tui-select>
+      </div>
+      <div class="row mb-2" >
+        <tui-select
+          class="control"
+          [(ngModel)]="valueTeachers"
+        >
+          Преподаватель
+          <custom-list *tuiDataList (setItemEvent)="selectTeachers($event)" [items]="itemsTeachers"></custom-list>
+        </tui-select>
+      </div>
+      <div class="row mb-2" >
+        <tui-select
+          class="control"
+          [(ngModel)]="valueAuditories"
+        >
+          Аудитория
+          <custom-list *tuiDataList (setItemEvent)="selectAuditories($event)" [items]="itemsAuditories"></custom-list>
+        </tui-select>
+      </div>
       
-  >
-      Общий поиск
-      <input
-          tuiTextfield
-          placeholder="Введите название"
-      />
-      <tui-data-list-wrapper
-          *tuiDataList
-          [items]="itemsAll | tuiFilterByInputWith : stringify"
-          [itemContent]="stringify | tuiStringifyContent"
-      ></tui-data-list-wrapper>
-  </tui-combo-box>
-			<div class="row mb-2">
-				<tui-select class="control" [(ngModel)]="valueGroups">
-					Группа
-					<custom-list *tuidatalist (setItemEvent)="selectGroup($event)" [items]="itemsGroups"></custom-list>
-				</tui-select>
-			</div>
-			<div class="row mb-2">
-				<tui-select class="control" [(ngModel)]="valueTeachers">
-					Преподаватель
-					<custom-list *tuidatalist (setItemEvent)="selectTeachers($event)" [items]="itemsTeachers"></custom-list>
-				</tui-select>
-			</div>
-			<div class="row mb-2">
-				<tui-select class="control" [(ngModel)]="valueAuditories">
-					Аудитория
-					<custom-list *tuidatalist (setItemEvent)="selectAuditories($event)" [items]="itemsAuditories"></custom-list>
-				</tui-select>
-			</div>
+      <div class="card shadow-lg mb-2 p-2">
+        <h6>Отображать:</h6>
+          <form [formGroup]="showCriteria" >
+            <div tuiGroup  orientation="vertical" class="group">
+                <tui-checkbox-block contentAlign="right" formControlName="lessons" size="l">
+                  Занятия
+                </tui-checkbox-block>
+                <tui-checkbox-block contentAlign="right"  formControlName="traffic"  size="l" >
+                  Перенос занятий
+                </tui-checkbox-block>
+                <tui-checkbox-block  contentAlign="right"  formControlName="projects"  size="l" (change)="updateData()">
+                  Проекты
+                </tui-checkbox-block>
+                <tui-checkbox-block contentAlign="right"   formControlName="events" size="l" (change)="updateData()">
+                  Мероприятия
+                </tui-checkbox-block>
+            </div>
+        </form>
+      </div>
+      <div class="card shadow-lg">
+        <tui-calendar
+          [value]="date"
+          (dayClick)="onDayClick($event)"
+        ></tui-calendar>
+      </div>
+    </div>
 
-			<div class="card shadow-lg mb-2 p-2">
-				<h6>Отображать:</h6>
-        <form [formGroup]="showCriteria" >
-          <div tuiGroup  orientation="vertical" class="group">
-              <tui-checkbox-block contentAlign="right" formControlName="lessons" size="l">
-                Занятия
-              </tui-checkbox-block>
-              <tui-checkbox-block contentAlign="right"  formControlName="traffic"  size="l" >
-                Перенос занятий
-              </tui-checkbox-block>
-              <tui-checkbox-block  contentAlign="right"  formControlName="projects"  size="l" (change)="updateData()">
-                Проекты
-              </tui-checkbox-block>
-              <tui-checkbox-block contentAlign="right"   formControlName="events" size="l" (change)="updateData()">
-                Мероприятия
-              </tui-checkbox-block>
+    <div class="col-xl mb-4 col-sm-12 rounded-3">
+      <tui-loader
+        class="inline-flex tui-space_right-2"
+        [showLoader]="loadCompleted"
+        [inheritColor]="loadCompleted"
+        [overlay]="loadCompleted"
+      > 
+      <div class="calendar card p-2 shadow-lg">
+        <div class="row justify-content-center mx-auto">
+          <div class="my-2 me-2 my-lg-0 ">
+            <h2 class="calendar-heading" > {{sheduleMonths}}</h2>
           </div>
-      </form>
-			</div>
-			<div class="card shadow-lg">
-				<tui-calendar [value]="date" [(month)]="calendarMonth" (dayClick)="onDayClick($event)"></tui-calendar>
-			</div>
-		</div>
+        </div> 
+        <div class="row-auto">
+          <table class="week">
+            <thead>
+              <tr>
+                <th></th>
+                <th>
+                  <div class="weekday-field">Понедельник</div>
+                  <div class="day-field">{{ weekDays[0].day }}</div>
+                </th>
+                <th>
+                  <div class="weekday-field">Вторник</div>
+                  <div class="day-field">{{ weekDays[1].day }}</div>
+                </th>
+                <th>
+                  <div class="weekday-field">Среда</div>
+                  <div class="day-field">{{ weekDays[2].day }}</div>
+                </th>
+                <th>
+                  <div class="weekday-field">Четверг</div>
+                  <div class="day-field">{{ weekDays[3].day }}</div>
+                </th>
+                <th>
+                  <div class="weekday-field">Пятница</div>
+                  <div class="day-field">{{ weekDays[4].day }}</div>
+                </th>
+                <th>
+                  <div class="weekday-field">Суббота</div>
+                  <div class="day-field">{{ weekDays[5].day }}</div>
+                </th>
+                <th>
+                  <div class="weekday-field">Воскресенье</div>
+                  <div class="day-field">{{ weekDays[6].day }}</div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let pair of listPairs " >
+                <tr>
+                  <th class="hour-field">{{pair}} пара</th>
+                  <ng-container *ngFor="let day of listDays" >
+                    
+                      <td>
+                        <div class="events-wrapper">
+                          <ng-container *ngFor="let i of filterSchedules(tableGroupData, day, pair) ">
+                            <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                          </ng-container>
 
+                          <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, day, pair)">
+                            <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
 
-		<div class="col-xl mb-4 col-sm-12 rounded-3">
-			<tui-scrollbar>
-				<tui-loader class="inline-flex tui-space_right-2" [showLoader]="loadCompleted" [inheritColor]="loadCompleted" [overlay]="loadCompleted">
-					<div class="calendar card p-2 shadow-lg">
-						<div class="d-flex mb-2 justify-content-between">
-							<div>
-								<span *ngIf="valueGroups != ''" class="tui-text_body-xl ms-4">Группа:
-									{{valueGroups}}</span>
-								<span *ngIf="valueTeachers != ''" class="tui-text_body-xl ms-4">Преподаватель:
-									{{valueTeachers}}</span>
-								<span *ngIf="valueAuditories != ''" class="tui-text_body-xl ms-4">Аудитория:
-									{{valueAuditories}}</span>
-							</div>
-							<div>
-								<span class="ms-4 tui-text_body-xl">{{sheduleMonths}}</span>
-							</div>
-							<div class="btn-group btn-group-sm" role="group">
-								<button type="button" class="btn btn-outline-primary" (click)="changeWeekToPrevious()">Предыдущая
-								</button>
-								<button type="button" class="btn btn-outline-primary" (click)="changeWeekToNext()">Следующая</button>
-							</div>
-
-						</div>
-						<div class="row-auto">
-							<table class="week">
-								<thead>
-									<tr>
-										<th width="5%"></th>
-										<th width="13%">
-											<div class="weekday-field">Понедельник</div>
-											<div class="day-field">{{ weekDays[0].day }}</div>
-										</th>
-										<th width="13%">
-											<div class="weekday-field">Вторник</div>
-											<div class="day-field">{{ weekDays[1].day }}</div>
-										</th>
-										<th width="13%">
-											<div class="weekday-field">Среда</div>
-											<div class="day-field">{{ weekDays[2].day }}</div>
-										</th>
-										<th width="13%">
-											<div class="weekday-field">Четверг</div>
-											<div class="day-field">{{ weekDays[3].day }}</div>
-										</th>
-										<th width="13%">
-											<div class="weekday-field">Пятница</div>
-											<div class="day-field">{{ weekDays[4].day }}</div>
-										</th>
-										<th width="13%">
-											<div class="weekday-field">Суббота</div>
-											<div class="day-field">{{ weekDays[5].day }}</div>
-										</th>
-										<th width="13%">
-											<div class="weekday-field">Воскресенье</div>
-											<div class="day-field">{{ weekDays[6].day }}</div>
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-									<ng-container *ngFor="let pair of listPairs ">
-										<tr>
-											<th class="hour-field">{{pair}}</th>
-											<ng-container *ngFor="let day of listDays">
-
-												<td>
-													<div class="events-wrapper">
-														<ng-container *ngFor="let i of filterSchedules(tableGroupData, day, pair) ">
-															<app-calendar-card class="event event-end" [scheduleItem]="i"></app-calendar-card>
-														</ng-container>
-
-														<ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, day, pair)">
-															<app-calendar-card class="event event-end" [activitiesItem]="y"></app-calendar-card>
-
-														</ng-container>
-													</div>
-												</td>
-											</ng-container>
-										</tr>
-									</ng-container>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</tui-loader>
-			</tui-scrollbar>
-		</div>
-
-	</div>
+                          </ng-container>
+                        </div>
+                      </td>
+                    </ng-container>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </tui-loader>
+    </div>
+  </div>
 </div>

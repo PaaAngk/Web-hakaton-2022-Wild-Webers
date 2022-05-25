@@ -1,52 +1,26 @@
-<!-- // тип, 1 -- лекция, 2 -- практика, 3 -- лаба -->
-<div
-  *ngIf="scheduleItem"
-  [tuiHint]="scheduleHint"
-  class="calendar-item calendar__practice-card"
-  title="">
+<ng-container *ngIf="scheduleItem">
+  <!-- // тип, 1 -- лекция, 2 -- практика, 3 -- лаба -->
+  <div
+    class="calendar-item"
+    
+    [ngClass]="{ 'calendar__lab-card': scheduleItem?.type == 3 , 'calendar__practice-card': scheduleItem?.type == 2, 'calendar__lecture-card': scheduleItem?.type == 1  }"
+    title="">
     <p>{{ scheduleItem?.discipline }}</p>
-    <hr>
-    <p *ngIf="scheduleItem.subgroup_number != null " class="calendar-auditories">Подгруппа {{ scheduleItem.subgroup_number }}</p>
-    <hr>
-    <p class="calendar-auditories" *ngIf="scheduleItem?.auditories!=null">Ауд.<br>{{ scheduleItem?.auditories }}</p>
-    <p class="calendar-auditories" *ngIf="scheduleItem?.auditories==null">Аудитории нет</p>
-</div>
-  
-<ng-template #scheduleHint>
-  <div *ngIf="scheduleItem?.auditories!=null">
-    Аудитория: <strong>{{scheduleItem?.auditories}}</strong>
+    <ng-container *ngIf="scheduleItem.subgroup_number==1 ">
+      <p class="calendar-auditories">Подгруппа {{ scheduleItem.subgroup_number }}</p>
+    </ng-container>
+    <ng-container *ngIf="scheduleItem.subgroup_number==2 ">
+      <p class="calendar-auditories">Подгруппа {{ scheduleItem.subgroup_number }}</p>
+    </ng-container>
+    <p class="calendar-auditories">Ауд.<br>{{ scheduleItem?.auditories }}</p>
   </div>
-  <div *ngIf="scheduleItem?.auditories==null">
-    Аудитории нет
-  </div>
-
-
-  <div *ngIf="scheduleItem?.teachers!=null">Преподаватель: <strong>{{scheduleItem?.teachers}}</strong></div>
-  <div *ngIf="scheduleItem?.teachers==null">Преподавателя нет<strong>{{scheduleItem?.teachers}}</strong></div>
-</ng-template>
-
-
-<!-- // тип, 0 -- мероприятие, 1 -- проект, 3 -- перенос пары, 4 -- перенесенная пара -->
-<div 
-  *ngIf="activitiesItem"
-  class="calendar-item" 
-  [tuiHint]="activitiesHint"
-  [ngClass]="{ 'calendar__activities-card': activitiesItem?.type == 0 ,'calendar__transfer-card': activitiesItem?.type == 3 || activitiesItem?.type == 4 , 'calendar__project-card': activitiesItem?.type == 1  }"
+</ng-container>
+<ng-container *ngIf="activitiesItem">
+  <!-- // тип, 0 -- мероприятие, 1 -- проект, 3 -- перенос пары, 4 -- перенесенная пара -->
+  <div class="calendar-item" 
+  [ngClass]="{ 'calendar__activities-card': activitiesItem?.type == 0 , 'calendar__transfer2-card': activitiesItem?.type == 4 ||activitiesItem?.type == 3, 'calendar__project-card': activitiesItem?.type == 1  }"
   title="">
-    <p *ngIf="activitiesItem?.type==3">ПЕРЕНОС</p>
-    <p *ngIf="activitiesItem?.type!=3">{{ activitiesItem?.description }}</p>
-    <hr>
-    <div *ngIf="activitiesItem?.auditories!=null">Аудитория <strong>{{activitiesItem?.auditories}}</strong></div>
-    <div *ngIf="activitiesItem?.auditories==null">Аудитории нет<strong>{{activitiesItem?.auditories}}</strong></div>
-</div>
-
-<ng-template #activitiesHint>
-  <p *ngIf="activitiesItem?.type==3">{{ activitiesItem?.description }}</p>
-  <div *ngIf="activitiesItem?.auditories!=null">
-    Аудитория: <strong>{{activitiesItem?.auditories}}</strong>
+    <p>{{ activitiesItem?.description }}</p>
+    <p class="calendar-auditories">{{ activitiesItem?.auditories }}</p>
   </div>
-  <div *ngIf="activitiesItem?.auditories==null">
-    Аудитории нет
-  </div>
-</ng-template>
-<!-- [ngClass]="{ 'calendar__lab-card': scheduleItem?.type == 3 , 'calendar__practice-card': scheduleItem?.type == 2, 'calendar__lecture-card': scheduleItem?.type == 1  }" -->
+</ng-container>
