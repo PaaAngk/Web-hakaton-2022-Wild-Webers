@@ -31,8 +31,8 @@ export class TimeTableComponent implements OnInit {
 
   loadCompleted : boolean = false;
   valueGroups:string = '';
-  valueTeachers = '';
-  valueAuditories = '';
+  valueTeachers:string = '';
+  valueAuditories:string = '';
 
   tableGroupData: Array<Schedules> =[]
   tableGroupDataActivities: Array<Activities> =[]

@@ -55,80 +55,96 @@
       </div>
     </div>
 
-    <div class="col-xl mb-4 col-sm-12 rounded-3">
-      <tui-loader
-        class="inline-flex tui-space_right-2"
-        [showLoader]="loadCompleted"
-        [inheritColor]="loadCompleted"
-        [overlay]="loadCompleted"
-      > 
-      <div class="calendar card p-2 shadow-lg">
-        <div class="row justify-content-center mx-auto">
-          <div class="my-2 me-2 my-lg-0 ">
-            <h2 class="calendar-heading" > {{sheduleMonths}}</h2>
-          </div>
-        </div> 
-        <div class="row-auto">
-          <table class="week">
-            <thead>
-              <tr>
-                <th></th>
-                <th>
-                  <div class="weekday-field">Понедельник</div>
-                  <div class="day-field">{{ weekDays[0].day }}</div>
-                </th>
-                <th>
-                  <div class="weekday-field">Вторник</div>
-                  <div class="day-field">{{ weekDays[1].day }}</div>
-                </th>
-                <th>
-                  <div class="weekday-field">Среда</div>
-                  <div class="day-field">{{ weekDays[2].day }}</div>
-                </th>
-                <th>
-                  <div class="weekday-field">Четверг</div>
-                  <div class="day-field">{{ weekDays[3].day }}</div>
-                </th>
-                <th>
-                  <div class="weekday-field">Пятница</div>
-                  <div class="day-field">{{ weekDays[4].day }}</div>
-                </th>
-                <th>
-                  <div class="weekday-field">Суббота</div>
-                  <div class="day-field">{{ weekDays[5].day }}</div>
-                </th>
-                <th>
-                  <div class="weekday-field">Воскресенье</div>
-                  <div class="day-field">{{ weekDays[6].day }}</div>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <ng-container *ngFor="let pair of listPairs " >
+    
+      <div class="col-xl mb-4 col-sm-12 rounded-3">
+        <tui-scrollbar>
+        <tui-loader
+          class="inline-flex tui-space_right-2"
+          [showLoader]="loadCompleted"
+          [inheritColor]="loadCompleted"
+          [overlay]="loadCompleted"
+        > 
+        <div class="calendar card p-2 shadow-lg">
+          <div class="d-flex mb-2 justify-content-between">
+            <div>         
+              <span *ngIf="valueGroups != ''" class="tui-text_body-xl ms-4" >Группа: {{valueGroups}}</span>
+              <span *ngIf="valueTeachers != ''" class="tui-text_body-xl ms-4" >Преподаватель: {{valueTeachers}}</span>
+              <span *ngIf="valueAuditories != ''" class="tui-text_body-xl ms-4" >Аудитория: {{valueAuditories}}</span>
+            </div>
+            <div>
+              <span class="ms-4 tui-text_body-xl" >{{sheduleMonths}} {{ weekDays[0].day }}-{{ weekDays[6].day }}</span>
+            </div>
+            <div class="btn-group btn-group-sm" role="group" >
+              <button type="button" class="btn btn-outline-primary">Предыдущая </button>
+              <button type="button" class="btn btn-outline-primary">Следующая</button>
+            </div>         
+            
+          </div> 
+          <div class="row-auto">
+            <table class="week">
+              <thead>
                 <tr>
-                  <th class="hour-field">{{pair}} пара</th>
-                  <ng-container *ngFor="let day of listDays" >
-                    
-                      <td>
-                        <div class="events-wrapper">
-                          <ng-container *ngFor="let i of filterSchedules(tableGroupData, day, pair) ">
-                            <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
-                          </ng-container>
+                  <th width="5%" >
 
-                          <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, day, pair)">
-                            <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
-
-                          </ng-container>
-                        </div>
-                      </td>
-                    </ng-container>
+                  </th>
+                  <th width="13%">
+                    <div class="weekday-field">Понедельник</div>
+                    <div class="day-field">{{ weekDays[0].day }}</div>
+                  </th>
+                  <th width="13%">
+                    <div class="weekday-field">Вторник</div>
+                    <div class="day-field">{{ weekDays[1].day }}</div>
+                  </th>
+                  <th width="13%" >
+                    <div class="weekday-field">Среда</div>
+                    <div class="day-field">{{ weekDays[2].day }}</div>
+                  </th>
+                  <th width="13%">
+                    <div class="weekday-field">Четверг</div>
+                    <div class="day-field">{{ weekDays[3].day }}</div>
+                  </th>
+                  <th width="13%">
+                    <div class="weekday-field">Пятница</div>
+                    <div class="day-field">{{ weekDays[4].day }}</div>
+                  </th>
+                  <th width="13%">
+                    <div class="weekday-field">Суббота</div>
+                    <div class="day-field">{{ weekDays[5].day }}</div>
+                  </th>
+                  <th width="13%">
+                    <div class="weekday-field">Воскресенье</div>
+                    <div class="day-field">{{ weekDays[6].day }}</div>
+                  </th>
                 </tr>
-              </ng-container>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let pair of listPairs " >
+                  <tr>
+                    <th class="hour-field">{{pair}}</th>
+                    <ng-container *ngFor="let day of listDays" >
+                      
+                        <td>
+                          <div class="events-wrapper">
+                            <ng-container *ngFor="let i of filterSchedules(tableGroupData, day, pair) ">
+                              <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                            </ng-container>
+
+                            <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, day, pair)">
+                              <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                            </ng-container>
+                          </div>
+                        </td>
+                      </ng-container>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
         </div>
+        </tui-loader>
+      </tui-scrollbar>
       </div>
-      </tui-loader>
-    </div>
+    
   </div>
 </div>
