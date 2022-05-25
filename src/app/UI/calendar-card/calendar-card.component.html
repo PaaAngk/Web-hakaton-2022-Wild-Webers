@@ -18,7 +18,7 @@
 <ng-container *ngIf="activitiesItem">
   <!-- // тип, 0 -- мероприятие, 1 -- проект, 3 -- перенос пары, 4 -- перенесенная пара -->
   <div class="calendar-item" 
-  [ngClass]="{ 'calendar__activities-card': activitiesItem?.type == 0 ,'calendar__transfer2-card': activitiesItem?.type == 3 , 'calendar__transfer-card': activitiesItem?.type == 4, 'calendar__project-card': activitiesItem?.type == 1  }"
+  [ngClass]="{ 'calendar__activities-card': activitiesItem?.type == 0 , 'calendar__transfer2-card': activitiesItem?.type == 4 ||activitiesItem?.type == 3, 'calendar__project-card': activitiesItem?.type == 1  }"
   title="">
     <p>{{ activitiesItem?.description }}</p>
     <p class="calendar-auditories">{{ activitiesItem?.auditories }}</p>
