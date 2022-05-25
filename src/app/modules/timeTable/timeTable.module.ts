@@ -7,11 +7,11 @@ import {TuiPrimitiveTextfieldModule} from '@taiga-ui/core';
 import {TuiTextfieldControllerModule} from '@taiga-ui/core';
 import {TuiDataListWrapperModule, TuiSelectModule} from '@taiga-ui/kit';
 
-import {TuiRadioListModule, TuiFilterModule} from '@taiga-ui/kit';
+import {TuiRadioListModule, TuiFilterModule, TuiFilterByInputPipeModule, TuiComboBoxModule} from '@taiga-ui/kit';
 import { CustomListComponent } from 'src/app/UI/custom-list.component';
 import {TuiCalendarModule} from '@taiga-ui/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {TuiCheckboxLabeledModule} from '@taiga-ui/kit';
+import {TuiCheckboxLabeledModule,TuiStringifyContentPipeModule} from '@taiga-ui/kit';
 import {FormControl, FormGroup} from '@angular/forms';
 import {TuiScrollbarModule, TuiHintModule } from '@taiga-ui/core';
 
@@ -32,11 +32,14 @@ import {TuiLetModule} from '@taiga-ui/cdk';
     ReactiveFormsModule,
     TuiSelectModule,
     TuiDataListModule,
+    TuiStringifyContentPipeModule,
+    TuiFilterByInputPipeModule,
     TuiDataListWrapperModule,
     TuiRadioListModule,
     TuiCalendarModule,
     TuiLoaderModule,
     TuiFilterModule,
+    TuiComboBoxModule,
     TuiLetModule,
     TuiScrollbarModule,
     TuiHintModule,
