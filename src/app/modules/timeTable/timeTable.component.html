@@ -1,6 +1,6 @@
-<div class="container">
-  <div class="row">
-    <div class="col-auto p-2 card rounded-3 ">
+<div class="container-xl mx-auto">
+  <div class="row justify-content-md-center">
+    <div class="col-md-auto mb-4 col-sm-12 card p-2 rounded-3">
       <div class="row mb-2" >
         <tui-select
           class="control"
@@ -55,7 +55,7 @@
       </div>
     </div>
 
-    <div class="col-8 rounded-3">
+    <div class="col-xl mb-4 col-sm-12 rounded-3">
       <tui-loader
         class="inline-flex tui-space_right-2"
         [showLoader]="loadCompleted"
@@ -63,11 +63,9 @@
         [overlay]="loadCompleted"
       > 
       <div class="calendar card p-2 shadow-lg">
-
-         <div class="row justify-content-center">
-
+        <div class="row justify-content-center mx-auto">
           <div class="my-2 me-2 my-lg-0 ">
-            <span class="calendar-heading" > {{sheduleMonths}}</span>
+            <h2 class="calendar-heading" > {{sheduleMonths}}</h2>
           </div>
         </div> 
         <div class="row-auto">
