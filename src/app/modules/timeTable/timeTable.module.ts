@@ -13,7 +13,7 @@ import {TuiCalendarModule} from '@taiga-ui/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TuiCheckboxLabeledModule} from '@taiga-ui/kit';
 import {FormControl, FormGroup} from '@angular/forms';
-
+import {TuiScrollbarModule, TuiHintModule } from '@taiga-ui/core';
 
 
 import { CalendarCardComponent } from './../../UI/calendar-card/calendar-card.component';
@@ -38,6 +38,8 @@ import {TuiLetModule} from '@taiga-ui/cdk';
     TuiLoaderModule,
     TuiFilterModule,
     TuiLetModule,
+    TuiScrollbarModule,
+    TuiHintModule,
   ],
   declarations: [
     TimeTableComponent,
