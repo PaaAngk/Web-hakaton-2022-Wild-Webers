@@ -56,12 +56,12 @@
     </div>
 
     <div class="col-8 rounded-3">
-      <!-- <tui-loader
-                class="inline-flex tui-space_right-2"
-                [showLoader]="loadCompleted == true"
-                [inheritColor]="true"
-                [overlay]="true"
-            > -->
+      <tui-loader
+        class="inline-flex tui-space_right-2"
+        [showLoader]="loadCompleted"
+        [inheritColor]="loadCompleted"
+        [overlay]="loadCompleted"
+      > 
       <div class="calendar card p-2 shadow-lg">
 
          <div class="row justify-content-center">
@@ -130,7 +130,7 @@
           </table>
         </div>
       </div>
-      <!-- </tui-loader> -->
+      </tui-loader>
     </div>
   </div>
 </div>
