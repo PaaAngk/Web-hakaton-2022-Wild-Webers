@@ -11,14 +11,14 @@ import {TuiRadioListModule, TuiFilterModule} from '@taiga-ui/kit';
 import { CustomListComponent } from 'src/app/UI/custom-list.component';
 import {TuiCalendarModule} from '@taiga-ui/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {TuiCheckboxLabeledModule} from '@taiga-ui/kit';
+import {TuiCheckboxLabeledModule,TuiStringifyContentPipeModule} from '@taiga-ui/kit';
 import {FormControl, FormGroup} from '@angular/forms';
 import {TuiCheckboxBlockModule} from '@taiga-ui/kit';
 
-
+import {TuiScrollbarModule, TuiHintModule } from '@taiga-ui/core';
 import { CalendarCardComponent } from './../../UI/calendar-card/calendar-card.component';
 import {TuiLetModule} from '@taiga-ui/cdk';
-
+import { TuiFilterByInputPipeModule, TuiComboBoxModule} from '@taiga-ui/kit';
 
 @NgModule({
   imports: [
@@ -35,9 +35,10 @@ import {TuiLetModule} from '@taiga-ui/cdk';
     TuiDataListWrapperModule,
     TuiRadioListModule,
     TuiCalendarModule,
-    TuiLoaderModule,
-    TuiFilterModule,
-    TuiLetModule,TuiCheckboxBlockModule,
+    TuiLoaderModule,TuiStringifyContentPipeModule,
+    TuiFilterModule,TuiComboBoxModule,TuiFilterByInputPipeModule,
+    TuiLetModule,TuiCheckboxBlockModule,TuiScrollbarModule,
+    TuiHintModule,
   ],
   declarations: [
     TimeTableComponent,
