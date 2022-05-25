@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class="col-auto p-2 card rounded-3">
-      <div class="row mb-2" style="padding-left: 10px">
+    <div class="col-auto p-2 card rounded-3 ">
+      <div class="row mb-2" >
         <tui-select
           class="control"
           [(ngModel)]="valueGroups"
@@ -10,7 +10,7 @@
           <custom-list *tuiDataList (setItemEvent)="selectGroup($event)" [items]="itemsGroups"></custom-list>
         </tui-select>
       </div>
-      <div class="row mb-2" style="padding-left: 10px">
+      <div class="row mb-2" >
         <tui-select
           class="control"
           [(ngModel)]="valueTeachers"
@@ -19,7 +19,7 @@
           <custom-list *tuiDataList (setItemEvent)="selectTeachers($event)" [items]="itemsTeachers"></custom-list>
         </tui-select>
       </div>
-      <div class="row mb-2" style="padding-left: 10px">
+      <div class="row mb-2" >
         <tui-select
           class="control"
           [(ngModel)]="valueAuditories"
@@ -28,7 +28,9 @@
           <custom-list *tuiDataList (setItemEvent)="selectAuditories($event)" [items]="itemsAuditories"></custom-list>
         </tui-select>
       </div>
-      <h4>Отображать:</h4>
+      
+      <div class="card shadow-lg mb-2 p-2">
+      <h6>Отображать:</h6>
       <form [formGroup]="showCriteria">
         <tui-checkbox-labeled
             formControlName="lessons"
@@ -44,7 +46,7 @@
             formControlName="events"
             class="tui-space_bottom-3"
         >Мероприятия</tui-checkbox-labeled>
-    </form>
+    </form></div>
       <div class="card shadow-lg">
         <tui-calendar
           [value]="date"
@@ -54,18 +56,18 @@
     </div>
 
     <div class="col-8 rounded-3">
-      <!-- <tui-loader
-                class="inline-flex tui-space_right-2"
-                [showLoader]="loadCompleted == true"
-                [inheritColor]="true"
-                [overlay]="true"
-            > -->
+      <tui-loader
+        class="inline-flex tui-space_right-2"
+        [showLoader]="loadCompleted"
+        [inheritColor]="loadCompleted"
+        [overlay]="loadCompleted"
+      > 
       <div class="calendar card p-2 shadow-lg">
 
          <div class="row justify-content-center">
 
-          <div class="my-2 me-2 my-lg-0 justify-content-center">
-            <span class="calendar-heading"> {{sheduleMonths}}</span>
+          <div class="my-2 me-2 my-lg-0 ">
+            <span class="calendar-heading" > {{sheduleMonths}}</span>
           </div>
         </div> 
         <div class="row-auto">
@@ -128,7 +130,7 @@
           </table>
         </div>
       </div>
-      <!-- </tui-loader> -->
+      </tui-loader>
     </div>
   </div>
 </div>

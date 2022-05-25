@@ -154,49 +154,50 @@ export class TimeTableComponent implements OnInit {
     var date:string= ''+this.weekStartDate?.year+'-'+this.weekStartDate?.formattedMonthPart+'-'+this.weekStartDate?.formattedDayPart;
     //если выбрана группа
     if(this.valueGroups!=''){
-      
+      this.loadCompleted = true
       //получаем занятия 
       this.schedulesService.getByGroup(this.valueGroups,date.toString()).subscribe(
         data => {
-          this.tableGroupData=data,
-          this.loadCompleted = true
-          
+          this.tableGroupData=data
         },
       );
       //получаем активити 
       this.activitiesService.getByGroup(this.valueGroups,this.weekStartDate).subscribe(
         (data) => {
-          (this.tableGroupDataActivities = data), (this.loadCompleted = true);
+          this.tableGroupDataActivities = data, 
+          this.loadCompleted = false
       });
     }
+
     //если выбран препод
     else if (this.valueTeachers!=''){
-      
+      this.loadCompleted = true
       //получаем занятия 
       this.schedulesService.getByTeachers(this.valueTeachers,date.toString()).subscribe(
         data => {
-          this.tableGroupData=data,
-          this.loadCompleted = true
+          this.tableGroupData=data
         },
       );
       //получаем активити 
       this.activitiesService.getByTeachers(this.valueTeachers,this.weekStartDate).subscribe(
         (data) => {
-          (this.tableGroupDataActivities = data), (this.loadCompleted = true);
+          this.tableGroupDataActivities = data, 
+          this.loadCompleted = false
       });
     }
     //если выбрана аудитория
     else if (this.valueAuditories!=''){
+      this.loadCompleted = true
       //получаем занятия 
       this.schedulesService.getByAuditories(this.valueAuditories,date.toString()).subscribe(
         data => {
-          this.tableGroupData=data,
-          this.loadCompleted = true
+          this.tableGroupData=data
         },
       );
       this.activitiesService.getByAuditories(this.valueAuditories,this.weekStartDate).subscribe(
         (data) => {
-          (this.tableGroupDataActivities = data), (this.loadCompleted = true);
+          this.tableGroupDataActivities = data, 
+          this.loadCompleted = false
       });
     }
   }
