@@ -13,6 +13,8 @@ import {TuiCalendarModule} from '@taiga-ui/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TuiCheckboxLabeledModule,TuiStringifyContentPipeModule} from '@taiga-ui/kit';
 import {FormControl, FormGroup} from '@angular/forms';
+import {TuiCheckboxBlockModule} from '@taiga-ui/kit';
+
 import {TuiScrollbarModule, TuiHintModule } from '@taiga-ui/core';
 
 
@@ -39,6 +41,7 @@ import {TuiLetModule} from '@taiga-ui/cdk';
     TuiCalendarModule,
     TuiLoaderModule,
     TuiFilterModule,
+    TuiLetModule,TuiCheckboxBlockModule,
     TuiComboBoxModule,
     TuiLetModule,
     TuiScrollbarModule,

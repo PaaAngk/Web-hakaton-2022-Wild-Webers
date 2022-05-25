@@ -52,8 +52,8 @@ export class SchedulesService {
     teachers: string,
     week_begining: string
   ): Observable<Schedules[]> {
-    console.log("получаем занятия getByTeachers")
-    console.log(teachers)
+    //console.log("получаем занятия getByTeachers")
+    //console.log(teachers)
     return this.apiService
       .get(
         '/schedules?teachers_like=' +
