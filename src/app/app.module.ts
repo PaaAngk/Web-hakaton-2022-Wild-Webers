@@ -15,7 +15,9 @@ import { of } from "rxjs";
 import { environment } from '../environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
+import { TuiFilterByInputPipeModule, TuiComboBoxModule} from '@taiga-ui/kit';
 
+ 
 
 @NgModule({
   declarations: [
@@ -28,7 +30,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     TuiRootModule,
     BrowserAnimationsModule,
     LayoutModule, 
-    TuiDialogModule, 
+    TuiDialogModule, TuiFilterByInputPipeModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       registrationStrategy: 'registerWhenStable:30000'

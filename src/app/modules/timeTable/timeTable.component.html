@@ -1,21 +1,7 @@
 <div class="container-xl mx-auto">
   <div class="row justify-content-md-center">
     <div class="col-md-auto mb-4 col-sm-12 filter p-2 rounded-3">
-      <div class="row mb-2" >
-        <tui-combo-box
-          class="b-form"
-          [stringify]="stringify"
-          [(ngModel)]="value">
-          Общий поиск
-          <input tuiTextfield placeholder="Введите название"  />
-          <tui-data-list-wrapper
-		  
-              *tuiDataList
-              [items]="itemsAll | tuiFilterByInputWith : stringify"
-              [itemContent]="stringify | tuiStringifyContent">
-          </tui-data-list-wrapper>
-        </tui-combo-box>
-      </div>
+      
       <div class="row mb-2" >
         <tui-select
           class="control"
@@ -44,8 +30,7 @@
         </tui-select>
       </div>
       
-      <!-- <div class="card shadow-lg mb-2 p-2">
-        <h6>Отображать:</h6> -->
+      
           <form [formGroup]="showCriteria" class="mb-2">
             <div tuiGroup  orientation="vertical" class="btn-group-vertical group">
 				<i class ="is"></i>
@@ -63,7 +48,7 @@
                 </tui-checkbox-block>
             </div>
         </form>
-      <!-- </div> -->
+      
       <div class="card shadow-lg">
         <tui-calendar
           [value]="date"

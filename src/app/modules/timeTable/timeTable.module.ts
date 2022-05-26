@@ -20,6 +20,10 @@ import { CalendarCardComponent } from './../../UI/calendar-card/calendar-card.co
 import {TuiLetModule, TuiForModule} from '@taiga-ui/cdk';
 import { TuiFilterByInputPipeModule, TuiComboBoxModule} from '@taiga-ui/kit';
 
+import {TuiFilterPipeModule} from '@taiga-ui/cdk';
+ 
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -38,7 +42,7 @@ import { TuiFilterByInputPipeModule, TuiComboBoxModule} from '@taiga-ui/kit';
     TuiLoaderModule,TuiStringifyContentPipeModule,
     TuiFilterModule,TuiComboBoxModule,TuiFilterByInputPipeModule,
     TuiLetModule,TuiCheckboxBlockModule,TuiScrollbarModule,
-    TuiHintModule,
+    TuiHintModule,TuiFilterPipeModule,
     TuiForModule,
   ],
   declarations: [
