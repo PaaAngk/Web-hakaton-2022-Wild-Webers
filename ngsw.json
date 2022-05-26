@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1653575440880,
+  "timestamp": 1653578114470,
   "index": "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/index.html",
   "assetGroups": [
     {
@@ -11,13 +11,13 @@
         "ignoreVary": true
       },
       "urls": [
-        "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/882.068fa09f39688fd5.js",
+        "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/882.0c421ef5970391d8.js",
         "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/favicon.ico",
         "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/index.html",
-        "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/main.e8293a53b265ca7c.js",
+        "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/main.51a875ae7e1f4514.js",
         "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/manifest.webmanifest",
         "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/polyfills.a36d2668629a0348.js",
-        "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/runtime.999e372b89556787.js",
+        "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/runtime.e060a4bd7402330c.js",
         "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/styles.7daf0acf0416ec39.css"
       ],
       "patterns": []
@@ -491,9 +491,22 @@
       "version": 1
     },
     {
-      "name": "mission-api",
+      "name": "schedules-api",
       "patterns": [
-        "https:\\/\\/equable-dot-somersault\\.glitch\\.me\\/"
+        "https:\\/\\/rain-harsh-zebu\\.glitch\\.me\\/schedules"
+      ],
+      "strategy": "performance",
+      "maxSize": 100,
+      "maxAge": 864000000,
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "version": 1
+    },
+    {
+      "name": "activities-api",
+      "patterns": [
+        "https:\\/\\/rain-harsh-zebu\\.glitch\\.me\\/activities"
       ],
       "strategy": "performance",
       "maxSize": 100,
@@ -505,7 +518,7 @@
     }
   ],
   "hashTable": {
-    "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/882.068fa09f39688fd5.js": "606b87351a8b0f350ba0ca82214df1d8359a08ab",
+    "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/882.0c421ef5970391d8.js": "ab261b3ee8c7a3aa8bc2aecf16237e41134a3767",
     "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
     "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
     "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
@@ -949,11 +962,11 @@
     "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/assets/taiga-ui/icons/tuiIconWifiOffLarge.svg": "6178ea0c00bf3798ab25f8d7c2e920612ffef386",
     "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/assets/taiga-ui/icons/tuiIconWifiOnLarge.svg": "0e5c1fe6c3a3b5a94b1c96d226c8f0f152a29dc4",
     "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/favicon.ico": "34116865e42a9fb876cda0d7b2f1e62f9679762e",
-    "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/index.html": "cd6fadb7dbb5c8790e44d8e058ce893289816f45",
-    "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/main.e8293a53b265ca7c.js": "148f6c3b179d641b7f8ad95093bd05cc61d1fb17",
+    "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/index.html": "0b7733508f430b0242bffedca61aa0a00af5560b",
+    "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/main.51a875ae7e1f4514.js": "3b023a9e176feb8321a2cb08e5549b15be865766",
     "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/manifest.webmanifest": "ea9f8a89cc24a6e615e55fbf22d8a473560d9510",
     "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/polyfills.a36d2668629a0348.js": "3821faa12edb07372b1b82263a4c59ee519e9961",
-    "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/runtime.999e372b89556787.js": "d7e08f5b5e64bae4bbddeb0579c5e0e4479deaa7",
+    "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/runtime.e060a4bd7402330c.js": "b1445bd71001fd6f96abf1a63cf3eff6f6003037",
     "https://PaaAngk.github.io/Web-hakaton-2022-Wild-Webers/styles.7daf0acf0416ec39.css": "ba7df26a01c93b356c7b0612e941b97122f0ad24"
   },
   "navigationUrls": [
