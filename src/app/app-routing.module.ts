@@ -10,6 +10,7 @@ const routes: Routes = [
     component  : LayoutComponent,
     children   : [
         {path: 'schedule', loadChildren: () => import('./modules/timeTable/timeTable.module').then(m => m.TimeTableModule)},
+        {path: 'schedule/:group', loadChildren: () => import('./modules/timeTable/timeTable.module').then(m => m.TimeTableModule)},
         {path: 'activitie', loadChildren: () => import('./modules/activities/activities.module').then(m => m.ActivitiesModule)},
     ]
   }

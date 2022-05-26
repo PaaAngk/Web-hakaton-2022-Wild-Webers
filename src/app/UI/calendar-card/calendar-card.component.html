@@ -1,36 +1,51 @@
 <!-- // тип, 1 -- лекция, 2 -- практика, 3 -- лаба -->
 <div
   *ngIf="scheduleItem"
-  [tuiHint]="tooltip"
+  [tuiHint]="scheduleHint"
   class="calendar-item calendar__practice-card"
-  
   title="">
     <p>{{ scheduleItem?.discipline }}</p>
     <hr>
     <p *ngIf="scheduleItem.subgroup_number != null " class="calendar-auditories">Подгруппа {{ scheduleItem.subgroup_number }}</p>
     <hr>
-    <p class="calendar-auditories">Ауд.<br>{{ scheduleItem?.auditories }}</p>
+    <p class="calendar-auditories" *ngIf="scheduleItem?.auditories!=null">Аудитория {{ scheduleItem?.auditories }}</p>
+    <p class="calendar-auditories" *ngIf="scheduleItem?.auditories==null">Аудитории нет</p>
 </div>
-  
-<ng-template #tooltip>
-  <div>
-      What is
-      <strong>love</strong>
-      ?
+
+<ng-template #scheduleHint>
+  <div *ngIf="scheduleItem?.auditories!=null">
+    Аудитория: <strong>{{scheduleItem?.auditories}}</strong>
   </div>
-  <div>Baby don't hurt me</div>
-  <div>Don't hurt me</div>
-  <div>No more...</div>
+  <div *ngIf="scheduleItem?.auditories==null">
+    Аудитории нет
+  </div>
+
+  <div *ngIf="scheduleItem?.teachers!=null">Преподаватель: <strong>{{scheduleItem?.teachers}}</strong></div>
+  <div *ngIf="scheduleItem?.teachers==null">Преподавателя нет<strong>{{scheduleItem?.teachers}}</strong></div>
 </ng-template>
 
-<ng-container *ngIf="activitiesItem">
-  <!-- // тип, 0 -- мероприятие, 1 -- проект, 3 -- перенос пары, 4 -- перенесенная пара -->
-  <div class="calendar-item" 
+
+<!-- // тип, 0 -- мероприятие, 1 -- проект, 3 -- перенос пары, 4 -- перенесенная пара -->
+<div 
+  *ngIf="activitiesItem"
+  class="calendar-item" 
+  [tuiHint]="activitiesHint"
   [ngClass]="{ 'calendar__activities-card': activitiesItem?.type == 0 ,'calendar__transfer-card': activitiesItem?.type == 3 || activitiesItem?.type == 4 , 'calendar__project-card': activitiesItem?.type == 1  }"
   title="">
-    <p>{{ activitiesItem?.description }}</p>
-    <p class="calendar-auditories">{{ activitiesItem?.auditories }}</p>
-  </div>
-</ng-container>
+    <p *ngIf="activitiesItem?.type==3">ПЕРЕНОС</p>
+    <p *ngIf="activitiesItem?.type!=3">{{ activitiesItem?.description }}</p>
+    <hr>
+    <div *ngIf="activitiesItem?.auditories!=null">Аудитория <strong>{{activitiesItem?.auditories}}</strong></div>
+    <div *ngIf="activitiesItem?.auditories==null">Аудитории нет<strong>{{activitiesItem?.auditories}}</strong></div>
+</div>
 
+<ng-template #activitiesHint>
+  <p *ngIf="activitiesItem?.type==3">{{ activitiesItem?.description }}</p>
+  <div *ngIf="activitiesItem?.auditories!=null">
+    Аудитория: <strong>{{activitiesItem?.auditories}}</strong>
+  </div>
+  <div *ngIf="activitiesItem?.auditories==null">
+    Аудитории нет
+  </div>
+</ng-template>
 <!-- [ngClass]="{ 'calendar__lab-card': scheduleItem?.type == 3 , 'calendar__practice-card': scheduleItem?.type == 2, 'calendar__lecture-card': scheduleItem?.type == 1  }" -->
