@@ -31,7 +31,18 @@
     {
       "name": "api-performance",
       "urls": [
-        "/schedule?group"
+        "**/schedule"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 100,
+        "maxAge": "10d"
+      }
+    },
+    {
+      "name": "mission-api",
+      "urls": [
+        "https://equable-dot-somersault.glitch.me/"
       ],
       "cacheConfig": {
         "strategy": "performance",
@@ -40,4 +51,5 @@
       }
     }
   ]
+
 }
