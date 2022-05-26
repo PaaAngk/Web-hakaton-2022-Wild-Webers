@@ -8,18 +8,22 @@
     <hr *ngIf="scheduleItem.subgroup_number != null ">
     <p *ngIf="scheduleItem.subgroup_number != null " class="calendar-auditories">Подгруппа {{ scheduleItem.subgroup_number }}</p>
     <hr>
-    <p class="calendar-auditories" *ngIf="scheduleItem?.auditories!=null">Аудитория {{ scheduleItem?.auditories }}</p>
-    <p class="calendar-auditories" *ngIf="scheduleItem?.auditories==null">Аудитории нет</p>
+    <i><p class="calendar-auditories" *ngIf="scheduleItem?.auditories!=null">Ауд. {{ scheduleItem?.auditories }}</p>
+    <p class="calendar-auditories" *ngIf="scheduleItem?.auditories==null">Ауд. нет</p></i>
 </div>
-
 <ng-template #scheduleHint>
+  <div><strong>{{ scheduleItem?.discipline }}</strong></div>
+  <div *ngIf="scheduleItem?.type==1"><i>Лекция</i></div>
+  <div *ngIf="scheduleItem?.type==2"><i>Практика</i></div>
+  <div *ngIf="scheduleItem?.type==3"><i>Лабораторная</i></div>
   <div *ngIf="scheduleItem?.auditories!=null">
-    Аудитория: <strong>{{scheduleItem?.auditories}}</strong>
+    Ауд.: <strong>{{scheduleItem?.auditories}}</strong>
   </div>
   <div *ngIf="scheduleItem?.auditories==null">
-    Аудитории нет
+    Ауд. нет
   </div>
-
+  <div *ngIf="scheduleItem?.groups != null ">Группа:  <strong>{{ scheduleItem?.groups }}</strong></div>
+  <div *ngIf="scheduleItem?.subgroup_number != null ">Подгруппа: {{ scheduleItem?.subgroup_number }}</div>
   <div *ngIf="scheduleItem?.teachers!=null">Преподаватель: <strong>{{scheduleItem?.teachers}}</strong></div>
   <div *ngIf="scheduleItem?.teachers==null">Преподавателя нет<strong>{{scheduleItem?.teachers}}</strong></div>
 </ng-template>
@@ -32,20 +36,28 @@
   [tuiHint]="activitiesHint"
   [ngClass]="{ 'calendar__activities-card': activitiesItem?.type == 0 ,'calendar__transfer-card': activitiesItem?.type == 3 || activitiesItem?.type == 4 , 'calendar__project-card': activitiesItem?.type == 1  }"
   title="">
-    <p *ngIf="activitiesItem?.type==3">ПЕРЕНОС</p>
-    <p *ngIf="activitiesItem?.type!=3">{{ activitiesItem?.description }}</p>
+
+    <!-- <p *ngIf="activitiesItem?.type!=3">{{ activitiesItem?.description }}</p> -->
+    <p >{{ activitiesItem?.description }}</p>
     <hr>
-    <div *ngIf="activitiesItem?.auditories!=null">Аудитория <strong>{{activitiesItem?.auditories}}</strong></div>
-    <div *ngIf="activitiesItem?.auditories==null">Аудитории нет<strong>{{activitiesItem?.auditories}}</strong></div>
+    <i><div *ngIf="activitiesItem?.auditories!=null">Ауд.: <strong>{{activitiesItem?.auditories}}</strong></div>
+    <div *ngIf="activitiesItem?.auditories==null">Ауд.: нет<strong>{{activitiesItem?.auditories}}</strong></div></i>
 </div>
 
 <ng-template #activitiesHint>
-  <p *ngIf="activitiesItem?.type==3">{{ activitiesItem?.description }}</p>
+  <div><strong>{{ activitiesItem?.description }}</strong></div>
+  <div *ngIf="activitiesItem?.type==1"><i>Проект</i></div>
+  <div *ngIf="activitiesItem?.type==3 || activitiesItem?.type==4"><i>Перенос пары</i></div>
+  <div *ngIf="activitiesItem?.type==0"><i>Мероприятие</i></div>
+  
   <div *ngIf="activitiesItem?.auditories!=null">
-    Аудитория: <strong>{{activitiesItem?.auditories}}</strong>
+    Ауд.: <strong>{{activitiesItem?.auditories}}</strong>
   </div>
   <div *ngIf="activitiesItem?.auditories==null">
-    Аудитории нет
+    Ауд.: нет
   </div>
+  <div *ngIf="activitiesItem?.groups != null ">Группа:  <strong>{{ activitiesItem?.groups }}</strong></div>
+  <div *ngIf="activitiesItem?.teachers!=null">Преподаватель: <strong>{{activitiesItem?.teachers}}</strong></div>
+  <div *ngIf="activitiesItem?.teachers==null">Преподавателя нет<strong>{{activitiesItem?.teachers}}</strong></div>
 </ng-template>
 <!-- [ngClass]="{ 'calendar__lab-card': scheduleItem?.type == 3 , 'calendar__practice-card': scheduleItem?.type == 2, 'calendar__lecture-card': scheduleItem?.type == 1  }" -->
