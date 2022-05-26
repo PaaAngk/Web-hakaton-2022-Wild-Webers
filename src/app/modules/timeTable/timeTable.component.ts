@@ -77,15 +77,15 @@ export class TimeTableComponent implements OnInit {
     this.updateData();
     this.schedulesService.listGroup.subscribe((data) => {
       this.itemsGroups = data;
-      //console.log(this.itemsGroups);
+      
     });
     this.schedulesService.listTeachers.subscribe((data) => {
       this.itemsTeachers = data;
-      //console.log(this.itemsTeachers);
+      
     });
     this.schedulesService.listAuditories.subscribe((data) => {
       this.itemsAuditories = data;
-      //console.log(this.itemsAuditories);
+      
       this.itemsAll = this.itemsGroups.concat(this.itemsTeachers,this.itemsAuditories);
       this.itemsAll.sort((a,b) => a > b ? 1 : -1 );
     });
@@ -264,7 +264,6 @@ export class TimeTableComponent implements OnInit {
   }
 
   filterActivities(arr: Array<Activities>, day: number, pair: number) {
-    //console.log(arr);
     return arr.filter( (el) => {
       var d=this.weekDays[day-1]
       var date: string ='' +d?.year +'-' +d?.formattedMonthPart +'-' +d?.formattedDayPart;
