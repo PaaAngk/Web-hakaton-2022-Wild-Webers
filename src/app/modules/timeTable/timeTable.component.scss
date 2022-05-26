@@ -1,3 +1,43 @@
+.calendar__lab-card{
+  order: 2;
+  background: rgb(244, 245, 177);
+  color: rgb(0, 0, 0);
+  padding-left: 7px;
+}
+.calendar__practice-card{
+  order: 2;
+  background: rgb(177, 245, 186);
+  color: rgb(0, 0, 0);
+  padding-left: 7px;
+}
+.calendar__lecture-card{
+  order: 2;
+  background: rgb(252, 206, 162);
+  color: rgb(0, 0, 0);
+  padding-left: 7px;
+}
+
+.calendar__project-card{
+  order: 2;
+  background: rgb(169, 182, 253);
+  color: rgb(0, 0, 0);
+  padding-left: 7px;
+}
+
+.calendar__activities-card{
+  order: 2;
+  background: rgb(220, 181, 247);
+  color: rgb(0, 0, 0);
+  padding-left: 7px;
+}
+
+
+.calendar__transfer-card{
+  order: 2;
+  background: rgb(255, 171, 171);
+  color: rgb(0, 0, 0);
+  padding-left: 7px;
+}
 
 
 
@@ -6,6 +46,8 @@
   width: max-content;
   margin-left: calc(var(--bs-gutter-x) * .5);
 }
+
+
 
 .calendar__blue-card{
   order: 2;
@@ -33,7 +75,6 @@
 .calendar {
   font-size: .9rem
 }
-
 
 .calendar .calendar-tools {
   display: -webkit-box;

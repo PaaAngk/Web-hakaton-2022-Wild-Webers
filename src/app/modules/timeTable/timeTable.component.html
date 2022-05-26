@@ -1,153 +1,873 @@
 <div class="container-xl mx-auto">
-	<div class="row justify-content-md-center">
-		<div class="col-md-auto mb-4 col-sm-12 card p-2 rounded-3">
-      <tui-combo-box
-      class="b-form"
-      [stringify]="stringify"
-      [(ngModel)]="value"
+  <div class="row justify-content-md-center">
+    <div class="col-md-auto mb-4 col-sm-12 card p-2 rounded-3">
+      <div class="row mb-2" >
+        <tui-combo-box
+          class="b-form"
+          [stringify]="stringify"
+          [(ngModel)]="value">
+          Общий поиск
+          <input tuiTextfield placeholder="Введите название"  />
+          <tui-data-list-wrapper
+              *tuiDataList
+              [items]="itemsAll | tuiFilterByInputWith : stringify"
+              [itemContent]="stringify | tuiStringifyContent">
+          </tui-data-list-wrapper>
+        </tui-combo-box>
+      </div>
+      <div class="row mb-2" >
+        <tui-select
+          class="control"
+          [(ngModel)]="valueGroups"
+        >
+          Группа
+          <custom-list *tuiDataList (setItemEvent)="selectGroup($event)" [items]="itemsGroups"></custom-list>
+        </tui-select>
+      </div>
+      <div class="row mb-2" >
+        <tui-select
+          class="control"
+          [(ngModel)]="valueTeachers"
+        >
+          Преподаватель
+          <custom-list *tuiDataList (setItemEvent)="selectTeachers($event)" [items]="itemsTeachers"></custom-list>
+        </tui-select>
+      </div>
+      <div class="row mb-2" >
+        <tui-select
+          class="control"
+          [(ngModel)]="valueAuditories"
+        >
+          Аудитория
+          <custom-list *tuiDataList (setItemEvent)="selectAuditories($event)" [items]="itemsAuditories"></custom-list>
+        </tui-select>
+      </div>
       
-  >
-      Общий поиск
-      <input
-          tuiTextfield
-          placeholder="Введите название"
-      />
-      <tui-data-list-wrapper
-          *tuiDataList
-          [items]="itemsAll | tuiFilterByInputWith : stringify"
-          [itemContent]="stringify | tuiStringifyContent"
-      ></tui-data-list-wrapper>
-  </tui-combo-box>
-			<div class="row mb-2">
-				<tui-select class="control" [(ngModel)]="valueGroups">
-					Группа
-					<custom-list *tuidatalist (setItemEvent)="selectGroup($event)" [items]="itemsGroups"></custom-list>
-				</tui-select>
-			</div>
-			<div class="row mb-2">
-				<tui-select class="control" [(ngModel)]="valueTeachers">
-					Преподаватель
-					<custom-list *tuidatalist (setItemEvent)="selectTeachers($event)" [items]="itemsTeachers"></custom-list>
-				</tui-select>
-			</div>
-			<div class="row mb-2">
-				<tui-select class="control" [(ngModel)]="valueAuditories">
-					Аудитория
-					<custom-list *tuidatalist (setItemEvent)="selectAuditories($event)" [items]="itemsAuditories"></custom-list>
-				</tui-select>
-			</div>
+      <div class="card shadow-lg mb-2 p-2">
+        <h6>Отображать:</h6>
+          <form [formGroup]="showCriteria" >
+            <div tuiGroup  orientation="vertical" class="group">
+                <tui-checkbox-labeled  style ="background: rgb(177, 245, 186);" class="tui-space_top-3 " contentAlign="right" formControlName="lessons" size="l">
+                  Занятия
+                </tui-checkbox-labeled>
+                <tui-checkbox-labeled style ="background: rgb(255, 171, 171);" class="tui-space_top-3" contentAlign="right"  formControlName="traffic"  size="l" >
+                  Перенос занятий
+                </tui-checkbox-labeled>
+                <tui-checkbox-labeled style ="background: rgb(169, 182, 253);" class="tui-space_top-3" contentAlign="right"  formControlName="projects"  size="l" (change)="updateData()">
+                  Проекты
+                </tui-checkbox-labeled>
+                <tui-checkbox-labeled style ="background: rgb(220, 181, 247);;" class="tui-space_top-3" contentAlign="right"   formControlName="events" size="l" (change)="updateData()">
+                  Мероприятия
+                </tui-checkbox-labeled>
+            </div>
+        </form>
+      </div>
+      <div class="card shadow-lg">
+        <tui-calendar
+          [value]="date"
+          (dayClick)="onDayClick($event)"
+        ></tui-calendar>
+      </div>
+    </div>
 
-			<div class="card shadow-lg mb-2 p-2">
-				<h6>Отображать:</h6>
-        <form [formGroup]="showCriteria" >
-          <div tuiGroup  orientation="vertical" class="group">
-              <tui-checkbox-block contentAlign="right" formControlName="lessons" size="l">
-                Занятия
-              </tui-checkbox-block>
-              <tui-checkbox-block contentAlign="right"  formControlName="traffic"  size="l" >
-                Перенос занятий
-              </tui-checkbox-block>
-              <tui-checkbox-block  contentAlign="right"  formControlName="projects"  size="l" (change)="updateData()">
-                Проекты
-              </tui-checkbox-block>
-              <tui-checkbox-block contentAlign="right"   formControlName="events" size="l" (change)="updateData()">
-                Мероприятия
-              </tui-checkbox-block>
+    <div class="col-xl mb-4 col-sm-12 rounded-3">
+      <tui-scrollbar>
+      <tui-loader
+        class="inline-flex tui-space_right-2"
+        [showLoader]="loadCompleted"
+        [inheritColor]="loadCompleted"
+        [overlay]="loadCompleted"
+      > 
+      <div class="calendar card p-2 shadow-lg">
+        <div class="d-flex mb-2 justify-content-between">
+          <div>         
+            <span *ngIf="valueGroups != ''" class="tui-text_body-xl ms-4" >Группа: {{valueGroups}}</span>
+            <span *ngIf="valueTeachers != ''" class="tui-text_body-xl ms-4" >Преподаватель: {{valueTeachers}}</span>
+            <span *ngIf="valueAuditories != ''" class="tui-text_body-xl ms-4" >Аудитория: {{valueAuditories}}</span>
           </div>
-      </form>
-			</div>
-			<div class="card shadow-lg">
-				<tui-calendar [value]="date" [(month)]="calendarMonth" (dayClick)="onDayClick($event)"></tui-calendar>
-			</div>
-		</div>
+          <div>
+            <span class="ms-4 tui-text_body-xl" >{{sheduleMonths}} {{ weekDays[0].day }}-{{ weekDays[6].day }}</span>
+          </div>
+          <div class="btn-group btn-group-sm" role="group" >
+            <button type="button" class="btn btn-outline-primary" (click)="changeWeekToPrevious()">Предыдущая
+            </button>
+            <button type="button" class="btn btn-outline-primary" (click)="changeWeekToNext()">Следующая</button>
+          </div>         
 
+        </div> 
+        <div class="row-auto">
+          <table class="week">
+            <thead><tr>
+              <th width="5%" >
 
-		<div class="col-xl mb-4 col-sm-12 rounded-3">
-			<tui-scrollbar>
-				<tui-loader class="inline-flex tui-space_right-2" [showLoader]="loadCompleted" [inheritColor]="loadCompleted" [overlay]="loadCompleted">
-					<div class="calendar card p-2 shadow-lg">
-						<div class="d-flex mb-2 justify-content-between">
-							<div>
-								<span *ngIf="valueGroups != ''" class="tui-text_body-xl ms-4">Группа:
-									{{valueGroups}}</span>
-								<span *ngIf="valueTeachers != ''" class="tui-text_body-xl ms-4">Преподаватель:
-									{{valueTeachers}}</span>
-								<span *ngIf="valueAuditories != ''" class="tui-text_body-xl ms-4">Аудитория:
-									{{valueAuditories}}</span>
-							</div>
-							<div>
-								<span class="ms-4 tui-text_body-xl">{{sheduleMonths}}</span>
-							</div>
-							<div class="btn-group btn-group-sm" role="group">
-								<button type="button" class="btn btn-outline-primary" (click)="changeWeekToPrevious()">Предыдущая
-								</button>
-								<button type="button" class="btn btn-outline-primary" (click)="changeWeekToNext()">Следующая</button>
-							</div>
+              </th>
+              <th width="13%">
+                <div class="weekday-field">Понедельник</div>
+                <div class="day-field">{{ weekDays[0].day }}</div>
+              </th>
+              <th width="13%">
+                <div class="weekday-field">Вторник</div>
+                <div class="day-field">{{ weekDays[1].day }}</div>
+              </th>
+              <th width="13%" >
+                <div class="weekday-field">Среда</div>
+                <div class="day-field">{{ weekDays[2].day }}</div>
+              </th>
+              <th width="13%">
+                <div class="weekday-field">Четверг</div>
+                <div class="day-field">{{ weekDays[3].day }}</div>
+              </th>
+              <th width="13%">
+                <div class="weekday-field">Пятница</div>
+                <div class="day-field">{{ weekDays[4].day }}</div>
+              </th>
+              <th width="13%">
+                <div class="weekday-field">Суббота</div>
+                <div class="day-field">{{ weekDays[5].day }}</div>
+              </th>
+              <th width="13%">
+                <div class="weekday-field">Воскресенье</div>
+                <div class="day-field">{{ weekDays[6].day }}</div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>        
+              <tr>
+                <th class="hour-field">1</th>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 1, 1) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
 
-						</div>
-						<div class="row-auto">
-							<table class="week">
-								<thead>
-									<tr>
-										<th width="5%"></th>
-										<th width="13%">
-											<div class="weekday-field">Понедельник</div>
-											<div class="day-field">{{ weekDays[0].day }}</div>
-										</th>
-										<th width="13%">
-											<div class="weekday-field">Вторник</div>
-											<div class="day-field">{{ weekDays[1].day }}</div>
-										</th>
-										<th width="13%">
-											<div class="weekday-field">Среда</div>
-											<div class="day-field">{{ weekDays[2].day }}</div>
-										</th>
-										<th width="13%">
-											<div class="weekday-field">Четверг</div>
-											<div class="day-field">{{ weekDays[3].day }}</div>
-										</th>
-										<th width="13%">
-											<div class="weekday-field">Пятница</div>
-											<div class="day-field">{{ weekDays[4].day }}</div>
-										</th>
-										<th width="13%">
-											<div class="weekday-field">Суббота</div>
-											<div class="day-field">{{ weekDays[5].day }}</div>
-										</th>
-										<th width="13%">
-											<div class="weekday-field">Воскресенье</div>
-											<div class="day-field">{{ weekDays[6].day }}</div>
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-									<ng-container *ngFor="let pair of listPairs ">
-										<tr>
-											<th class="hour-field">{{pair}}</th>
-											<ng-container *ngFor="let day of listDays">
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 1, 1)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
 
-												<td>
-													<div class="events-wrapper">
-														<ng-container *ngFor="let i of filterSchedules(tableGroupData, day, pair) ">
-															<app-calendar-card class="event event-end" [scheduleItem]="i"></app-calendar-card>
-														</ng-container>
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 2, 1) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
 
-														<ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, day, pair)">
-															<app-calendar-card class="event event-end" [activitiesItem]="y"></app-calendar-card>
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 2, 1)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
 
-														</ng-container>
-													</div>
-												</td>
-											</ng-container>
-										</tr>
-									</ng-container>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</tui-loader>
-			</tui-scrollbar>
-		</div>
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 3, 1) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
 
-	</div>
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 3, 1)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 4, 1) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 4, 1)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 5, 1) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 5, 1)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 6, 1) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 6, 1)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 7, 1) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 7, 1)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+              </tr>
+              <tr>
+                <th class="hour-field">2</th>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 1, 2) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 1, 2)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 2, 2) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 2, 2)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 3, 2) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 3, 2)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 4, 2) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 4, 2)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 5, 2) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 5, 2)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 6, 2) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 6, 2)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 7, 2) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 7, 2)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+              </tr>
+              <tr>
+                <th class="hour-field">3</th>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 1, 3) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 1, 3)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 2, 3) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 2, 3)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 3, 3) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 3, 3)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 4, 3) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 4, 3)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 5, 3) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 5, 3)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 6, 3) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 6, 3)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData,7, 3) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities,7, 3)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                  
+              </tr>
+              <tr>
+                <th class="hour-field">4</th>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData,1, 4) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities,1, 4)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 2, 4) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 2, 4)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 3, 4) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 3, 4)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 4, 4) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 4, 4)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 5, 4) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 5, 4)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 6, 4) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 6, 4)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 7, 4) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 7, 4)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="events-wrapper">
+                        <ng-container *ngFor="let i of filterSchedules(tableGroupData, 8, 4) ">
+                          <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                        </ng-container>
+
+                        <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 8, 4)">
+                          <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                        </ng-container>
+                      </div>
+                    </td>
+                  
+              </tr>
+              <tr>
+                <th class="hour-field">5</th>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData,1, 5) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities,1, 5)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 2, 5) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 2, 5)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 3, 5) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 3, 5)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 4, 5) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 4, 5)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 5, 5) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 5, 5)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 6, 5) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 6, 5)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 7, 5) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 7, 5)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 8, 5) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 8, 5)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                
+              </tr>
+              <tr>
+                <th class="hour-field">6</th>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData,1, 6) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities,1, 6)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 2, 6) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 2, 6)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 3, 6) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 3, 6)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 4, 6) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 4, 6)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 5,6) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 5, 6)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 6, 6) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 6, 6)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 7, 6) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 7, 6)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 8, 6) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 8, 6)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                
+              </tr>
+              <tr>
+                <th class="hour-field">7</th>
+                
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData,1, 7) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities,1, 7)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 2, 7) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 2, 7)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 3, 7) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 3, 7)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 4, 7) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 4, 7)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 5, 7) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 5, 7)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 6, 7) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 6, 7)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 7, 7) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 7, 7)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 8, 7) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 8, 7)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                
+              </tr>
+              <tr>
+                <th class="hour-field">8</th>
+               
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData,1, 8) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities,1, 8)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 2, 8) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 2, 8)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 3, 8) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 3, 8)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 4, 8) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 4, 8)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 5, 8) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 5,8)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 6, 8) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 6, 8)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 7, 8) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 7, 8)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="events-wrapper">
+                      <ng-container *ngFor="let i of filterSchedules(tableGroupData, 8, 8) ">
+                        <app-calendar-card class="event event-end" [scheduleItem]="i" ></app-calendar-card>
+                      </ng-container>
+                      <ng-container *ngFor="let y of filterActivities(tableGroupDataActivities, 8, 8)">
+                        <app-calendar-card class="event event-end" [activitiesItem]="y" ></app-calendar-card>
+
+                      </ng-container>
+                    </div>
+                  </td>
+                
+              </tr>
+           
+          </tbody>
+        </table>
+      </div>
+    </div>
+    </tui-loader>
+  </tui-scrollbar>
+  </div>
+
+</div>
 </div>

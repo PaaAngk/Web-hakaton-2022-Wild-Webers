@@ -11,7 +11,7 @@
     <p class="calendar-auditories" *ngIf="scheduleItem?.auditories!=null">Ауд.<br>{{ scheduleItem?.auditories }}</p>
     <p class="calendar-auditories" *ngIf="scheduleItem?.auditories==null">Аудитории нет</p>
 </div>
-  
+
 <ng-template #scheduleHint>
   <div *ngIf="scheduleItem?.auditories!=null">
     Аудитория: <strong>{{scheduleItem?.auditories}}</strong>
@@ -19,7 +19,6 @@
   <div *ngIf="scheduleItem?.auditories==null">
     Аудитории нет
   </div>
-
 
   <div *ngIf="scheduleItem?.teachers!=null">Преподаватель: <strong>{{scheduleItem?.teachers}}</strong></div>
   <div *ngIf="scheduleItem?.teachers==null">Преподавателя нет<strong>{{scheduleItem?.teachers}}</strong></div>
