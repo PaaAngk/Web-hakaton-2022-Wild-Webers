@@ -29,14 +29,19 @@
                 "glob": "**/*",
                 "input": "node_modules/@taiga-ui/icons/src",
                 "output": "assets/taiga-ui/icons"
-              }
+              },
+              "src/manifest.webmanifest",
+              "src/manifest.webmanifest",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "node_modules/@taiga-ui/core/styles/taiga-ui-global.less",
               "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -48,8 +53,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "6kb",
+                  "maximumError": "8kb"
                 }
               ],
               "fileReplacements": [
@@ -98,7 +103,10 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest",
+              "src/manifest.webmanifest",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.css"

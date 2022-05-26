@@ -167,7 +167,6 @@ export class TimeTableComponent implements OnInit {
       this.valueGroups = params['group']==undefined? '':params['group'];
       this.valueTeachers = params['teachers']==undefined? '':params['teachers'];
       this.valueAuditories = params['auditories']==undefined? '':params['auditories'];
-      console.log(this.valueTeachers)
       this.updateData();
     });
     this.showCriteria.value.projects=false

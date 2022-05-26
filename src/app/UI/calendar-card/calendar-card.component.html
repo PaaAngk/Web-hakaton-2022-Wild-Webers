@@ -5,7 +5,7 @@
   class="calendar-item calendar__practice-card"
   title="">
     <p>{{ scheduleItem?.discipline }}</p>
-    <hr>
+    <hr *ngIf="scheduleItem.subgroup_number != null ">
     <p *ngIf="scheduleItem.subgroup_number != null " class="calendar-auditories">Подгруппа {{ scheduleItem.subgroup_number }}</p>
     <hr>
     <i><p class="calendar-auditories" *ngIf="scheduleItem?.auditories!=null">Ауд. {{ scheduleItem?.auditories }}</p>

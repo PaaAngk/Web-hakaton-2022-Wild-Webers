@@ -19,7 +19,7 @@ export class ApiService {
   }
 
   get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
-    return this.http.get(`${environment.api_url}${path}`, { params })
+    return this.http.get('http://localhost:3000'+path, { params })
       .pipe(catchError(this.formatErrors));
   }
 }
