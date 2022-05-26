@@ -72,18 +72,18 @@
       </div>
     </div>
 
-    <div class="col-xl mb-4 col-sm-12 rounded-3">
-      <tui-scrollbar>
+    <div class="col-xl mb-4 col-sm-12 rounded-3 d-block">
+      <!-- <tui-scrollbar> -->
       <tui-loader
         class="inline-flex tui-space_right-2"
         [showLoader]="loadCompleted"
         [inheritColor]="loadCompleted"
         [overlay]="loadCompleted"
       >
-	  <div class="alert alert-warning" *ngIf="cantLoad" role="alert">
-		Не удалось загрузить данные попробуйте перезагрузить сайт
-	  </div>
-      <div class="calendar card p-2 shadow-lg">
+      <div  class="alert alert-warning" *ngIf="cantLoad" role="alert">
+      Не удалось загрузить данные попробуйте перезагрузить сайт
+      </div>
+      <div class="calendar card p-2 shadow-lg" >
         <div class="d-flex mb-2 justify-content-between">
           <div>         
             <span *ngIf="valueGroups != ''" class="tui-text_body-xl ms-4" >Группа: {{valueGroups}}</span>
@@ -100,8 +100,8 @@
           </div>         
 
         </div> 
-        <div class="row-auto">
-          <table class="week">
+        
+          <table class="week" width="100%">
             <thead><tr>
               <th width="5%" >
 
@@ -869,9 +869,8 @@
           </tbody>
         </table>
       </div>
-    </div>
     </tui-loader>
-  </tui-scrollbar>
+  <!-- </tui-scrollbar> -->
   </div>
 
 </div>
