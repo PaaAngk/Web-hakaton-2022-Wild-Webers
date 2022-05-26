@@ -1,5 +1,7 @@
 # Дикие вебщики :)
-
+```
+https://paaangk.github.io/Web-hakaton-2022-Wild-Webers
+```
 ### Установить Node js, Visual Studio Code
 
 ### В папке проекта вызвать терминал VS Code и ввести:
