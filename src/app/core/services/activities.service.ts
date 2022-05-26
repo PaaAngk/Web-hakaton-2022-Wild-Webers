@@ -15,11 +15,6 @@ export class ActivitiesService {
 
   constructor(private apiService: ApiService) {}
 
-  // get(): Observable<Activities> {
-  //   return this.apiService.get('/activities')
-  //     .pipe(map((data: {activities: Activities}) => data.activities));
-  // }
-
   get(day: string): Observable<Activities[]> {
     return this.apiService
       .get('/activities?' + 'dt=' + day + '&_sort=dt,pair&_order=asc')
@@ -31,7 +26,8 @@ export class ActivitiesService {
       );
   }
 
-  getByGroup(group: string,week_begining?: TuiDay): Observable<Activities[]> {
+
+  getParametrDay(week_begining?: TuiDay):string{
     var param:string='dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
     week_begining=week_begining?.append(new TuiDay(0,0,1));
     param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
@@ -46,9 +42,35 @@ export class ActivitiesService {
     week_begining=week_begining?.append(new TuiDay(0,0,1));
     param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
     week_begining=week_begining?.append(new TuiDay(0,0,1));
-    
+    return param
+  }
+
+  getActivitiesByGroup(group: string,showProjects:boolean,showEvents:boolean,week_begining?: TuiDay): Observable<Activities[]> {
+    var param:string='';
+    //отображать проекты
+    if(showProjects){
+      if(showEvents){
+        //показывать мероприятия и проекты
+        param='type=0&type=1&type=3&type=4&'
+      }else{
+        //только проекты показывать
+        param='type=1&type=3&type=4&'
+      }
+    }else {
+      //не отображать проекты
+      if(showEvents){
+        //только мепроприятия
+        param='type=0&type=3&type=4&'
+      }else{
+        //показывать активити только с переносами
+        param='type=3&type=4&'
+      }
+    }
+    // console.log(param)
+    // console.log(showProjects)
+    // console.log(showEvents)
     return this.apiService
-      .get('/activities?groups_like=' +group+'&'+ param + '_sort=dt,pair&_order=asc')
+      .get('/activities?'+param+'groups_like=' +group+'&'+ this.getParametrDay(week_begining) + '_sort=dt,pair&_order=asc')
       .pipe(
         map(
           (data: { schedules: Array<Activities> }) =>
@@ -57,24 +79,32 @@ export class ActivitiesService {
       );
   }
 
-  getByTeachers(teachers: string,week_begining?: TuiDay): Observable<Activities[]> {
-    var param:string='dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
-    week_begining=week_begining?.append(new TuiDay(0,0,1));
-    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
-    week_begining=week_begining?.append(new TuiDay(0,0,1));
-    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
-    week_begining=week_begining?.append(new TuiDay(0,0,1));
-    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
-    week_begining=week_begining?.append(new TuiDay(0,0,1));
-    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
-    week_begining=week_begining?.append(new TuiDay(0,0,1));
-    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
-    week_begining=week_begining?.append(new TuiDay(0,0,1));
-    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
-    week_begining=week_begining?.append(new TuiDay(0,0,1));
-    
+  getActivitiesByTeachers(group: string,showProjects:boolean,showEvents:boolean,week_begining?: TuiDay): Observable<Activities[]> {
+    var param:string='';
+    //отображать проекты
+    if(showProjects){
+      if(showEvents){
+        //показывать мероприятия и проекты
+        param='type=0&type=1&type=3&type=4&'
+      }else{
+        //только проекты показывать
+        param='type=1&type=3&type=4&'
+      }
+    }else {
+      //не отображать проекты
+      if(showEvents){
+        //только мепроприятия
+        param='type=0&type=3&type=4&'
+      }else{
+        //показывать активити только с переносами
+        param='type=3&type=4&'
+      }
+    }
+    // console.log(param)
+    // console.log(showProjects)
+    // console.log(showEvents)
     return this.apiService
-      .get('/activities?teachers_like=' +teachers+'&'+ param + '_sort=dt,pair&_order=asc')
+      .get('/activities?'+param+'teachers_like=' +group+'&'+ this.getParametrDay(week_begining) + '_sort=dt,pair&_order=asc')
       .pipe(
         map(
           (data: { schedules: Array<Activities> }) =>
@@ -83,24 +113,33 @@ export class ActivitiesService {
       );
   }
 
-  getByAuditories(auditories: string,week_begining?: TuiDay): Observable<Activities[]> {
-    var param:string='dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
-    week_begining=week_begining?.append(new TuiDay(0,0,1));
-    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
-    week_begining=week_begining?.append(new TuiDay(0,0,1));
-    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
-    week_begining=week_begining?.append(new TuiDay(0,0,1));
-    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
-    week_begining=week_begining?.append(new TuiDay(0,0,1));
-    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
-    week_begining=week_begining?.append(new TuiDay(0,0,1));
-    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
-    week_begining=week_begining?.append(new TuiDay(0,0,1));
-    param=param+'dt=' +week_begining?.year+'-'+week_begining?.formattedMonthPart+'-'+week_begining?.formattedDayPart+'&';
-    week_begining=week_begining?.append(new TuiDay(0,0,1));
-    
+
+  getActivitiesByAuditories(group: string,showProjects:boolean,showEvents:boolean,week_begining?: TuiDay): Observable<Activities[]> {
+    var param:string='';
+    //отображать проекты
+    if(showProjects){
+      if(showEvents){
+        //показывать мероприятия и проекты
+        param='type=0&type=1&type=3&type=4&'
+      }else{
+        //только проекты показывать
+        param='type=1&type=3&type=4&'
+      }
+    }else {
+      //не отображать проекты
+      if(showEvents){
+        //только мепроприятия
+        param='type=0&type=3&type=4&'
+      }else{
+        //показывать активити только с переносами
+        param='type=3&type=4&'
+      }
+    }
+    // console.log(param)
+    // console.log(showProjects)
+    // console.log(showEvents)
     return this.apiService
-      .get('/activities?auditories_like=' +auditories+'&'+ param + '_sort=dt,pair&_order=asc')
+      .get('/activities?'+param+'auditories_like=' +group+'&'+ this.getParametrDay(week_begining) + '_sort=dt,pair&_order=asc')
       .pipe(
         map(
           (data: { schedules: Array<Activities> }) =>
@@ -108,4 +147,6 @@ export class ActivitiesService {
         )
       );
   }
+
+  
 }
