@@ -8,7 +8,7 @@
     <hr>
     <p *ngIf="scheduleItem.subgroup_number != null " class="calendar-auditories">Подгруппа {{ scheduleItem.subgroup_number }}</p>
     <hr>
-    <p class="calendar-auditories" *ngIf="scheduleItem?.auditories!=null">Ауд.<br>{{ scheduleItem?.auditories }}</p>
+    <p class="calendar-auditories" *ngIf="scheduleItem?.auditories!=null">Аудитория {{ scheduleItem?.auditories }}</p>
     <p class="calendar-auditories" *ngIf="scheduleItem?.auditories==null">Аудитории нет</p>
 </div>
 

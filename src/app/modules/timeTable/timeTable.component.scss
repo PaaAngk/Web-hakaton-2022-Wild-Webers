@@ -1,3 +1,61 @@
+
+.half-background_discipline:before{
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 8%;
+  height: 2.6rem;
+  z-index: 10000;
+  border-radius: var(--tui-radius-m) 0 0 var(--tui-radius-m);
+  background-color: rgb(177, 245, 186);
+}
+
+.half-background_transfer:before{
+  content: "";
+  position: absolute;
+  top: 3.34rem;;
+  left: 0;
+  width: 8%;
+  height: 2.6rem;
+  z-index: 10000;
+  border-radius: var(--tui-radius-m) 0 0 var(--tui-radius-m);
+  background: rgb(255, 171, 171);
+}
+
+.half-background_proj:before{
+  content: "";
+  position: absolute;
+  top: 6.34rem;
+  left: 0;
+  width: 8%;
+  height: 2.6rem;
+  z-index: 10000;
+  border-radius: var(--tui-radius-m) 0 0 var(--tui-radius-m);
+  background: rgb(169, 182, 253);
+}
+
+.half-background_activ:before{
+  content: "";
+  position: absolute;
+  top: 9.34rem;
+  left: 0;
+  width: 8%;
+  height: 2.6rem;
+  z-index: 10000;
+  border-radius: var(--tui-radius-m) 0 0 var(--tui-radius-m);
+  background: rgb(220, 181, 247);
+}
+
+.filter{
+  padding: 0.75rem;
+  width: 100%;
+  max-height:56rem;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255);
+}
+
+
 .calendar__lab-card{
   order: 2;
   background: rgb(244, 245, 177);
