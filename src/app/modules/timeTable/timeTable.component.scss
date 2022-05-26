@@ -64,22 +64,9 @@
   background-color: rgba(255, 255, 255);
 }
 
-
-.calendar__lab-card{
-  order: 2;
-  background: rgb(244, 245, 177);
-  color: rgb(0, 0, 0);
-  padding-left: 7px;
-}
 .calendar__practice-card{
   order: 2;
   background: rgb(177, 245, 186);
-  color: rgb(0, 0, 0);
-  padding-left: 7px;
-}
-.calendar__lecture-card{
-  order: 2;
-  background: rgb(252, 206, 162);
   color: rgb(0, 0, 0);
   padding-left: 7px;
 }
@@ -106,36 +93,9 @@
   padding-left: 7px;
 }
 
-
-
-
 .filter{
   width: max-content;
   margin-left: calc(var(--bs-gutter-x) * .5);
-}
-
-
-
-.calendar__blue-card{
-  order: 2;
-  background: rgb(199, 207, 245);
-  color: rgb(27, 7, 99);
-  padding-left: 7px;
-}
-
-.calendar__green-card{
-  order: 2;
-  background: rgb(199, 245, 217);
-  color: rgb(11, 65, 33);
-  padding-left: 7px;
-}
-
-
-.calendar__red-card{
-  order: 2;
-  background: rgb(199, 245, 217);
-  color: rgb(11, 65, 33);
-  padding-left: 7px;
 }
 
 // Calendar
@@ -156,32 +116,6 @@
 .calendar .calendar-tools .calendar-heading {
   font-size: 1.4rem;
   font-weight: 700
-}
-
-@media(max-width:992px) {
-  .calendar .calendar-tools {
-      -webkit-box-orient: vertical;
-      -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-      flex-direction: column
-  }
-
-  .calendar .calendar-tools .calendar-heading {
-      text-align: center;
-      -webkit-box-ordinal-group: 0;
-      -ms-flex-order: -1;
-      order: -1
-  }
-
-  .calendar .calendar-tools>.btn-group {
-      -webkit-transform: scale(.9);
-      transform: scale(.9)
-  }
-}
-
-.calendar .calendar-tools .select-wrapper {
-  width: 100px;
-  margin-right: 20px
 }
 
 .calendar table {
@@ -428,57 +362,5 @@
   width: 92px
 }
 
-.color-dropdown-menu.animation,
-.color-dropdown-menu.show {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap
-}
 
-.color-dropdown-menu>li i {
-  pointer-events: none
-}
 
-.color-dropdown-menu>li:first-child,
-.color-dropdown-menu>li:first-child .dropdown-item {
-  border-radius: 0;
-  border-top-left-radius: .5rem
-}
-
-.color-dropdown-menu>li:nth-child(2) .dropdown-item {
-  border-radius: 0;
-  border-top-right-radius: .5rem !important
-}
-
-.color-dropdown-menu>li:last-child .dropdown-item {
-  border-radius: 0;
-  border-bottom-left-radius: .5rem !important
-}
-
-.was-validated .form-outline .form-control.calendar-invalid-input,
-.was-validated .form-outline .form-control.calendar-invalid-input~.form-notch .form-notch-leading,
-.was-validated .form-outline .form-control.calendar-invalid-input~.form-notch .form-notch-middle,
-.was-validated .form-outline .form-control.calendar-invalid-input~.form-notch .form-notch-trailing {
-  border-color: #00b74a
-}
-
-.was-validated .form-outline .form-control.calendar-invalid-input~.form-label {
-  color: #00b74a
-}
-
-.was-validated .form-outline .form-control.calendar-invalid-input {
-  margin-bottom: 0;
-  border-color: #f93154
-}
-
-.was-validated .form-outline .form-control.calendar-invalid-input~.form-notch .form-notch-leading,
-.was-validated .form-outline .form-control.calendar-invalid-input~.form-notch .form-notch-middle,
-.was-validated .form-outline .form-control.calendar-invalid-input~.form-notch .form-notch-trailing {
-  border-color: #f93154
-}
-
-.was-validated .form-outline .form-control.calendar-invalid-input~.form-label {
-  color: #f93154
-}
