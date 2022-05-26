@@ -186,6 +186,7 @@ export class TimeTableComponent implements OnInit {
   ngAfterContentChecked(){}
 
   updateData() {
+    this.cantLoad = false
     var date:string= ''+this.weekStartDate?.year+'-'+this.weekStartDate?.formattedMonthPart+'-'+this.weekStartDate?.formattedDayPart;
     //если выбрана группа
     if(this.valueGroups!=''){

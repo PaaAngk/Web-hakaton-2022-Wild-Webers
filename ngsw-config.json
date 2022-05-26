@@ -40,9 +40,20 @@
       }
     },
     {
-      "name": "mission-api",
+      "name": "schedules-api",
       "urls": [
-        "https://equable-dot-somersault.glitch.me/"
+        "http://localhost:3000/schedules"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 100,
+        "maxAge": "10d"
+      }
+    },
+    {
+      "name": "activities-api",
+      "urls": [
+        "http://localhost:3000/activities"
       ],
       "cacheConfig": {
         "strategy": "performance",

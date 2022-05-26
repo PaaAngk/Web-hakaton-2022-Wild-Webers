@@ -19,7 +19,9 @@ export class ApiService {
   }
 
   get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
+
     return this.http.get('https://rain-harsh-zebu.glitch.me'+path, { params })
+
       .pipe(catchError(this.formatErrors));
   }
 }
