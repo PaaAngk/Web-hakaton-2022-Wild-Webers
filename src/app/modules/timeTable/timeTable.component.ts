@@ -4,6 +4,8 @@ import { Schedules } from './../../core/modules/schedules.model';
 import { SchedulesService } from 'src/app/core/services';
 import { elementAt, Observable, Observer } from 'rxjs';
 import { TuiDay, TuiDayOfWeek,TuiMonth } from '@taiga-ui/cdk';
+import { ViewEncapsulation} from '@angular/core';
+import {TUI_TEXTFIELD_APPEARANCE, tuiCheckboxOptionsProvider} from '@taiga-ui/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {TuiCheckboxLabeledModule} from '@taiga-ui/kit';
 import {
@@ -19,7 +21,9 @@ import { ActivitiesService } from 'src/app/core/services/activities.service';
 @Component({
   selector: 'app-timeTable',
   templateUrl: './timeTable.component.html',
-  styleUrls: ['./timeTable.component.scss']
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./timeTable.component.scss'],
+  
 })
 export class TimeTableComponent implements OnInit {
   weekDays: TuiDay[] = [];
