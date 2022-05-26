@@ -17,7 +17,7 @@ import {TuiCheckboxBlockModule} from '@taiga-ui/kit';
 
 import {TuiScrollbarModule, TuiHintModule } from '@taiga-ui/core';
 import { CalendarCardComponent } from './../../UI/calendar-card/calendar-card.component';
-import {TuiLetModule} from '@taiga-ui/cdk';
+import {TuiLetModule, TuiForModule} from '@taiga-ui/cdk';
 import { TuiFilterByInputPipeModule, TuiComboBoxModule} from '@taiga-ui/kit';
 
 @NgModule({
@@ -39,6 +39,7 @@ import { TuiFilterByInputPipeModule, TuiComboBoxModule} from '@taiga-ui/kit';
     TuiFilterModule,TuiComboBoxModule,TuiFilterByInputPipeModule,
     TuiLetModule,TuiCheckboxBlockModule,TuiScrollbarModule,
     TuiHintModule,
+    TuiForModule,
   ],
   declarations: [
     TimeTableComponent,

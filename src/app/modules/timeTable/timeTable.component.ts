@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Schedules } from './../../core/modules/schedules.model';
 import { SchedulesService } from 'src/app/core/services';
-import { elementAt } from 'rxjs';
+import { elementAt, Observable, Observer } from 'rxjs';
 import { TuiDay, TuiDayOfWeek,TuiMonth } from '@taiga-ui/cdk';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {TuiCheckboxLabeledModule} from '@taiga-ui/kit';
@@ -19,10 +19,7 @@ import { ActivitiesService } from 'src/app/core/services/activities.service';
 @Component({
   selector: 'app-timeTable',
   templateUrl: './timeTable.component.html',
-  styleUrls: ['./timeTable.component.scss'],
-
-  changeDetection: ChangeDetectionStrategy.OnPush,
-
+  styleUrls: ['./timeTable.component.scss']
 })
 export class TimeTableComponent implements OnInit {
   weekDays: TuiDay[] = [];
@@ -36,19 +33,15 @@ export class TimeTableComponent implements OnInit {
   valueGroups:string = '';
   valueTeachers:string = '';
   valueAuditories:string = '';
-  
-  // showProjects:boolean=false;
-  // showEvents:boolean=false;
 
   value = null;
-
-    readonly stringify = (item: string): string =>
-        `${item}`;
+    readonly stringify = (item: string): string =>`${item}`;
 
   itemsAll: string[] = [];
   itemsCategory: number[]=[];
 
   tableGroupData: Array<Schedules> =[]
+  
   tableGroupDataActivities: Array<Activities> =[]
 
   selectedGroup:string ='';
@@ -65,7 +58,7 @@ export class TimeTableComponent implements OnInit {
 "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
   sheduleMonths: string='';
 
-
+  cantLoad = false;
   showCriteria:FormGroup;
  
 
@@ -103,26 +96,25 @@ export class TimeTableComponent implements OnInit {
 
   selectGroup(item: string) {
     this.selectedGroup = item;
-    this.updateData();
+    this.router.navigate([], { queryParams: { group: item },relativeTo: this.activatedRoute });
     this.valueTeachers =''
     this.valueAuditories =''
-    //console.log(this.valueGroups+"222")
   }
 
   selectTeachers(item: string) {
     this.selectedGroup = item;
+    this.router.navigate([], { queryParams: { teachers: item },relativeTo: this.activatedRoute });
     this.updateData();
     this.valueGroups =''
     this.valueAuditories =''
-    //console.log(this.valueGroups+"222")
   }
 
   selectAuditories(item: string) {
     this.selectedGroup = item;
+    this.router.navigate([], { queryParams: { auditories: item },relativeTo: this.activatedRoute });
     this.updateData();
     this.valueGroups =''
     this.valueTeachers =''
-    //console.log(this.valueGroups+"222")
   }
 
   onDayClick(day: TuiDay): void {
@@ -171,7 +163,13 @@ export class TimeTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.valueGroups = params['group']==undefined? '':params['group'];
+      this.valueTeachers = params['teachers']==undefined? '':params['teachers'];
+      this.valueAuditories = params['auditories']==undefined? '':params['auditories'];
+      console.log(this.valueTeachers)
+      this.updateData();
+    });
     this.showCriteria.value.projects=false
     this.showCriteria.value.events=false
   }
@@ -182,11 +180,9 @@ export class TimeTableComponent implements OnInit {
   changeWeekToPrevious(){
     this.onDayClick(this.weekDays[0].append(new TuiDay(0,0,7),true));
   }
+  ngAfterContentChecked(){}
 
   updateData() {
-    // console.log("dfg")
-    // console.log(this.showProjects)
-    // console.log(this.showEvents)
     var date:string= ''+this.weekStartDate?.year+'-'+this.weekStartDate?.formattedMonthPart+'-'+this.weekStartDate?.formattedDayPart;
     //если выбрана группа
     if(this.valueGroups!=''){
@@ -194,16 +190,19 @@ export class TimeTableComponent implements OnInit {
       //получаем занятия 
       this.schedulesService.getByGroup(this.valueGroups,date.toString()).subscribe(
         data => {
-          this.tableGroupData=data
+          this.tableGroupData=data,
           this.loadCompleted = false
-        },
+        }
       );
       //получаем активити 
       this.activitiesService.getActivitiesByGroup(this.valueGroups,this.showCriteria.value.projects,this.showCriteria.value.events,this.weekStartDate).subscribe(
         (data) => {
           this.tableGroupDataActivities = data,
-          this.loadCompleted = false
-      });
+          this.loadCompleted = false,
+          this.ngAfterContentChecked()
+          },
+          (error)=>{this.cantLoad = true, this.loadCompleted = false, this.tableGroupData=[]}
+      );
     }
     //если выбран препод
     else if (this.valueTeachers!=''){
@@ -220,7 +219,9 @@ export class TimeTableComponent implements OnInit {
         (data) => {
           this.tableGroupDataActivities = data,
           this.loadCompleted = false
-      });
+        },
+        (error)=>{this.cantLoad = true, this.loadCompleted = false, this.tableGroupData=[]}
+      );
     }
     //если выбрана аудитория
     else if (this.valueAuditories!=''){
@@ -237,14 +238,24 @@ export class TimeTableComponent implements OnInit {
         (data) => {
           this.tableGroupDataActivities = data,
           this.loadCompleted = false
-      });
+        },
+        (error)=>{this.cantLoad = true, this.loadCompleted = false, this.tableGroupData=[]}
+      );
     }
+    
   }
 
-  filterSchedules(arr: Array<Schedules>, day: number, pair: number) {
-    //console.log(this.tableGroupData)
-    return arr.filter(function (el) {
+  filterSchedules( day: number, pair: number) {
+    return this.tableGroupData.filter(function (el) {
       return el.day == day && el.pair == pair;
+    });
+  }
+
+  filterSchedulesAsync( day: number, pair: number) {
+    return new Promise<Array<Schedules>>((resolve, reject) => {
+        this.tableGroupData.filter(function (el) {
+        return el.day == day && el.pair == pair;
+      })
     });
   }
 
