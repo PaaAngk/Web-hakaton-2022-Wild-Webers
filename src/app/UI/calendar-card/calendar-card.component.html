@@ -37,7 +37,6 @@
   [ngClass]="{ 'calendar__activities-card': activitiesItem?.type == 0 ,'calendar__transfer-card': activitiesItem?.type == 3 || activitiesItem?.type == 4 , 'calendar__project-card': activitiesItem?.type == 1  }"
   title="">
 
-    <!-- <p *ngIf="activitiesItem?.type!=3">{{ activitiesItem?.description }}</p> -->
     <p >{{ activitiesItem?.description }}</p>
     <hr>
     <i><div *ngIf="activitiesItem?.auditories!=null">Ауд.: <strong>{{activitiesItem?.auditories}}</strong></div>
@@ -60,4 +59,3 @@
   <div *ngIf="activitiesItem?.teachers!=null">Преподаватель: <strong>{{activitiesItem?.teachers}}</strong></div>
   <div *ngIf="activitiesItem?.teachers==null">Преподавателя нет<strong>{{activitiesItem?.teachers}}</strong></div>
 </ng-template>
-<!-- [ngClass]="{ 'calendar__lab-card': scheduleItem?.type == 3 , 'calendar__practice-card': scheduleItem?.type == 2, 'calendar__lecture-card': scheduleItem?.type == 1  }" -->

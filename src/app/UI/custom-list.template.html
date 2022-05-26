@@ -8,23 +8,15 @@
     [(value)]="value"
     (keydown.arrowDown.prevent)="onArrowDown(list, $event)"
 >
-    Search categories
+    Поиск по списку
 </tui-primitive-textfield>
 <hr />
 <tui-data-list
     #list
-    emptyContent="No results found"
+    emptyContent="Ничего не найдено"
     (keydown)="onKeyDown($event.key, input.nativeFocusableElement)"
 >
-    <!-- <ng-container *ngFor="let item of items"> -->
-        <tui-opt-group
-            *tuiLet="items | tuiFilter: filter:value as filtered"
-            
-        >
-            <!-- <tui-opt-group
-                *ngIf="filtered.length"
-                tuiMultiSelectGroup
-            > -->
+        <tui-opt-group *tuiLet="items | tuiFilter: filter:value as filtered">
                 <button
                     *ngFor="let item of filtered"
                     tuiOption
@@ -33,7 +25,5 @@
                 >
                     {{ item }}
                 </button>
-            <!-- </tui-opt-group> -->
         </tui-opt-group>
-    <!-- </ng-container> -->
 </tui-data-list>

@@ -42,7 +42,7 @@
     {
       "name": "schedules-api",
       "urls": [
-        "http://localhost:3000/schedules"
+        "https://rain-harsh-zebu.glitch.me/schedules"
       ],
       "cacheConfig": {
         "strategy": "performance",
@@ -53,7 +53,7 @@
     {
       "name": "activities-api",
       "urls": [
-        "http://localhost:3000/activities"
+        "https://rain-harsh-zebu.glitch.me/activities"
       ],
       "cacheConfig": {
         "strategy": "performance",

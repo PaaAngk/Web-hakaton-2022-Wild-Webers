@@ -205,7 +205,7 @@ export class TimeTableComponent implements OnInit {
           this.loadCompleted = false,
           this.ngAfterContentChecked()
           },
-          (error)=>{this.cantLoad = true, this.loadCompleted = false, this.tableGroupData=[]}
+          (error)=>{this.cantLoad = true, this.loadCompleted = false, this.tableGroupData=[], this.tableGroupDataActivities=[]}
       );
     }
     //если выбран препод
@@ -224,7 +224,7 @@ export class TimeTableComponent implements OnInit {
           this.tableGroupDataActivities = data,
           this.loadCompleted = false
         },
-        (error)=>{this.cantLoad = true, this.loadCompleted = false, this.tableGroupData=[]}
+        (error)=>{this.cantLoad = true, this.loadCompleted = false, this.tableGroupData=[], this.tableGroupDataActivities=[]}
       );
     }
     //если выбрана аудитория
@@ -238,12 +238,12 @@ export class TimeTableComponent implements OnInit {
         },
       );
       //получаем активити 
-      this.activitiesService.getActivitiesByAuditories(this.valueTeachers,this.showCriteria.value.projects,this.showCriteria.value.events,this.weekStartDate).subscribe(
+      this.activitiesService.getActivitiesByAuditories(this.valueAuditories,this.showCriteria.value.projects,this.showCriteria.value.events,this.weekStartDate).subscribe(
         (data) => {
           this.tableGroupDataActivities = data,
           this.loadCompleted = false
         },
-        (error)=>{this.cantLoad = true, this.loadCompleted = false, this.tableGroupData=[]}
+        (error)=>{this.cantLoad = true, this.loadCompleted = false, this.tableGroupData=[], this.tableGroupDataActivities=[]}
       );
     }
     
