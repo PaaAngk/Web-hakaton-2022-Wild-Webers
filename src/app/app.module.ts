@@ -11,8 +11,8 @@ import { LayoutModule } from './core/layout/layout.module';
 import { HttpClientModule } from "@angular/common/http";
 import {TUI_LANGUAGE, TUI_RUSSIAN_LANGUAGE} from '@taiga-ui/i18n';
 import { of } from "rxjs";
-
-
+//import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 
@@ -26,11 +26,14 @@ import { of } from "rxjs";
     HttpClientModule,
     TuiRootModule,
     BrowserAnimationsModule,
-    LayoutModule,
-
-      
-      TuiDialogModule,
-      TuiNotificationsModule
+    LayoutModule, 
+    TuiDialogModule,
+    // ServiceWorkerModule.register('ngsw-worker.js', {
+    //   enabled: environment.production,
+    //   // Register the ServiceWorker as soon as the application is stable
+    //   // or after 30 seconds (whichever comes first).
+    //   registrationStrategy: 'registerWhenStable:30000'
+    // })
 ],
   providers: [
     {

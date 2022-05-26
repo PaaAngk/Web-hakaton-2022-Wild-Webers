@@ -9,6 +9,7 @@
           Общий поиск
           <input tuiTextfield placeholder="Введите название"  />
           <tui-data-list-wrapper
+		  
               *tuiDataList
               [items]="itemsAll | tuiFilterByInputWith : stringify"
               [itemContent]="stringify | tuiStringifyContent">
