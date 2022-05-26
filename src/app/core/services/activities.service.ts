@@ -66,9 +66,7 @@ export class ActivitiesService {
         param='type=3&type=4&'
       }
     }
-    // console.log(param)
-    // console.log(showProjects)
-    // console.log(showEvents)
+    
     return this.apiService
       .get('/activities?'+param+'groups_like=' +group+'&'+ this.getParametrDay(week_begining) + '_sort=dt,pair&_order=asc')
       .pipe(
@@ -100,9 +98,7 @@ export class ActivitiesService {
         param='type=3&type=4&'
       }
     }
-    // console.log(param)
-    // console.log(showProjects)
-    // console.log(showEvents)
+    
     return this.apiService
       .get('/activities?'+param+'teachers_like=' +group+'&'+ this.getParametrDay(week_begining) + '_sort=dt,pair&_order=asc')
       .pipe(
@@ -135,9 +131,7 @@ export class ActivitiesService {
         param='type=3&type=4&'
       }
     }
-    // console.log(param)
-    // console.log(showProjects)
-    // console.log(showEvents)
+    
     return this.apiService
       .get('/activities?'+param+'auditories_like=' +group+'&'+ this.getParametrDay(week_begining) + '_sort=dt,pair&_order=asc')
       .pipe(
